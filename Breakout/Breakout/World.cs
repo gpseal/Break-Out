@@ -73,19 +73,7 @@ namespace Breakout
             introNum = 0;
         }
 
-        public void PaddleMove(string direction)
-        {
-            switch (direction)
-            {
-                case "Left":
-                    paddle.MoveLeft();
-                    break;
 
-                case "Right":
-                    paddle.MoveRight();
-                    break;
-            }
-        }
 
         public void BrickIntro()
         {
