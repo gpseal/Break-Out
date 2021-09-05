@@ -17,7 +17,7 @@ namespace Breakout
         private Pen shadowPen;
         private Brush highlight;
         private Brush shadow;
-        private int width;
+        private int PaddleWidth;
         private int height;
         private int introSpeed;
         private int aniFrame;
@@ -30,7 +30,7 @@ namespace Breakout
             this.ball = ball;
             this.playArea = playArea;
             this.height = height;
-            this.width = width;
+            this.PaddleWidth = width;
             this.bufferGraphics = bufferGraphics;
             brush = new SolidBrush(colour);
             this.position = position;
@@ -50,13 +50,19 @@ namespace Breakout
 
         public void MoveLeft()
         {
-
-            position.X -= paddleSpeed;
+            if (position.X > 0)
+            {
+                position.X -= paddleSpeed;
+            }
         }
 
         public void MoveRight()
         {
-            position.X += paddleSpeed;
+            if (position.X + PaddleWidth < playArea.Width)
+            {
+                position.X += paddleSpeed;
+            }
+            
         }
 
         public void Hit()
@@ -71,7 +77,7 @@ namespace Breakout
                 aniFrame = 0;
             }
             
-            bufferGraphics.FillRectangle(brush, position.X, position.Y, width, height); //draws image using textureBrush
+            bufferGraphics.FillRectangle(brush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
             aniFrame++;
         }
 
