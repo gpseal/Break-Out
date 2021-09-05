@@ -41,14 +41,26 @@ namespace Breakout
             bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
             world.Run();
 
+            if (keydown == true) //if key has been pressed
+            {
+                world.PaddleMove(key);
+            }
 
             graphics.DrawImage(bufferImage, 0, 0);
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-
+            key = e.KeyCode.ToString();
+            keydown = true;
         }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            keydown = false;
+        }
+
+
     }
 }

@@ -23,6 +23,7 @@ namespace Breakout
         private int aniFrame;
         private Size playArea;
         private Ball ball;
+        private int paddleSpeed;
 
         public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, Ball ball)
         {
@@ -37,7 +38,7 @@ namespace Breakout
             shadowPen = new Pen(Brushes.Black);
             introSpeed = 15;
             aniFrame = 0;
-
+            paddleSpeed = 12;
 
         }
 
@@ -49,13 +50,13 @@ namespace Breakout
 
         public void MoveLeft()
         {
-            
-            
+
+            position.X -= paddleSpeed;
         }
 
         public void MoveRight()
         {
-
+            position.X += paddleSpeed;
         }
 
         public void Hit()
