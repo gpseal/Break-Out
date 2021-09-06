@@ -48,8 +48,8 @@ namespace Breakout
             brickHeight = 20;
             brickGap = 0;
             introCount = 0;
-            ball = new Ball(new Point(450, 150), new Point(-10, -10), Color.DimGray, bufferGraphics, playArea, 20);
-            paddle = new Paddle(new Point(300, 590), Color.PaleVioletRed, bufferGraphics, 100, 20, playArea, ball);
+            ball = new Ball(new Point(150, 200), new Point(10, 10), Color.DimGray, bufferGraphics, playArea, 20);
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, 100, 20, playArea, ball);
             brickList = new List<Brick>();
 
             for (int rows = 0; rows < 5; rows++)

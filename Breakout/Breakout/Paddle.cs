@@ -30,7 +30,7 @@ namespace Breakout
             this.ball = ball;
             this.playArea = playArea;
             this.height = height;
-            this.PaddleWidth = width;
+            PaddleWidth = width;
             this.bufferGraphics = bufferGraphics;
             brush = new SolidBrush(colour);
             this.position = position;
@@ -67,7 +67,31 @@ namespace Breakout
 
         public void Hit()
         {
+            int brickTop = position.Y;
+            int brickBottom = position.Y + height;
+            int brickLeft = position.X;
+            int brickRight = position.X + PaddleWidth;
 
+
+            if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
+            {
+                ball.BrickBounceSide();
+            }
+
+            else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight)  //detects right hit
+            {
+                ball.BrickBounceSide();
+            }
+
+            else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom) // detect if ball hits bottom
+            {
+                ball.BrickBounceVert();
+            }
+
+            else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop) // detect if ball hits top
+            {
+                ball.BrickBounceVert();
+            }
         }
 
         public void Draw()
