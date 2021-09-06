@@ -25,7 +25,11 @@ namespace Breakout
         private int ballLeft;
         private int ballBottom;
         private int ballRight;
-        private int ballMiddle;
+
+        private int ballTopMiddle;
+        private int ballSideMiddle;
+
+        private int test;
         //private Color highlight;
 
 
@@ -58,9 +62,10 @@ namespace Breakout
             position.Y += velocity.Y;
             ballTop = position.Y;
             ballLeft = position.X;
-            ballRight = ballBottom + BALLSIZE;
+            ballTopMiddle = position.X + (BALLSIZE / 2);
+            ballSideMiddle = position.Y + (BALLSIZE / 2);
+            ballRight = ballLeft + BALLSIZE;
             ballBottom = ballTop + BALLSIZE;
-            ballMiddle = position.X + (BALLSIZE/2);
         }
 
         public void Bounce()
@@ -87,15 +92,22 @@ namespace Breakout
             }
         }
 
-        public void BrickBounce()
+        public void BrickBounceVert()
         { 
             velocity.Y *= -1;
         }
+
+        public void BrickBounceSide()
+        {
+            velocity.X *= -1;
+        }
+
 
         public int BallTop { get => ballTop; set => ballTop = value; }
         public int BallLeft { get => ballLeft; set => ballLeft = value; }
         public int BallRight { get => ballRight; set => ballRight = value; }
         public int BallBottom { get => ballBottom; set => ballBottom = value; }
-        public int BallMiddle { get => ballMiddle; set => ballMiddle = value; }
+        public int BallTopMiddle { get => ballTopMiddle; set => ballTopMiddle = value; }
+        public int BallSideMiddle { get => ballSideMiddle; set => ballSideMiddle = value; }
     }
 }

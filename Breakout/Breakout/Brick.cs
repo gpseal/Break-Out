@@ -24,6 +24,7 @@ namespace Breakout
         private bool hit;
         private int brickNum;
 
+
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Ball ball, int brickNum)
         {
             this.height = height;
@@ -57,13 +58,41 @@ namespace Breakout
 
         public void Hit()
         {
-            hit = false;
-            if (ball.BallTop >= position.Y && ball.BallTop <= position.Y + 20 && ball.BallLeft >= position.X && ball.BallLeft <= position.X + width)
+            int brickTop = position.Y;
+            int brickBottom = position.Y + height;
+            int brickLeft = position.X;
+            int brickRight = position.X + width;
+
+
+            if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
             {
-                ball.BrickBounce();
+                ball.BrickBounceSide();
                 //hit = true;
                 position.Y = -100;
             }
+
+            else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight && hit == false)  //detects right hit
+            {
+                ball.BrickBounceSide();
+                //hit = true;
+                position.Y = -100;
+            }
+
+            else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom && hit == false) // detect if ball hits bottom
+            {
+                ball.BrickBounceVert();
+                //hit = true;
+                position.Y = -100;
+            }
+
+            else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop && hit == false) // detect if ball hits top
+            {
+                ball.BrickBounceVert();
+                //hit = true;
+                position.Y = -100;
+            }
+
+            //hit = false;
         }
 
         public bool Hit1 { get => hit; set => hit = value; }
