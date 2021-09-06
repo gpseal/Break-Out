@@ -11,7 +11,7 @@ namespace Breakout
     {
         private const int NEG = -1;
         private const int BALLSIZE = 20;
-
+        private int paddleX;
         private Point position;
         private Point velocity;
         private Brush brush;
@@ -45,7 +45,7 @@ namespace Breakout
             brush = new SolidBrush(colour);
             this.bufferGraphics = bufferGraphics;
             this.playArea = playArea;
-            
+
         }
 
         public void Draw()
@@ -53,7 +53,7 @@ namespace Breakout
             bufferGraphics.FillEllipse(brush, position.X, position.Y, size, size);
             bufferGraphics.FillEllipse(DarkGray, position.X, position.Y, size - 3, size - 3);
             bufferGraphics.FillEllipse(LightGray, position.X + 1, position.Y + 1, size - 8, size - 8);
-            bufferGraphics.FillEllipse(highlight, position.X+3, position.Y+3, size-15, size-15);
+            bufferGraphics.FillEllipse(highlight, position.X + 3, position.Y + 3, size - 15, size - 15);
         }
 
         public void Move()
@@ -70,7 +70,7 @@ namespace Breakout
 
         public void Bounce()
         {
-            
+
             if (position.X >= playArea.Width - BALLSIZE) //checks to see if ball is outside the boundary
             {
                 velocity.X *= NEG;  //changes velocity to negative so ball changes direction and bounces off walls
@@ -93,13 +93,21 @@ namespace Breakout
         }
 
         public void BrickBounceVert()
-        { 
+        {
             velocity.Y *= -1;
         }
 
         public void BrickBounceSide()
         {
             velocity.X *= -1;
+        }
+
+        public void PaddleBounce()
+        {
+            if (true)
+            {
+
+            }
         }
 
 
@@ -109,5 +117,6 @@ namespace Breakout
         public int BallBottom { get => ballBottom; set => ballBottom = value; }
         public int BallTopMiddle { get => ballTopMiddle; set => ballTopMiddle = value; }
         public int BallSideMiddle { get => ballSideMiddle; set => ballSideMiddle = value; }
+        public int PaddleX { get => paddleX; set => paddleX = value; }
     }
 }

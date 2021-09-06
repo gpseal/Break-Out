@@ -44,11 +44,11 @@ namespace Breakout
             brickNum = 0;
             brickX = 0;
             brickY = -120;
-            brickWidth = 70;
-            brickHeight = 20;
+            brickWidth = 69;
+            brickHeight = 19;
             brickGap = 0;
             introCount = 0;
-            ball = new Ball(new Point(150, 200), new Point(10, 10), Color.DimGray, bufferGraphics, playArea, 20);
+            ball = new Ball(new Point(150, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20);
             paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, 100, 20, playArea, ball);
             brickList = new List<Brick>();
 
@@ -127,6 +127,8 @@ namespace Breakout
                 paddle.Intro();
             }
             paddle.Draw();
+
+            ball.PaddleX = paddle.Position.X;
 
             ball.Bounce();
             ball.Move();

@@ -23,7 +23,7 @@ namespace Breakout
         private Ball ball;
         private bool hit;
         private int brickNum;
-
+        private Rectangle rectangle;
 
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Ball ball, int brickNum)
         {
@@ -39,6 +39,7 @@ namespace Breakout
             this.ball = ball;
             hit = false;
             this.brickNum = brickNum;
+            rectangle = new Rectangle(position.X, position.Y, width, height);
         }
 
         public void IntroAnim()
@@ -48,49 +49,69 @@ namespace Breakout
 
         public void Draw()
         {
+            rectangle.X = position.X;
+            rectangle.Y = position.Y;
             bufferGraphics.FillRectangle(brush, position.X, position.Y, width, height);
             bufferGraphics.FillRectangle(highlight, position.X + 2, position.Y + 2, width - 4, height - 4);
             bufferGraphics.DrawLine(highlightPen, new Point(position.X, position.Y), new Point(position.X, position.Y + height));
             bufferGraphics.DrawLine(highlightPen, new Point(position.X, position.Y), new Point(position.X + width, position.Y));
             bufferGraphics.DrawLine(shadowPen, new Point(position.X, position.Y + height), new Point(position.X + width, position.Y + height));
             bufferGraphics.DrawLine(shadowPen, new Point(position.X + width, position.Y + height), new Point(position.X + width, position.Y));
+            
         }
 
         public void Hit()
         {
-            int brickTop = position.Y;
-            int brickBottom = position.Y + height;
-            int brickLeft = position.X;
-            int brickRight = position.X + width;
-
-
-            if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
-            {
-                ball.BrickBounceSide();
-                //hit = true;
-                position.Y = -100;
-            }
-
-            else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight && hit == false)  //detects right hit
-            {
-                ball.BrickBounceSide();
-                //hit = true;
-                position.Y = -100;
-            }
-
-            else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom && hit == false) // detect if ball hits bottom
+            if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
             {
                 ball.BrickBounceVert();
                 //hit = true;
                 position.Y = -100;
             }
 
-            else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop && hit == false) // detect if ball hits top
+            if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
             {
-                ball.BrickBounceVert();
+                ball.BrickBounceSide();
                 //hit = true;
                 position.Y = -100;
             }
+
+
+
+
+            //int brickTop = position.Y;
+            //int brickBottom = position.Y + height;
+            //int brickLeft = position.X;
+            //int brickRight = position.X + width;
+
+
+            //if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
+            //{
+            //    ball.BrickBounceSide();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
+
+            //else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight && hit == false)  //detects right hit
+            //{
+            //    ball.BrickBounceSide();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
+
+            //else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom && hit == false) // detect if ball hits bottom
+            //{
+            //    ball.BrickBounceVert();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
+
+            //else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop && hit == false) // detect if ball hits top
+            //{
+            //    ball.BrickBounceVert();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
 
             //hit = false;
         }
