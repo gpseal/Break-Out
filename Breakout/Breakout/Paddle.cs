@@ -34,7 +34,7 @@ namespace Breakout
             this.position = position;
             introSpeed = 15;
             aniFrame = 0;
-            paddleSpeed = 12;
+            paddleSpeed = 10;
             rectangle = new Rectangle(position.X, position.Y, width, height);
 
         }
@@ -66,14 +66,13 @@ namespace Breakout
         {
             if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
             {
-                ball.BrickBounceVert();
+                ball.PaddleBounce();
                 //hit = true;
             }
 
             if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
             {
                 ball.BrickBounceSide();
-                //hit = true;
             }
 
             //int brickTop = position.Y;

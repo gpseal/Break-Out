@@ -22,11 +22,14 @@ namespace Breakout
         private Color[]brickColour;
         private int brickNum;
         private Paddle paddle;
+        private int paddleWidth;
         private int introCount;
         private int introNum;
         private Image background;
         private TextureBrush tbrush;
         private Size playArea;
+
+        private int paddleIntro;  //used for timing of paddle intro
 
         public World(Graphics bufferGraphics, Size playArea)
         {
@@ -48,8 +51,10 @@ namespace Breakout
             brickHeight = 19;
             brickGap = 0;
             introCount = 0;
-            ball = new Ball(new Point(150, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20);
-            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, 100, 20, playArea, ball);
+            paddleWidth = 100;
+
+            ball = new Ball(new Point(150, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea, ball);
             brickList = new List<Brick>();
 
             for (int rows = 0; rows < 5; rows++)
@@ -65,7 +70,9 @@ namespace Breakout
                 brickY += (brickHeight + brickGap);
             }
 
-            introCount--;
+            paddleIntro = introCount - 4;
+            introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
+
             background = (Bitmap)Properties.Resources.ResourceManager.GetObject("city");
             tbrush = new TextureBrush(background);
             
@@ -89,13 +96,13 @@ namespace Breakout
 
         public void BrickIntro()
         {
-            brickList[introCount].IntroAnim();
+            brickList[introCount].IntroAnim(); //runs intro anmimation for brick
             introNum++;
 
-            if (introNum >= 3)
+            if (introNum >= 6) //intro takes 6 frames
             {
-                introCount--;
-                introNum = 0;
+                introCount--; //intro animation moves to next brick
+                introNum = 0;  //resets fram count
             }
         }
 
@@ -120,16 +127,15 @@ namespace Breakout
                 brickNum++;
             }
 
+            ball.PaddleX = paddle.Position.X;  //gives ball class information regarding position of paddle (for bouncing near edges of panel)
             paddle.Hit();
 
-            if (introCount > 43)
+            if (introCount > paddleIntro)
             {
                 paddle.Intro();
             }
+
             paddle.Draw();
-
-            ball.PaddleX = paddle.Position.X;
-
             ball.Bounce();
             ball.Move();
             ball.Draw();

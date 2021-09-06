@@ -44,7 +44,7 @@ namespace Breakout
 
         public void IntroAnim()
         {
-            position.Y += 50;
+            position.Y += 25; //bricks fall from above top of screen to begin game
         }
 
         public void Draw()

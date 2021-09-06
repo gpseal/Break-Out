@@ -10,8 +10,9 @@ namespace Breakout
     class Ball
     {
         private const int NEG = -1;
-        private const int BALLSIZE = 20;
+        
         private int paddleX;
+        private int paddleWidth;
         private Point position;
         private Point velocity;
         private Brush brush;
@@ -33,7 +34,7 @@ namespace Breakout
         //private Color highlight;
 
 
-        public Ball(Point position, Point velocity, Color colour, Graphics bufferGraphics, Size playArea, int size)
+        public Ball(Point position, Point velocity, Color colour, Graphics bufferGraphics, Size playArea, int size, int paddleWidth)
         {
             //highlight = Color.White;
             this.size = size;
@@ -45,6 +46,7 @@ namespace Breakout
             brush = new SolidBrush(colour);
             this.bufferGraphics = bufferGraphics;
             this.playArea = playArea;
+            this.paddleWidth = paddleWidth;
 
         }
 
@@ -62,21 +64,21 @@ namespace Breakout
             position.Y += velocity.Y;
             ballTop = position.Y;
             ballLeft = position.X;
-            ballTopMiddle = position.X + (BALLSIZE / 2);
-            ballSideMiddle = position.Y + (BALLSIZE / 2);
-            ballRight = ballLeft + BALLSIZE;
-            ballBottom = ballTop + BALLSIZE;
+            ballTopMiddle = position.X + (size / 2);
+            ballSideMiddle = position.Y + (size / 2);
+            ballRight = ballLeft + size;
+            ballBottom = ballTop + size;
         }
 
         public void Bounce()
         {
 
-            if (position.X >= playArea.Width - BALLSIZE) //checks to see if ball is outside the boundary
+            if (position.X >= playArea.Width - size) //checks to see if ball is outside the boundary
             {
                 velocity.X *= NEG;  //changes velocity to negative so ball changes direction and bounces off walls
             }
 
-            if (position.Y >= playArea.Height - BALLSIZE)
+            if (position.Y >= playArea.Height - size)
             {
                 velocity.Y *= -1;
             }
@@ -104,10 +106,33 @@ namespace Breakout
 
         public void PaddleBounce()
         {
-            if (true)
+            
+            velocity.Y *= -1;
+
+            if (ballTopMiddle >= PaddleX && ballTopMiddle <= PaddleX + size) //if ball hits paddle near edge, velocity x will be changed
             {
+                velocity.X +=2;
+            }
+
+            else if (ballTopMiddle <= PaddleX + paddleWidth && ballTopMiddle >= PaddleX + paddleWidth - size) //if ball hits paddle near edge velocity x will be changed
+            {
+                velocity.X -= 2;
+            }
+
+            else //if ball does not hit near edge of paddle, velocity X reurns to normal
+            {
+                if (velocity.X < 0)
+                {
+                    velocity.X = -5;
+                }
+
+                else
+                {
+                    velocity.X = 5;
+                }
 
             }
+
         }
 
 
