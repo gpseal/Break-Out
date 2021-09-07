@@ -19,15 +19,18 @@ namespace Breakout
         private Brush shadow;
         private int width;
         private int height;
-        private Ball ball;
+        //private Ball ball;
         private bool hit;
         private int brickNum;
         private Rectangle rectangle;
         private int score;
         private TextBox texBox1;
+        private List<Ball> ballList;
+        private ItemDrop itemDrop;
 
-        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Ball ball, int brickNum, TextBox texBox1)
+        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1)
         {
+            this.ballList = ballList;
             this.texBox1 = texBox1;
             this.height = height;
             this.width = width;
@@ -38,10 +41,11 @@ namespace Breakout
             shadow = new SolidBrush(Color.FromArgb(128, 255, 255, 255));
             highlight = new SolidBrush(Color.FromArgb(100, 255, 255, 255));
             this.position = position;
-            this.ball = ball;
+            //this.ball = ball;
             hit = false;
             this.brickNum = brickNum;
             rectangle = new Rectangle(position.X, position.Y, width, height);
+            itemDrop = new ItemDrop(bufferGraphics);
         }
 
         public void IntroAnim()
@@ -64,19 +68,41 @@ namespace Breakout
 
         public void Hit()
         {
-            if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
+
+            foreach (Ball eachBall in ballList)
             {
-                ball.BrickBounceVert();
-                //hit = true;
-                position.Y = -100;
+
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
+                {
+                    itemDrop.draw();
+                    eachBall.BrickBounceVert();
+                    //hit = true;
+                    position.Y = -100;
+
+                }
+
+                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
+                {
+                    eachBall.BrickBounceSide();
+                    //hit = true;
+                    position.Y = -100;
+                }
+
             }
 
-            if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
-            {
-                ball.BrickBounceSide();
-                //hit = true;
-                position.Y = -100;
-            }
+            //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
+            //{
+            //    ball.BrickBounceVert();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
+
+            //if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
+            //{
+            //    ball.BrickBounceSide();
+            //    //hit = true;
+            //    position.Y = -100;
+            //}
 
 
 

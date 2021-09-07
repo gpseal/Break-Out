@@ -18,9 +18,10 @@ namespace Breakout
         private int introSpeed;
         private int aniFrame;
         private Size playArea;
-        private Ball ball;
+        //private Ball ball;
         private int paddleSpeed;
         private Rectangle rectangle;
+        private List<Ball> ballList;
 
         //paddle textures etc
         private TextureBrush tbrush;
@@ -32,9 +33,11 @@ namespace Breakout
         private TextureBrush engineBrush;
         private Image engine;
 
-        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, Ball ball)
+        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList)
         {
-            this.ball = ball;
+
+            this.ballList = ballList;
+            //this.ball = ball;
             this.playArea = playArea;
             this.height = height;
             PaddleWidth = width;
@@ -114,21 +117,37 @@ namespace Breakout
             }
 
 
-
         }
 
         public void Hit()
         {
-            if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
+
+            foreach (Ball eachBall in ballList)
             {
-                ball.PaddleBounce();
-                //hit = true;
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
+                {
+                    eachBall.PaddleBounce();
+                    //hit = true;
+                }
+
+                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
+                {
+                    eachBall.BrickBounceSide();
+                }
+
             }
 
-            if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
-            {
-                ball.BrickBounceSide();
-            }
+
+            //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
+            //{
+            //    ball.PaddleBounce();
+            //    //hit = true;
+            //}
+
+            //if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
+            //{
+            //    ball.BrickBounceSide();
+            //}
 
         }
 

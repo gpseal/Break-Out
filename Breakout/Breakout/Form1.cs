@@ -71,6 +71,11 @@ namespace Breakout
                 case "Space":
                     world.Pause();
                     break;
+
+                case "S":
+                    world.SpawnBall();
+                    break;
+
             }
             
         }

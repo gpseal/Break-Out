@@ -12,8 +12,9 @@ namespace Breakout
     class World
     {
         private Graphics bufferGraphics;
-        private Ball ball;
+        //private Ball ball;
         private List<Brick> brickList;
+        private List<Ball> ballList;
         private int brickX;
         private int brickY;
         private int brickWidth;
@@ -30,6 +31,8 @@ namespace Breakout
         private Size playArea;
         private Timer timer1;
         private TextBox texBox1;
+
+        private ItemDrop itemDrop;
 
         private int paddleIntro;  //used for timing of paddle intro
 
@@ -56,15 +59,21 @@ namespace Breakout
             introCount = 0;
             paddleWidth = 100;
 
-            ball = new Ball(new Point(150, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
-            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea, ball);
+            ballList = new List<Ball>();
+
+            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+
+            //ball = new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
+
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList);
             brickList = new List<Brick>();
 
             for (int rows = 0; rows < 5; rows++)
             { 
                 for (int i = 0; i < 10; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight, ball, brickNum, texBox1));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1));
                     brickX += (brickWidth + brickGap);
                     brickNum++;
                     introCount++;
@@ -78,7 +87,8 @@ namespace Breakout
 
             background = (Bitmap)Properties.Resources.ResourceManager.GetObject("city");
             tbrush = new TextureBrush(background);
-            
+
+            itemDrop = new ItemDrop(bufferGraphics);
 
             introNum = 0;
         }
@@ -119,7 +129,7 @@ namespace Breakout
         public void Run()
         {
 
-            texBox1.Text = ball.Score.ToString();
+            //texBox1.Text = ball.Score.ToString();
             Draw();
             if (introCount > -1)
             {
@@ -139,7 +149,12 @@ namespace Breakout
                 brickNum++;
             }
 
-            ball.PaddleX = paddle.Position.X;  //gives ball class information regarding position of paddle (for bouncing near edges of panel)
+            foreach (Ball eachBall in ballList)
+            {
+                eachBall.PaddleX = paddle.Position.X;
+            }
+
+            //ball.PaddleX = paddle.Position.X;  //gives ball class information regarding position of paddle (for bouncing near edges of panel)
             paddle.Hit();
 
             if (introCount > paddleIntro)
@@ -148,9 +163,24 @@ namespace Breakout
             }
 
             paddle.Draw();
-            ball.Bounce();
-            ball.Move();
-            ball.Draw();
+            itemDrop.draw();
+            
+
+            foreach (Ball eachBall in ballList)
+            {
+                eachBall.Move();
+                eachBall.Bounce();
+                eachBall.Draw();
+            }
+
+            //ball.Bounce();
+            //ball.Move();
+            //ball.Draw();
+        }
+
+        public void SpawnBall()
+        {
+            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
         }
 
         public void Draw()
