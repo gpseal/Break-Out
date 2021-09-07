@@ -29,12 +29,11 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            world = new World(bufferGraphics, playArea, timer1); //clientSize automatically generated, tells the boundaries of the program
+            world = new World(bufferGraphics, playArea, timer1, textBox1); //clientSize automatically generated, tells the boundaries of the program
             this.KeyPreview = true;
             timer1.Enabled = true;
             score = 0;
-            textBox1.Text = score.ToString();
-
+            
         }
 
 

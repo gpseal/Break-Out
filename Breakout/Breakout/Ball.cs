@@ -26,9 +26,10 @@ namespace Breakout
         private int ballLeft;
         private int ballBottom;
         private int ballRight;
-
+        private int score;
         private int ballTopMiddle;
         private int ballSideMiddle;
+
 
         private int test;
         //private Color highlight;
@@ -47,7 +48,7 @@ namespace Breakout
             this.bufferGraphics = bufferGraphics;
             this.playArea = playArea;
             this.paddleWidth = paddleWidth;
-
+            score = 0; //score for game kept, will tick up when a brick bounce method is called
         }
 
         public void Draw()
@@ -97,11 +98,13 @@ namespace Breakout
         public void BrickBounceVert()
         {
             velocity.Y *= -1;
+            score += 10;  //adds to total score, sent back world
         }
 
         public void BrickBounceSide()
         {
             velocity.X *= -1;
+            score += 10;  //adds to total score, sent back world
         }
 
         public void PaddleBounce()
@@ -143,5 +146,6 @@ namespace Breakout
         public int BallTopMiddle { get => ballTopMiddle; set => ballTopMiddle = value; }
         public int BallSideMiddle { get => ballSideMiddle; set => ballSideMiddle = value; }
         public int PaddleX { get => paddleX; set => paddleX = value; }
+        public int Score { get => score; set => score = value; }
     }
 }

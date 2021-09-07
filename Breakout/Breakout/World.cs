@@ -29,11 +29,13 @@ namespace Breakout
         private TextureBrush tbrush;
         private Size playArea;
         private Timer timer1;
+        private TextBox texBox1;
 
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, TextBox texBox1)
         {
+            this.texBox1 = texBox1;
             this.timer1 = timer1;
             this.playArea = playArea;
             this.bufferGraphics = bufferGraphics;
@@ -62,7 +64,7 @@ namespace Breakout
             { 
                 for (int i = 0; i < 10; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight, ball, brickNum));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight, ball, brickNum, texBox1));
                     brickX += (brickWidth + brickGap);
                     brickNum++;
                     introCount++;
@@ -97,7 +99,9 @@ namespace Breakout
 
         public void Pause()
         {
+            
             timer1.Enabled = !timer1.Enabled;
+            
         }
 
         public void BrickIntro()
@@ -114,6 +118,8 @@ namespace Breakout
 
         public void Run()
         {
+
+            texBox1.Text = ball.Score.ToString();
             Draw();
             if (introCount > -1)
             {

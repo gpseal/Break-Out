@@ -4,8 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using System.Windows.Forms;
 
 namespace Breakout
 {
@@ -24,9 +23,12 @@ namespace Breakout
         private bool hit;
         private int brickNum;
         private Rectangle rectangle;
+        private int score;
+        private TextBox texBox1;
 
-        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Ball ball, int brickNum)
+        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Ball ball, int brickNum, TextBox texBox1)
         {
+            this.texBox1 = texBox1;
             this.height = height;
             this.width = width;
             this.bufferGraphics = bufferGraphics;
@@ -118,6 +120,7 @@ namespace Breakout
 
         public bool Hit1 { get => hit; set => hit = value; }
         public int BrickNum { get => brickNum; set => brickNum = value; }
+        public int Score { get => score; set => score = value; }
     }
 
 
