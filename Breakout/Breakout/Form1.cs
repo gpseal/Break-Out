@@ -18,7 +18,9 @@ namespace Breakout
         private World world;
         private bool keydown;
         private string key;
+        private string keyPress;
         private Size playArea;
+        private int score;
 
         public Form1()
         {
@@ -27,16 +29,17 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            world = new World(bufferGraphics, playArea); //clientSize automatically generated, tells the boundaries of the program
-
+            world = new World(bufferGraphics, playArea, timer1); //clientSize automatically generated, tells the boundaries of the program
+            this.KeyPreview = true;
             timer1.Enabled = true;
-        }
+            score = 0;
+            textBox1.Text = score.ToString();
 
+        }
 
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
             
             bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
             world.Run();
@@ -47,20 +50,36 @@ namespace Breakout
             }
 
             graphics.DrawImage(bufferImage, 0, 0);
-
+            Application.DoEvents();//make sure all images are drawn before the program proceeds
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             key = e.KeyCode.ToString();
-            keydown = true;
+
+            switch (key)
+            {
+                case "Left":
+                    world.PaddleMove(key);
+                    keydown = true;
+                    break;
+
+                case "Right":
+                    world.PaddleMove(key);
+                    keydown = true;
+                    break;
+
+                case "Space":
+                    world.Pause();
+                    break;
+            }
+            
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             keydown = false;
         }
-
 
     }
 }

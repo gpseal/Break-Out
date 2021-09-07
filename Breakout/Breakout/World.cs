@@ -28,12 +28,13 @@ namespace Breakout
         private Image background;
         private TextureBrush tbrush;
         private Size playArea;
+        private Timer timer1;
 
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1)
         {
-
+            this.timer1 = timer1;
             this.playArea = playArea;
             this.bufferGraphics = bufferGraphics;
             Color[] brickColour = new Color[6];
@@ -92,6 +93,11 @@ namespace Breakout
                     paddle.MoveRight();
                     break;
             }
+        }
+
+        public void Pause()
+        {
+            timer1.Enabled = !timer1.Enabled;
         }
 
         public void BrickIntro()

@@ -22,6 +22,15 @@ namespace Breakout
         private int paddleSpeed;
         private Rectangle rectangle;
 
+        //paddle textures etc
+        private TextureBrush tbrush;
+        private Image paddleImage;
+        private Brush tail1;
+        private Brush tail2;
+        private Brush tail3;
+        private Brush tail4;
+        private TextureBrush engineBrush;
+        private Image engine;
 
         public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, Ball ball)
         {
@@ -37,6 +46,15 @@ namespace Breakout
             paddleSpeed = 10;
             rectangle = new Rectangle(position.X, position.Y, width, height);
 
+            //paddle animations
+            paddleImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("p" + (aniFrame).ToString());
+            tbrush = new TextureBrush(paddleImage);
+            tail1 = new SolidBrush(Color.FromArgb(190, 204, 245, 255));
+            tail2 = new SolidBrush(Color.FromArgb(150, 204, 245, 255));
+            tail3 = new SolidBrush(Color.FromArgb(100, 204, 245, 255));
+            tail4 = new SolidBrush(Color.FromArgb(50, 204, 245, 255));
+            engine = (Bitmap)Properties.Resources.ResourceManager.GetObject("engine");
+            engineBrush = new TextureBrush(engine);
         }
 
         public void Intro()
@@ -47,19 +65,56 @@ namespace Breakout
 
         public void MoveLeft()
         {
+            int tailHeight = 4;
             if (position.X > 0)
             {
                 position.X -= paddleSpeed;
+
+                bufferGraphics.FillRectangle(tail1, position.X + PaddleWidth + paddleSpeed, position.Y + 7, paddleSpeed, tailHeight);
+                bufferGraphics.FillRectangle(tail1, position.X + PaddleWidth + paddleSpeed, position.Y + 14, paddleSpeed, tailHeight);
+
+                bufferGraphics.FillRectangle(tail2, position.X + PaddleWidth + paddleSpeed, position.Y + 7, paddleSpeed * 2, tailHeight);
+                bufferGraphics.FillRectangle(tail2, position.X + PaddleWidth + paddleSpeed, position.Y + 14, paddleSpeed * 2, tailHeight);
+
+
+                bufferGraphics.FillRectangle(tail3, position.X + PaddleWidth + 3 * paddleSpeed, position.Y + 7, paddleSpeed * 2, tailHeight);
+                bufferGraphics.FillRectangle(tail3, position.X + PaddleWidth + 3 * paddleSpeed, position.Y + 14, paddleSpeed * 2, tailHeight);
+
+                bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 7, paddleSpeed * 2, tailHeight);
+                bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 14, paddleSpeed * 2, tailHeight);
+
+                engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
+                bufferGraphics.FillRectangle(engineBrush, position.X + PaddleWidth - 10, position.Y, height, height);
+
             }
         }
 
         public void MoveRight()
         {
+            int tailHeight = 4;
             if (position.X + PaddleWidth < playArea.Width)
             {
                 position.X += paddleSpeed;
+                bufferGraphics.FillRectangle(tail1, position.X - paddleSpeed*2, position.Y + 7, paddleSpeed, tailHeight);
+                bufferGraphics.FillRectangle(tail1, position.X - paddleSpeed*2, position.Y + 14, paddleSpeed, tailHeight);
+
+                bufferGraphics.FillRectangle(tail2, position.X - paddleSpeed * 3, position.Y + 7, paddleSpeed * 2, tailHeight);
+                bufferGraphics.FillRectangle(tail2, position.X - paddleSpeed * 3, position.Y + 14, paddleSpeed * 2, tailHeight);
+
+                bufferGraphics.FillRectangle(tail3, position.X -  paddleSpeed * 5, position.Y + 7, paddleSpeed * 2, tailHeight);
+                bufferGraphics.FillRectangle(tail3, position.X -  paddleSpeed * 5, position.Y + 14, paddleSpeed * 2, tailHeight);
+
+                bufferGraphics.FillRectangle(tail4, position.X - paddleSpeed * 7, position.Y + 7, paddleSpeed * 4, tailHeight);
+                bufferGraphics.FillRectangle(tail4, position.X - paddleSpeed * 7, position.Y + 14, paddleSpeed * 4, tailHeight);
+                //position.X += paddleSpeed;
+
+                engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
+                bufferGraphics.FillRectangle(engineBrush, position.X - paddleSpeed, position.Y, height, height);
+
             }
-            
+
+
+
         }
 
         public void Hit()
@@ -75,31 +130,6 @@ namespace Breakout
                 ball.BrickBounceSide();
             }
 
-            //int brickTop = position.Y;
-            //int brickBottom = position.Y + height;
-            //int brickLeft = position.X;
-            //int brickRight = position.X + PaddleWidth;
-
-
-            //if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
-            //{
-            //    ball.BrickBounceSide();
-            //}
-
-            //else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight)  //detects right hit
-            //{
-            //    ball.BrickBounceSide();
-            //}
-
-            //else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom) // detect if ball hits bottom
-            //{
-            //    ball.BrickBounceVert();
-            //}
-
-            //else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop) // detect if ball hits top
-            //{
-            //    ball.BrickBounceVert();
-            //}
         }
 
         public void Draw()
@@ -113,7 +143,17 @@ namespace Breakout
 
             bufferGraphics.FillRectangle(brush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
             aniFrame++;
+
+            paddleImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("p" + (aniFrame).ToString()); //changes image to next frame in set
+            tbrush = new TextureBrush(paddleImage); //applies new texture brush
+            tbrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X, position.Y); //adjusts position of texture
+            bufferGraphics.FillRectangle(tbrush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
+            aniFrame++;
+
+            
         }
+
+
 
         public Point Position { get => position; set => position = value; }
 
