@@ -61,6 +61,25 @@ namespace Breakout.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] brickHit {
+            get {
+                object obj = ResourceManager.GetObject("brickHit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream brickHit1 {
+            get {
+                return ResourceManager.GetStream("brickHit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap city {
@@ -97,6 +116,15 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("flame", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream move {
+            get {
+                return ResourceManager.GetStream("move", resourceCulture);
             }
         }
         
@@ -307,6 +335,33 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("p9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream paddleHit {
+            get {
+                return ResourceManager.GetStream("paddleHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream rocket {
+            get {
+                return ResourceManager.GetStream("rocket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream rocket2 {
+            get {
+                return ResourceManager.GetStream("rocket2", resourceCulture);
             }
         }
     }

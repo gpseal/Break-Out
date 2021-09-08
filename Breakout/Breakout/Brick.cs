@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ namespace Breakout
 {
     class Brick
     {
+        private SoundPlayer brickHit;
         private Graphics bufferGraphics;
         private Point position;
         private Brush brush;
@@ -30,9 +32,14 @@ namespace Breakout
         private List<DropBall> items;
         private Random random;
         private int dropNum;
+        private Brush death; //brush used when brick eliminated
+        private bool dead;
+        private int transparent;
 
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1, Random random)
         {
+            brickHit = new SoundPlayer(Properties.Resources.paddleHit);
+            transparent = 255;
             this.ballList = ballList;
             this.texBox1 = texBox1;
             this.height = height;
@@ -43,6 +50,7 @@ namespace Breakout
             shadowPen = new Pen(Brushes.Black);
             shadow = new SolidBrush(Color.FromArgb(128, 255, 255, 255));
             highlight = new SolidBrush(Color.FromArgb(100, 255, 255, 255));
+            
             this.position = position;
             //this.ball = ball;
             hit = false;
@@ -52,6 +60,7 @@ namespace Breakout
             drop = false;
             this.random = random;
             dropNum = random.Next(5);
+            dead = false;
         }
 
         public void IntroAnim()
@@ -72,86 +81,104 @@ namespace Breakout
             
         }
 
-        public void Hit()
+        public void Kill()
         {
             
+            if (transparent>0)
+            {
+                death = new SolidBrush(Color.FromArgb(transparent, 255, 255, 255));
+                bufferGraphics.FillRectangle(death, position.X, position.Y, width, height);
+                transparent -= 20;
+            }
+
+        }
+
+
+        public void Hit()
+        {
+
+
             foreach (Ball eachBall in ballList)
             {
 
-                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))  //checks to see if points on ball top/bottom have entered brick
                 {
-                    
+                    brickHit.Play();
                     eachBall.BrickBounceVert();
-                    position.Y = -100;
 
                     if (dropNum == 1)
                     {
-                        drop = true;
+                        drop = true; //triggers item drop for brick
                     }
 
+                    dead = true; //triggers death sequence for brick
                 }
 
-                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
+                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))  //checks to see if points on ball sides have entered brick
                 {
                     eachBall.BrickBounceSide();
-                    drop = true;
-                    position.Y = -100;
+
+                    if (dropNum == 1)
+                    {
+                        drop = true; //triggers item drop for brick
+                    }
+
+                    dead = true;//triggers death sequence for brick
                 }
 
+                //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
+                //{
+                //    ball.BrickBounceVert();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+                //if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
+                //{
+                //    ball.BrickBounceSide();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+
+
+
+                //int brickTop = position.Y;
+                //int brickBottom = position.Y + height;
+                //int brickLeft = position.X;
+                //int brickRight = position.X + width;
+
+
+                //if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
+                //{
+                //    ball.BrickBounceSide();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+                //else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight && hit == false)  //detects right hit
+                //{
+                //    ball.BrickBounceSide();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+                //else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom && hit == false) // detect if ball hits bottom
+                //{
+                //    ball.BrickBounceVert();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+                //else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop && hit == false) // detect if ball hits top
+                //{
+                //    ball.BrickBounceVert();
+                //    //hit = true;
+                //    position.Y = -100;
+                //}
+
+                //hit = false;
             }
-
-            //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
-            //{
-            //    ball.BrickBounceVert();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-            //if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
-            //{
-            //    ball.BrickBounceSide();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-
-
-
-            //int brickTop = position.Y;
-            //int brickBottom = position.Y + height;
-            //int brickLeft = position.X;
-            //int brickRight = position.X + width;
-
-
-            //if (ball.BallLeft <= brickRight && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallRight > brickLeft)  //detects left hit
-            //{
-            //    ball.BrickBounceSide();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-            //else if (ball.BallRight >= brickLeft && ball.BallSideMiddle >= brickTop && ball.BallSideMiddle <= brickBottom && ball.BallLeft < brickRight && hit == false)  //detects right hit
-            //{
-            //    ball.BrickBounceSide();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-            //else if (ball.BallTop <= brickBottom && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallBottom >= brickBottom && hit == false) // detect if ball hits bottom
-            //{
-            //    ball.BrickBounceVert();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-            //else if (ball.BallBottom >= brickTop && ball.BallTopMiddle <= brickRight && ball.BallTopMiddle >= brickLeft && ball.BallTop <= brickTop && hit == false) // detect if ball hits top
-            //{
-            //    ball.BrickBounceVert();
-            //    //hit = true;
-            //    position.Y = -100;
-            //}
-
-            //hit = false;
         }
 
         public bool Hit1 { get => hit; set => hit = value; }
@@ -159,6 +186,7 @@ namespace Breakout
         public int Score { get => score; set => score = value; }
         public Point Position { get => position; set => position = value; }
         public bool Drop { get => drop; set => drop = value; }
+        public bool Dead { get => dead; set => dead = value; }
     }
 
 

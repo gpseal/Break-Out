@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ namespace Breakout
     
     class World
     {
+        
         private Graphics bufferGraphics;
         //private Ball ball;
         private List<Brick> brickList;
@@ -66,7 +68,7 @@ namespace Breakout
 
             ballList = new List<Ball>();
             ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
-            ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            //ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
 
             dropBallList = new List<DropBall>();
             //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
@@ -145,17 +147,27 @@ namespace Breakout
             brickNum = 0;
             foreach (Brick eachBrick in brickList)
             {
-                //eachBrick.Intro();
-                brickPos = eachBrick.Position;
 
-                eachBrick.Draw();
-                eachBrick.Hit();
-                if (eachBrick.Drop == true) //checks if brick has an item drop
+                if (eachBrick.Dead == true)
                 {
-                    SpawnDropBall(brickPos);
-                    eachBrick.Drop = false;
+                    eachBrick.Kill();
                 }
-                brickNum++;
+
+                else
+                {
+                    //eachBrick.Intro();
+                    brickPos = eachBrick.Position;
+
+                    eachBrick.Draw();
+                    eachBrick.Hit();
+                    if (eachBrick.Drop == true) //checks if brick has an item drop
+                    {
+                        SpawnDropBall(brickPos);
+                        eachBrick.Drop = false;
+                    }
+                    brickNum++;
+                }
+
             }
 
             //foreach (Ball eachBall in ballList)
@@ -201,7 +213,7 @@ namespace Breakout
 
         public void SpawnBall()
         {
-            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            ballList.Add(new Ball(new Point(200, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
         }
 
         public void SpawnDropBall(Point position)

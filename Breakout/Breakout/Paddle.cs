@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace Breakout
 {
     class Paddle
     {
+
+        
         private Graphics bufferGraphics;
         private Point position;
         private Brush brush;
@@ -74,6 +77,7 @@ namespace Breakout
 
         public void MoveLeft()
         {
+
             int tailHeight = 4;
             if (position.X > 0)
             {
@@ -100,6 +104,8 @@ namespace Breakout
 
         public void MoveRight()
         {
+
+
             int tailHeight = 4;
             if (position.X + PaddleWidth < playArea.Width)
             {
@@ -127,17 +133,20 @@ namespace Breakout
 
         public void Hit()
         {
+            SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
 
             foreach (Ball eachBall in ballList)
             {
                 if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
                 {
+                    paddleHit.Play();
                     eachBall.PaddleBounce();
                     //hit = true;
                 }
 
                 if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
                 {
+                    paddleHit.Play();
                     eachBall.BrickBounceSide();
                 }
 

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace Breakout
 {
     public partial class Form1 : Form
     {
+        //private SoundPlayer sound;
         private Bitmap bufferImage;
         private Graphics bufferGraphics;
         private Graphics graphics; //will have a graphics object
@@ -25,6 +27,7 @@ namespace Breakout
 
         public Form1()
         {
+            //sound = new SoundPlayer(Properties.Resources.move);
             random = new Random();
             InitializeComponent();
             playArea = new Size(700, 540);
@@ -56,16 +59,20 @@ namespace Breakout
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            SoundPlayer rocket = new SoundPlayer(Properties.Resources.rocket2);
             key = e.KeyCode.ToString();
 
             switch (key)
             {
                 case "Left":
+                    
+                    //rocket.Play();
                     world.PaddleMove(key);
                     keydown = true;
                     break;
 
                 case "Right":
+                    //rocket.Play();
                     world.PaddleMove(key);
                     keydown = true;
                     break;
@@ -87,5 +94,9 @@ namespace Breakout
             keydown = false;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //sound.Play();
+        }
     }
 }

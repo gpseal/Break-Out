@@ -173,5 +173,23 @@
   <ItemGroup>
     <None Include="Resources\engine.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\move.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brickHit.flac" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brickHit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paddleHit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rocket.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rocket2.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
