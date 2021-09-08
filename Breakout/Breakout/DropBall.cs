@@ -7,22 +7,34 @@ using System.Threading.Tasks;
 
 namespace Breakout
 {
-    class ItemDrop
+    class DropBall
     {
         private Graphics bufferGraphics;
         private Point position;
         private Brush brush;
+        private int Y;
+        private int X;
 
-        public ItemDrop(Graphics bufferGraphics)
+        public DropBall(Graphics bufferGraphics, Point position)
         {
-            //this.position = position;
+            this.position = position;
             this.bufferGraphics = bufferGraphics;
             brush = new SolidBrush(Color.Orange);
+            Y = 100;
+            X = 200;
         }
 
-        public void draw()
+
+        public void Draw()
         {
-            bufferGraphics.FillRectangle(brush, 400, 400, 100, 100);
+            bufferGraphics.FillRectangle(brush, position.X, position.Y, 70, 20);
         }
+
+        public void Move()
+        {
+            position.Y += 4;
+        }
+
+
     }
 }

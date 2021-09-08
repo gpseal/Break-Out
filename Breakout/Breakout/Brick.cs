@@ -21,12 +21,13 @@ namespace Breakout
         private int height;
         //private Ball ball;
         private bool hit;
+        private bool drop;
         private int brickNum;
         private Rectangle rectangle;
         private int score;
         private TextBox texBox1;
         private List<Ball> ballList;
-        private ItemDrop itemDrop;
+        private List<DropBall> items;
 
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1)
         {
@@ -45,7 +46,8 @@ namespace Breakout
             hit = false;
             this.brickNum = brickNum;
             rectangle = new Rectangle(position.X, position.Y, width, height);
-            itemDrop = new ItemDrop(bufferGraphics);
+            items = new List<DropBall>();
+            drop = false;
         }
 
         public void IntroAnim()
@@ -74,9 +76,8 @@ namespace Breakout
 
                 if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
                 {
-                    itemDrop.draw();
                     eachBall.BrickBounceVert();
-                    //hit = true;
+                    drop = true;
                     position.Y = -100;
 
                 }
@@ -84,7 +85,7 @@ namespace Breakout
                 if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
                 {
                     eachBall.BrickBounceSide();
-                    //hit = true;
+                    drop = true;
                     position.Y = -100;
                 }
 
@@ -147,6 +148,8 @@ namespace Breakout
         public bool Hit1 { get => hit; set => hit = value; }
         public int BrickNum { get => brickNum; set => brickNum = value; }
         public int Score { get => score; set => score = value; }
+        public Point Position { get => position; set => position = value; }
+        public bool Drop { get => drop; set => drop = value; }
     }
 
 

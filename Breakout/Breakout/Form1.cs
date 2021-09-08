@@ -22,6 +22,7 @@ namespace Breakout
         private Size playArea;
         private int score;
 
+
         public Form1()
         {
             InitializeComponent();
@@ -73,7 +74,7 @@ namespace Breakout
                     break;
 
                 case "S":
-                    world.SpawnBall();
+                    //world.SpawnDropBall(brickPos);
                     break;
 
             }
