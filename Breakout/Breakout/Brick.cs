@@ -28,8 +28,10 @@ namespace Breakout
         private TextBox texBox1;
         private List<Ball> ballList;
         private List<DropBall> items;
+        private Random random;
+        private int dropNum;
 
-        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1)
+        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1, Random random)
         {
             this.ballList = ballList;
             this.texBox1 = texBox1;
@@ -48,6 +50,8 @@ namespace Breakout
             rectangle = new Rectangle(position.X, position.Y, width, height);
             items = new List<DropBall>();
             drop = false;
+            this.random = random;
+            dropNum = random.Next(5);
         }
 
         public void IntroAnim()
@@ -70,15 +74,20 @@ namespace Breakout
 
         public void Hit()
         {
-
+            
             foreach (Ball eachBall in ballList)
             {
 
                 if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
                 {
+                    
                     eachBall.BrickBounceVert();
-                    drop = true;
                     position.Y = -100;
+
+                    if (dropNum == 1)
+                    {
+                        drop = true;
+                    }
 
                 }
 

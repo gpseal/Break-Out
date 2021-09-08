@@ -11,7 +11,8 @@ namespace Breakout
     {
         private Graphics bufferGraphics;
         private Point position;
-        private Brush brush;
+        private Brush blue;
+        private Brush white;
         private int Y;
         private int X;
 
@@ -19,22 +20,25 @@ namespace Breakout
         {
             this.position = position;
             this.bufferGraphics = bufferGraphics;
-            brush = new SolidBrush(Color.Orange);
-            Y = 100;
-            X = 200;
+            blue = new SolidBrush(Color.BlueViolet);
+            white = new SolidBrush(Color.White);
+            Y = position.Y;
+            X = position.X;
         }
-
 
         public void Draw()
         {
-            bufferGraphics.FillRectangle(brush, position.X, position.Y, 70, 20);
+            bufferGraphics.FillEllipse(blue, X + 35, Y, 20, 20);
+            bufferGraphics.FillEllipse(white, X + 40, Y+5, 10, 10);
         }
 
         public void Move()
         {
-            position.Y += 4;
+            Y += 4;
         }
 
-
+        public Point Position { get => position; set => position = value; }
+        public int Y1 { get => Y; set => Y = value; }
+        public int X1 { get => X; set => X = value; }
     }
 }

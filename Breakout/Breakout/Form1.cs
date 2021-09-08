@@ -21,16 +21,17 @@ namespace Breakout
         private string keyPress;
         private Size playArea;
         private int score;
-
+        private Random random;
 
         public Form1()
         {
+            random = new Random();
             InitializeComponent();
             playArea = new Size(700, 540);
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            world = new World(bufferGraphics, playArea, timer1, textBox1); //clientSize automatically generated, tells the boundaries of the program
+            world = new World(bufferGraphics, playArea, timer1, textBox1, random); //clientSize automatically generated, tells the boundaries of the program
             this.KeyPreview = true;
             timer1.Enabled = true;
             score = 0;

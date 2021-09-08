@@ -22,6 +22,7 @@ namespace Breakout
         private int paddleSpeed;
         private Rectangle rectangle;
         private List<Ball> ballList;
+        private List<DropBall> dropBallList;
 
         //paddle textures etc
         private TextureBrush tbrush;
@@ -33,9 +34,13 @@ namespace Breakout
         private TextureBrush engineBrush;
         private Image engine;
 
-        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList)
-        {
+        //for item drops
+        private bool drop;
 
+        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList, List<DropBall> dropBallList)
+        {
+            
+            this.dropBallList = dropBallList;
             this.ballList = ballList;
             //this.ball = ball;
             this.playArea = playArea;
@@ -58,6 +63,7 @@ namespace Breakout
             tail4 = new SolidBrush(Color.FromArgb(50, 204, 245, 255));
             engine = (Bitmap)Properties.Resources.ResourceManager.GetObject("engine");
             engineBrush = new TextureBrush(engine);
+            
         }
 
         public void Intro()
@@ -137,6 +143,18 @@ namespace Breakout
 
             }
 
+            foreach (DropBall eachDrop in dropBallList)
+            {
+                drop = false;
+
+                if (rectangle.Contains(eachDrop.X1, eachDrop.Y1 + 10) || rectangle.Contains(eachDrop.X1 + 70, eachDrop.Y1))
+                {
+                    drop = true;
+                    eachDrop.Y1 += 100;
+                }
+
+            }
+
 
             //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
             //{
@@ -171,10 +189,8 @@ namespace Breakout
 
             
         }
-
-
-
+        
         public Point Position { get => position; set => position = value; }
-
+        public bool Drop { get => drop; set => drop = value; }
     }
 }

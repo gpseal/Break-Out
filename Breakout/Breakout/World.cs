@@ -34,14 +34,15 @@ namespace Breakout
         private Size playArea;
         private Timer timer1;
         private TextBox texBox1;
-
+        private Random random;
         private Point brickPos;
 
 
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, TextBox texBox1)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, TextBox texBox1, Random random)
         {
+            this.random = random;
             this.texBox1 = texBox1;
             this.timer1 = timer1;
             this.playArea = playArea;
@@ -70,14 +71,14 @@ namespace Breakout
             dropBallList = new List<DropBall>();
             //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
 
-            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList);
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
             brickList = new List<Brick>();
 
             for (int rows = 0; rows < 5; rows++)
             { 
                 for (int i = 0; i < 10; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1, random));
                     brickX += (brickWidth + brickGap);
                     brickNum++;
                     introCount++;
@@ -169,6 +170,13 @@ namespace Breakout
             {
                 paddle.Intro();
             }
+
+            if (paddle.Drop == true)
+            {
+                SpawnBall();
+            }
+
+
             paddle.Draw();
 
 
