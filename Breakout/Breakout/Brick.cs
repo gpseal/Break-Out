@@ -36,6 +36,8 @@ namespace Breakout
         private int transparent;
         private bool score;
 
+        private int moveCount;  //keeps track of brick movement in level 2
+        private int brickMove;
 
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1, Random random)
         {
@@ -62,7 +64,10 @@ namespace Breakout
             this.random = random;
             dropNum = random.Next(5);
             dead = false;
-            
+
+            //Brick movement
+            brickMove = 1;  //amount bricks will move in certain levels
+            moveCount = 0;
         }
 
         public void IntroAnim()
@@ -95,6 +100,18 @@ namespace Breakout
 
         }
 
+
+        public void Move()
+        {
+            position.Y += brickMove;
+            moveCount++;
+            if (moveCount >= 100)  //amount the bricks will move before moving back up the screen
+            {
+                brickMove *= -1;
+                moveCount = 0;
+            }
+
+        }
 
         public void Hit()
         {

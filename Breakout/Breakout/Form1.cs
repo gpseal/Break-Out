@@ -72,7 +72,7 @@ namespace Breakout
             }
 
             graphics.DrawImage(bufferImage, 0, 0);
-            Application.DoEvents();//make sure all images are drawn before the program proceeds
+            //Application.DoEvents();//make sure all images are drawn before the program proceeds
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -131,6 +131,13 @@ namespace Breakout
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
+
+            if (world.Dead == true)
+            {
+                world.Reset();
+                world.Dead = false;
+            }
+
             world.Run();
         }
 

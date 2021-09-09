@@ -32,6 +32,7 @@ namespace Breakout
         private int ballBottomRight;
         private int ballBottomLeft;
         private bool ballOut;
+        private bool dead;
 
 
         private int test;
@@ -103,7 +104,7 @@ namespace Breakout
 
         public void BallOut()
         {
-            if (position.Y >= playArea.Height + 100)
+            if (position.Y >= playArea.Height + 100 && dead == false)
             {
                 ballOut = true;
             }
@@ -156,6 +157,14 @@ namespace Breakout
 
         }
 
+        public void Reset()
+        {
+            position.X = 300;
+            position.Y = 200;
+            dead = false;
+            ballOut = false;
+        }
+
 
         public int BallTop { get => ballTop; set => ballTop = value; }
         public int BallLeft { get => ballLeft; set => ballLeft = value; }
@@ -168,5 +177,6 @@ namespace Breakout
         public int Size { get => size; set => size = value; }
         public bool BallOut1 { get => ballOut; set => ballOut = value; }
         public Point Position { get => position; set => position = value; }
+        public bool Dead { get => dead; set => dead = value; }
     }
 }

@@ -45,6 +45,7 @@ namespace Breakout
         private int backGroundAnimation;
 
         private int score;
+        private int activeBalls;
 
         //Menus and intro
         private int titleColor;
@@ -52,16 +53,25 @@ namespace Breakout
         private Label label1;
         private Label label2;
         private Label label3;
-
         private List<Label> labels;
         private Button button2;
         private Button button3;
-
         private int paddleIntro;  //used for timing of paddle intro
+
+        private bool dead;
+        private bool intro; //allows intro to run
+
+        //brick variables
+        private int rows;
+        private int columns;
+        private int brickCount;
+
+        //Levels
+        private int level;
 
         public World(Graphics bufferGraphics, Size playArea, Timer timer1, Timer timer2, Label label1, Label label2, Label label3, Label title,  Random random, Button button2, Button button3)
         {
-
+            level = 1;
             //this.labels = labels;
             this.label1 = label1;
             this.label2 = label2;
@@ -93,17 +103,23 @@ namespace Breakout
             ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
             //ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
 
+            activeBalls = ballList.Count;
+
             dropBallList = new List<DropBall>();
             //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
 
             paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
             brickList = new List<Brick>();
 
-            for (int rows = 0; rows < 5; rows++)
+            rows = 1;
+            columns = 10;
+
+
+            for (int j = 0; j < rows; j++)
             { 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < columns; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[rows], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1, random));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1, random));
                     brickX += (brickWidth + brickGap);
                     brickNum++;
                     introCount++;
@@ -111,6 +127,8 @@ namespace Breakout
                 brickX = 0;
                 brickY += (brickHeight + brickGap);
             }
+
+            brickCount = brickList.Count;
 
             paddleIntro = introCount - 4;
             introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
@@ -133,13 +151,33 @@ namespace Breakout
             this.title = title;
             this.button2 = button2;
             this.button3 = button3;
-
+            intro = true;
 
         }
 
 
         public void BallOut()
         {
+            activeBalls -= 1;  //keeps count of balls active, when extra balls are spawned this counter will have gone up
+            if (activeBalls == 0)  //once active balls have reached zero, a life will be taken off
+            {
+                lives--;
+                ballList[0].Reset();
+                activeBalls++;
+            }
+
+            if (lives == 0)
+            {
+                dead = true;  //dead set to true so that start button will now reset game
+                timer1.Enabled = false;
+                Brush black = new SolidBrush(Color.Black);
+                bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
+                label2.Text = "LIVES: ";
+                title.Text = "YOU LOSE!";
+                button2.Visible = true;
+                button3.Visible = true;
+                title.Visible = true;
+            }
 
         }
 
@@ -186,18 +224,41 @@ namespace Breakout
                 titleColor += 5;
             }
 
-            if (titleColor >= 255)
+            if (titleColor >= 255 && intro == true)
             {
                 button2.Visible = true;
                 button3.Visible = true;
             }
-            
         }
 
         public void Run()
         {
+            
+            if (brickCount == 0)
+            {
+                level++;
+
+                switch (level)
+                {
+                    case 2:
+                        Level2(); 
+                        break;
+                }
+
+            }
+            //if (lives <= 0)
+            //{
+            //    timer1.Enabled = false;
+            //}
+
+            //else
+            //{
+            //    timer1.Enabled = true;
+            //}
 
             timer1.Enabled = true;
+
+
             label1.Text = "SCORE: " + (score).ToString();
 
             switch (lives)
@@ -219,9 +280,6 @@ namespace Breakout
                     break;
             }
 
-
-            
-
             Background();
 
             if (introCount > -1)
@@ -232,10 +290,13 @@ namespace Breakout
             brickNum = 0;
             foreach (Brick eachBrick in brickList)
             {
-                
+
+
+
                 if (eachBrick.Score == true)
                 {
                     score += 10;
+                    brickCount--;
                     eachBrick.Score = false;
                 }
 
@@ -247,8 +308,11 @@ namespace Breakout
                 else
                 {
                     //eachBrick.Intro();
+                    if (level == 2)
+                    {
+                        eachBrick.Move();
+                    }
                     brickPos = eachBrick.Position;
-
                     eachBrick.Draw();
                     eachBrick.Hit();
                     if (eachBrick.Drop == true) //checks if brick has an item drop
@@ -261,12 +325,7 @@ namespace Breakout
 
             }
 
-            //foreach (Ball eachBall in ballList)
-            //{
-            //    eachBall.PaddleX = paddle.Position.X;
-            //}
 
-            //ball.PaddleX = paddle.Position.X;  //gives ball class information regarding position of paddle (for bouncing near edges of panel)
             paddle.Hit();
 
             if (introCount > paddleIntro)
@@ -286,11 +345,10 @@ namespace Breakout
             foreach (Ball eachBall in ballList)
             {
 
-                if (eachBall.BallOut1 == true) //check to see if the ball has gone below the bottom of the screen
+                if (eachBall.BallOut1 == true && eachBall.Dead == false) //check to see if the ball has gone below the bottom of the screen
                 {
-                    lives -= 1;
-                    eachBall.Position = new Point(150, 300);
-                    eachBall.BallOut1 = false;
+                    eachBall.Dead = true;
+                    BallOut();
                 }
 
                 eachBall.PaddleX = paddle.Position.X;
@@ -313,11 +371,11 @@ namespace Breakout
         public void SpawnBall()
         {
             ballList.Add(new Ball(new Point(200, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            activeBalls ++;
         }
 
         public void SpawnDropBall(Point position)
         {
-
             dropBallList.Add(new DropBall(bufferGraphics, position));
         }
 
@@ -340,9 +398,155 @@ namespace Breakout
 
             //counter++;
         }
+
+        public void Reset()   //https://stackoverflow.com/questions/708352/how-do-i-reinitialize-or-reset-the-properties-of-a-class
+        {
+
+            ////this.labels = labels;
+            //this.label1 = label1;
+            //this.label2 = label2;
+            //this.label3 = label3;
+            lives = 3;
+            //this.random = random;
+            //this.timer1 = timer1;
+            //this.timer2 = timer2;
+            //this.playArea = playArea;
+            //this.bufferGraphics = bufferGraphics;
+            Color[] brickColour = new Color[6];
+            brickColour[0] = Color.Yellow;
+            brickColour[1] = Color.Orange;
+            brickColour[2] = Color.Red;
+            brickColour[3] = Color.Blue;
+            brickColour[4] = Color.Purple;
+            brickColour[5] = Color.Black;
+
+            brickNum = 0;
+            brickX = 0;
+            brickY = -120;
+            brickWidth = 69;
+            brickHeight = 19;
+            brickGap = 1;
+            introCount = 0;
+            paddleWidth = 100;
+
+            ballList = new List<Ball>();
+            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            //ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+
+            activeBalls = ballList.Count;
+
+            dropBallList = new List<DropBall>();
+            //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
+
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
+            brickList = new List<Brick>();
+
+            rows = 5;
+            columns = 10;
+
+            for (int j = 0; j < rows; j++)
+            {
+                for (int i = 0; i < columns; i++)
+                {
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1, random));
+                    brickX += (brickWidth + brickGap);
+                    brickNum++;
+                    introCount++;
+                }
+                brickX = 0;
+                brickY += (brickHeight + brickGap);
+            }
+
+            brickCount = ballList.Count;
+            paddleIntro = introCount - 4;
+            introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
+
+
+            counter = 0;
+
+            introNum = 0;
+
+            //brickPos = new Point(500, 400);
+
+            score = 0;
+
+            //timer2.Enabled = true;
+            //titleColor = 0;
+
+            //INTRO SCREEN
+            this.title = title;
+            this.button2 = button2;
+            this.button3 = button3;
+            intro = false;
+
+        }
+
+
+
+        public void Level2()
+        {
+            level = 2;
+            Color[] brickColour = new Color[6];
+            brickColour[0] = Color.Yellow;
+            brickColour[1] = Color.Orange;
+            brickColour[2] = Color.Red;
+            brickColour[3] = Color.Blue;
+            brickColour[4] = Color.Purple;
+            brickColour[5] = Color.Black;
+
+            brickNum = 0;
+            brickX = 0;
+            brickY = -120;
+            brickWidth = 69;
+            brickHeight = 19;
+            brickGap = 1;
+            introCount = 0;
+            paddleWidth = 100;
+
+            ballList = new List<Ball>();
+            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+            //ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
+
+            activeBalls = ballList.Count;
+
+            dropBallList = new List<DropBall>();
+            //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
+
+            paddle = new Paddle(new Point(300, 588), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
+            brickList = new List<Brick>();
+
+            rows = 6;
+            columns = 10;
+
+            brickList.Clear(); //https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.clear?view=net-5.0
+
+            for (int j = 0; j < rows; j++)
+            {
+                for (int i = 0; i < columns; i++)
+                {
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, texBox1, random));
+                    brickX += (brickWidth + brickGap);
+                    brickNum++;
+                    introCount++;
+                }
+                brickX = 0;
+                brickY += (brickHeight + brickGap);
+            }
+
+            brickCount = brickList.Count;
+            paddleIntro = introCount - 4;
+            introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
+
+
+            counter = 0;
+
+            introNum = 0;
+
+
+
+
+        }
         public int BrickNum { get => brickNum; set => brickNum = value; }
-
-
-
+        public bool Dead { get => dead; set => dead = value; }
     }
 }

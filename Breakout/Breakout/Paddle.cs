@@ -171,20 +171,7 @@ namespace Breakout
                     drop = true;
                     eachDrop.Y1 += 100;
                 }
-
             }
-
-
-            //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
-            //{
-            //    ball.PaddleBounce();
-            //    //hit = true;
-            //}
-
-            //if (rectangle.Contains(ball.BallLeft, ball.BallSideMiddle) || rectangle.Contains(ball.BallRight, ball.BallSideMiddle))
-            //{
-            //    ball.BrickBounceSide();
-            //}
 
         }
 
