@@ -34,17 +34,23 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            world = new World(bufferGraphics, playArea, timer1, textBox1, random); //clientSize automatically generated, tells the boundaries of the program
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, Title, random, button2, button3) ; //clientSize automatically generated, tells the boundaries of the program
             this.KeyPreview = true;
-            timer1.Enabled = true;
+            timer2.Enabled = true;
+            //timer1.Enabled = true;
             score = 0;
             
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
+            world.Intro();
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
             bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
             world.Run();
 
@@ -97,6 +103,23 @@ namespace Breakout
         private void button2_Click(object sender, EventArgs e)
         {
             //sound.Play();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Title.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            timer2.Enabled = false;
+
+            pictureBox1.Visible = true;
+            label1.Visible = true;
+            label2.Visible = true;
+            label3.Visible = true;
+            label4.Visible = true;
+            label5.Visible = true;
+            label6.Visible = true;
+            world.Run();
         }
     }
 }

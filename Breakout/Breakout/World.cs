@@ -20,7 +20,7 @@ namespace Breakout
         private List<Ball> ballList;
 
         private List<DropBall> dropBallList;
-
+        
         private int brickX;
         private int brickY;
         private int brickWidth;
@@ -36,21 +36,32 @@ namespace Breakout
         private TextureBrush tbrush;
         private Size playArea;
         private Timer timer1;
+        private Timer timer2;
         private TextBox texBox1;
+        
         private Random random;
         private Point brickPos;
         private int backGroundAnimation;
 
         private int score;
 
+        //Menus and intro
+        private int titleColor;
+        private Label title;
+        private Label label1;
+        private Button button2;
+        private Button button3;
 
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, TextBox texBox1, Random random)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Timer timer2, Label label1, Label title,  Random random, Button button2, Button button3)
         {
+
+
+            this.label1 = label1;
             this.random = random;
-            this.texBox1 = texBox1;
             this.timer1 = timer1;
+            this.timer2 = timer2;
             this.playArea = playArea;
             this.bufferGraphics = bufferGraphics;
             Color[] brickColour = new Color[6];
@@ -106,6 +117,16 @@ namespace Breakout
             backGroundAnimation = 0;
 
             score = 0;
+
+            timer2.Enabled = true;
+            titleColor = 0;
+
+            //INTRO SCREEN
+            this.title = title;
+            this.button2 = button2;
+            this.button3 = button3;
+
+
         }
 
         public void PaddleMove(string direction)
@@ -141,10 +162,27 @@ namespace Breakout
             }
         }
 
+
+        public void Intro()
+        {
+            title.ForeColor = Color.FromArgb(titleColor, titleColor, titleColor);
+            if (titleColor < 255)
+            {
+                titleColor += 5;
+            }
+
+            if (titleColor >= 255)
+            {
+                button2.Visible = true;
+                button3.Visible = true;
+            }
+            
+        }
+
         public void Run()
         {
-
-            texBox1.Text = score.ToString();
+            timer1.Enabled = true;
+            label1.Text = score.ToString();
             Background();
 
             if (introCount > -1)
@@ -238,22 +276,22 @@ namespace Breakout
 
         public void Background()
         {
-            if (backGroundAnimation == 4)
-            {
-                backGroundAnimation = 0;
-            }
+            //if (backGroundAnimation == 4)
+            //{
+            //    backGroundAnimation = 0;
+            //}
 
             background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (backGroundAnimation).ToString()); //applies new image to background
             tbrush = new TextureBrush(background); //applies new texture brush
 
             bufferGraphics.FillRectangle(tbrush, 0, 0, playArea.Width, playArea.Height);
 
-            if (counter % 5 == 0)  //if counter is divisible by 5 add one to animation counter
-            {
-                backGroundAnimation++;
-            }
+            //if (counter % 5 == 0)  //if counter is divisible by 5 add one to animation counter
+            //{
+            //    backGroundAnimation++;
+            //}
 
-            counter++;
+            //counter++;
         }
         public int BrickNum { get => brickNum; set => brickNum = value; }
 
