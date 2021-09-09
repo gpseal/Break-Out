@@ -96,6 +96,8 @@ namespace Breakout
                 bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 7, paddleSpeed * 2, tailHeight);
                 bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 14, paddleSpeed * 2, tailHeight);
 
+
+
                 engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
                 bufferGraphics.FillRectangle(engineBrush, position.X + PaddleWidth - 10, position.Y, height, height);
 
@@ -137,12 +139,20 @@ namespace Breakout
 
             foreach (Ball eachBall in ballList)
             {
-                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
                 {
                     paddleHit.Play();
                     eachBall.PaddleBounce();
                     //hit = true;
                 }
+
+                //if (rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
+                //{
+                //    paddleHit.Play();
+                //    eachBall.PaddleBounce();
+                //    //hit = true;
+                //}
+
 
                 if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
                 {

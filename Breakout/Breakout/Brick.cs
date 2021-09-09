@@ -26,7 +26,6 @@ namespace Breakout
         private bool drop;
         private int brickNum;
         private Rectangle rectangle;
-        private int score;
         private TextBox texBox1;
         private List<Ball> ballList;
         private List<DropBall> items;
@@ -35,6 +34,8 @@ namespace Breakout
         private Brush death; //brush used when brick eliminated
         private bool dead;
         private int transparent;
+        private bool score;
+
 
         public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, TextBox texBox1, Random random)
         {
@@ -61,6 +62,7 @@ namespace Breakout
             this.random = random;
             dropNum = random.Next(5);
             dead = false;
+            
         }
 
         public void IntroAnim()
@@ -97,9 +99,9 @@ namespace Breakout
         public void Hit()
         {
 
-
             foreach (Ball eachBall in ballList)
             {
+                
 
                 if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))  //checks to see if points on ball top/bottom have entered brick
                 {
@@ -112,6 +114,7 @@ namespace Breakout
                     }
 
                     dead = true; //triggers death sequence for brick
+                    score = true;
                 }
 
                 if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))  //checks to see if points on ball sides have entered brick
@@ -124,6 +127,7 @@ namespace Breakout
                     }
 
                     dead = true;//triggers death sequence for brick
+                    score = true;
                 }
 
                 //if (rectangle.Contains(ball.BallTopMiddle, ball.BallBottom) || rectangle.Contains(ball.BallTopMiddle, ball.BallTop))
@@ -183,10 +187,10 @@ namespace Breakout
 
         public bool Hit1 { get => hit; set => hit = value; }
         public int BrickNum { get => brickNum; set => brickNum = value; }
-        public int Score { get => score; set => score = value; }
         public Point Position { get => position; set => position = value; }
         public bool Drop { get => drop; set => drop = value; }
         public bool Dead { get => dead; set => dead = value; }
+        public bool Score { get => score; set => score = value; }
     }
 
 

@@ -12,7 +12,8 @@ namespace Breakout
     
     class World
     {
-        
+        private int counter;
+
         private Graphics bufferGraphics;
         //private Ball ball;
         private List<Brick> brickList;
@@ -38,6 +39,9 @@ namespace Breakout
         private TextBox texBox1;
         private Random random;
         private Point brickPos;
+        private int backGroundAnimation;
+
+        private int score;
 
 
         private int paddleIntro;  //used for timing of paddle intro
@@ -62,7 +66,7 @@ namespace Breakout
             brickY = -120;
             brickWidth = 69;
             brickHeight = 19;
-            brickGap = 0;
+            brickGap = 1;
             introCount = 0;
             paddleWidth = 100;
 
@@ -92,13 +96,16 @@ namespace Breakout
             paddleIntro = introCount - 4;
             introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
 
-            background = (Bitmap)Properties.Resources.ResourceManager.GetObject("city");
-            tbrush = new TextureBrush(background);
 
+            counter = 0;
 
             introNum = 0;
 
             brickPos = new Point(500, 400);
+
+            backGroundAnimation = 0;
+
+            score = 0;
         }
 
         public void PaddleMove(string direction)
@@ -137,8 +144,9 @@ namespace Breakout
         public void Run()
         {
 
-            //texBox1.Text = ball.Score.ToString();
-            Draw();
+            texBox1.Text = score.ToString();
+            Background();
+
             if (introCount > -1)
             {
                 BrickIntro();
@@ -147,6 +155,12 @@ namespace Breakout
             brickNum = 0;
             foreach (Brick eachBrick in brickList)
             {
+                
+                if (eachBrick.Score == true)
+                {
+                    score += 10;
+                    eachBrick.Score = false;
+                }
 
                 if (eachBrick.Dead == true)
                 {
@@ -222,9 +236,24 @@ namespace Breakout
             dropBallList.Add(new DropBall(bufferGraphics, position));
         }
 
-        public void Draw()
+        public void Background()
         {
+            if (backGroundAnimation == 4)
+            {
+                backGroundAnimation = 0;
+            }
+
+            background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (backGroundAnimation).ToString()); //applies new image to background
+            tbrush = new TextureBrush(background); //applies new texture brush
+
             bufferGraphics.FillRectangle(tbrush, 0, 0, playArea.Width, playArea.Height);
+
+            if (counter % 5 == 0)  //if counter is divisible by 5 add one to animation counter
+            {
+                backGroundAnimation++;
+            }
+
+            counter++;
         }
         public int BrickNum { get => brickNum; set => brickNum = value; }
 

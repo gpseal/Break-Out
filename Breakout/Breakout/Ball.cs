@@ -29,6 +29,8 @@ namespace Breakout
         private int score;
         private int ballTopMiddle;
         private int ballSideMiddle;
+        private int ballBottomRight;
+        private int ballBottomLeft;
 
 
         private int test;
@@ -49,6 +51,7 @@ namespace Breakout
             this.playArea = playArea;
             this.paddleWidth = paddleWidth;
             score = 0; //score for game kept, will tick up when a brick bounce method is called
+            
         }
 
         public void Draw()
@@ -147,5 +150,6 @@ namespace Breakout
         public int BallSideMiddle { get => ballSideMiddle; set => ballSideMiddle = value; }
         public int PaddleX { get => paddleX; set => paddleX = value; }
         public int Score { get => score; set => score = value; }
+        public int Size { get => size; set => size = value; }
     }
 }
