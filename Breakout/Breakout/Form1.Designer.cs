@@ -79,11 +79,11 @@ namespace Breakout
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
             this.label1.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(197, 674);
+            this.label1.Location = new System.Drawing.Point(81, 667);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 58);
+            this.label1.Size = new System.Drawing.Size(153, 46);
             this.label1.TabIndex = 4;
-            this.label1.Text = "0";
+            this.label1.Text = "SCORE: 0";
             this.label1.Visible = false;
             // 
             // label2
@@ -92,11 +92,11 @@ namespace Breakout
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
             this.label2.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(73, 674);
+            this.label2.Location = new System.Drawing.Point(334, 667);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 46);
+            this.label2.Size = new System.Drawing.Size(249, 46);
             this.label2.TabIndex = 5;
-            this.label2.Text = "SCORE:";
+            this.label2.Text = "LIVES: == == ==";
             this.label2.Visible = false;
             // 
             // label3
@@ -105,11 +105,11 @@ namespace Breakout
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
             this.label3.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(353, 674);
+            this.label3.Location = new System.Drawing.Point(698, 667);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 46);
+            this.label3.Size = new System.Drawing.Size(128, 46);
             this.label3.TabIndex = 7;
-            this.label3.Text = "LIVES:";
+            this.label3.Text = "LEVEL: 1";
             this.label3.Visible = false;
             // 
             // label4
@@ -120,9 +120,8 @@ namespace Breakout
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(460, 674);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(168, 46);
+            this.label4.Size = new System.Drawing.Size(0, 58);
             this.label4.TabIndex = 6;
-            this.label4.Text = "==  ==  ==";
             this.label4.Visible = false;
             // 
             // label5
@@ -133,9 +132,8 @@ namespace Breakout
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(698, 674);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 46);
+            this.label5.Size = new System.Drawing.Size(0, 58);
             this.label5.TabIndex = 9;
-            this.label5.Text = "LEVEL:";
             this.label5.Visible = false;
             // 
             // label6
@@ -144,11 +142,10 @@ namespace Breakout
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
             this.label6.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(802, 674);
+            this.label6.Location = new System.Drawing.Point(834, 663);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 46);
+            this.label6.Size = new System.Drawing.Size(0, 46);
             this.label6.TabIndex = 8;
-            this.label6.Text = "3";
             this.label6.Visible = false;
             // 
             // timer2

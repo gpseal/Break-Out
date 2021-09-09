@@ -19,6 +19,7 @@ namespace Breakout
         private List<Brick> brickList;
         private List<Ball> ballList;
 
+        private int lives;
         private List<DropBall> dropBallList;
         
         private int brickX;
@@ -49,16 +50,23 @@ namespace Breakout
         private int titleColor;
         private Label title;
         private Label label1;
+        private Label label2;
+        private Label label3;
+
+        private List<Label> labels;
         private Button button2;
         private Button button3;
 
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Timer timer2, Label label1, Label title,  Random random, Button button2, Button button3)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Timer timer2, Label label1, Label label2, Label label3, Label title,  Random random, Button button2, Button button3)
         {
 
-
+            //this.labels = labels;
             this.label1 = label1;
+            this.label2 = label2;
+            this.label3 = label3;
+            lives = 3;
             this.random = random;
             this.timer1 = timer1;
             this.timer2 = timer2;
@@ -129,6 +137,13 @@ namespace Breakout
 
         }
 
+
+        public void BallOut()
+        {
+
+        }
+
+
         public void PaddleMove(string direction)
         {
             switch (direction)
@@ -181,8 +196,32 @@ namespace Breakout
 
         public void Run()
         {
+
             timer1.Enabled = true;
-            label1.Text = score.ToString();
+            label1.Text = "SCORE: " + (score).ToString();
+
+            switch (lives)
+            {
+                case 3:
+                    label2.Text = "LIVES: == == ==";
+                    break;
+
+                case 2:
+                    label2.Text = "LIVES: == ==";
+                    break;
+
+                case 1:
+                    label2.Text = "LIVES: ==";
+                    break;
+
+                case 0:
+                    label2.Text = "LIVES: ";
+                    break;
+            }
+
+
+            
+
             Background();
 
             if (introCount > -1)
@@ -246,6 +285,14 @@ namespace Breakout
 
             foreach (Ball eachBall in ballList)
             {
+
+                if (eachBall.BallOut1 == true) //check to see if the ball has gone below the bottom of the screen
+                {
+                    lives -= 1;
+                    eachBall.Position = new Point(150, 300);
+                    eachBall.BallOut1 = false;
+                }
+
                 eachBall.PaddleX = paddle.Position.X;
                 eachBall.Move();
                 eachBall.Bounce();

@@ -24,9 +24,21 @@ namespace Breakout
         private Size playArea;
         private int score;
         private Random random;
+        private List<Label> labels;
 
         public Form1()
         {
+
+            //labels = new List<Label>();
+            //labels.Add(label1);
+            //labels.Add(label2);
+            //labels.Add(label3);
+            //labels.Add(label4);
+            //labels.Add(label5);
+            //labels.Add(label6);
+            //labels.Add(label8);
+
+
             //sound = new SoundPlayer(Properties.Resources.move);
             random = new Random();
             InitializeComponent();
@@ -34,7 +46,7 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, Title, random, button2, button3) ; //clientSize automatically generated, tells the boundaries of the program
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3) ; //clientSize automatically generated, tells the boundaries of the program
             this.KeyPreview = true;
             timer2.Enabled = true;
             //timer1.Enabled = true;
@@ -121,5 +133,7 @@ namespace Breakout
             label6.Visible = true;
             world.Run();
         }
+
+
     }
 }

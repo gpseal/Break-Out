@@ -31,6 +31,7 @@ namespace Breakout
         private int ballSideMiddle;
         private int ballBottomRight;
         private int ballBottomLeft;
+        private bool ballOut;
 
 
         private int test;
@@ -51,7 +52,7 @@ namespace Breakout
             this.playArea = playArea;
             this.paddleWidth = paddleWidth;
             score = 0; //score for game kept, will tick up when a brick bounce method is called
-            
+            ballOut = false;
         }
 
         public void Draw()
@@ -72,6 +73,7 @@ namespace Breakout
             ballSideMiddle = position.Y + (size / 2);
             ballRight = ballLeft + size;
             ballBottom = ballTop + size;
+            BallOut();
         }
 
         public void Bounce()
@@ -82,10 +84,10 @@ namespace Breakout
                 velocity.X *= NEG;  //changes velocity to negative so ball changes direction and bounces off walls
             }
 
-            if (position.Y >= playArea.Height - size)
-            {
-                velocity.Y *= -1;
-            }
+            //if (position.Y >= playArea.Height - size)
+            //{
+            //    velocity.Y *= -1;
+            //}
 
             if (position.X <= 0)
             {
@@ -96,10 +98,22 @@ namespace Breakout
             {
                 velocity.Y *= -1;
             }
+
+        }
+
+        public void BallOut()
+        {
+            if (position.Y >= playArea.Height + 100)
+            {
+                ballOut = true;
+            }
+
         }
 
         public void BrickBounceVert()
         {
+
+            bufferGraphics.FillEllipse(highlight, position.X - 5, position.Y, size + 10, size - 15);
             velocity.Y *= -1;
             score += 10;  //adds to total score, sent back world
         }
@@ -112,7 +126,8 @@ namespace Breakout
 
         public void PaddleBounce()
         {
-            
+            bufferGraphics.FillEllipse(highlight, position.X, position.Y + size -5, size, size-15);
+
             velocity.Y *= -1;
 
             if (ballTopMiddle >= PaddleX && ballTopMiddle <= PaddleX + size) //if ball hits paddle near edge, velocity x will be changed
@@ -151,5 +166,7 @@ namespace Breakout
         public int PaddleX { get => paddleX; set => paddleX = value; }
         public int Score { get => score; set => score = value; }
         public int Size { get => size; set => size = value; }
+        public bool BallOut1 { get => ballOut; set => ballOut = value; }
+        public Point Position { get => position; set => position = value; }
     }
 }
