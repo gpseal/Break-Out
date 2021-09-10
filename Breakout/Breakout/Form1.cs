@@ -141,6 +141,24 @@ namespace Breakout
             world.Run();
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            label7.Visible = true;
+            Title.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            timer2.Enabled = false;
 
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            label7.Visible = true;
+            button4.Visible = true;
+            Title.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            timer2.Enabled = false;
+        }
     }
 }

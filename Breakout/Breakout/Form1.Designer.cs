@@ -44,6 +44,8 @@ namespace Breakout
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +122,7 @@ namespace Breakout
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(460, 674);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 58);
+            this.label4.Size = new System.Drawing.Size(0, 46);
             this.label4.TabIndex = 6;
             this.label4.Visible = false;
             // 
@@ -132,7 +134,7 @@ namespace Breakout
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(698, 674);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 58);
+            this.label5.Size = new System.Drawing.Size(0, 46);
             this.label5.TabIndex = 9;
             this.label5.Visible = false;
             // 
@@ -173,7 +175,7 @@ namespace Breakout
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(235, 272);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 181);
+            this.label8.Size = new System.Drawing.Size(0, 145);
             this.label8.TabIndex = 11;
             // 
             // button2
@@ -204,6 +206,33 @@ namespace Breakout
             this.button3.Text = "OPTIONS";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(217, 171);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(265, 322);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "BALL SPEED\r\n\r\nBRICK ROWS\r\n\r\nBRICK COLUMNS\r\n\r\nPADDLE WIDTH";
+            this.label7.Visible = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(405, 538);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(178, 49);
+            this.button4.TabIndex = 15;
+            this.button4.Text = "EXIT";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Visible = false;
             // 
             // Form1
             // 
@@ -211,6 +240,8 @@ namespace Breakout
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(934, 729);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Title);
@@ -250,6 +281,8 @@ namespace Breakout
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button4;
     }
 }
 
