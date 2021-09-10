@@ -174,13 +174,15 @@ namespace Breakout
             label5.Visible = true;
             label6.Visible = true;
 
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
-
-            if (world.Dead == true)
+            if (world.Dead == true || world2.Dead == true || world3.Dead == true)
             {
-                world.Reset();
+                level = 1;
                 world.Dead = false;
             }
+
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
+
+
             world.Run();
         }
 
