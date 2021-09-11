@@ -96,8 +96,6 @@ namespace Breakout
                 bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 7, paddleSpeed * 2, tailHeight);
                 bufferGraphics.FillRectangle(tail4, position.X + PaddleWidth + 5 * paddleSpeed, position.Y + 14, paddleSpeed * 2, tailHeight);
 
-
-
                 engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
                 bufferGraphics.FillRectangle(engineBrush, position.X + PaddleWidth - 10, position.Y, height, height);
 

@@ -67,6 +67,8 @@ namespace Breakout
         private int columns;
         private int brickCount;
 
+        private bool keydown;  //to signify that the paddle should move
+        private string key;
 
         //Levels
         private int level;
@@ -239,7 +241,10 @@ namespace Breakout
 
         public void Run()
         {
+
+
             timer1.Enabled = true;
+
 
 
             if (brickCount == 0)
@@ -348,9 +353,6 @@ namespace Breakout
                     {
                         eachBrick.MoveHorizontal();
                     }
-
-
-
                     brickPos = eachBrick.Position;
                     eachBrick.Draw();
                     eachBrick.Hit();
@@ -359,14 +361,7 @@ namespace Breakout
                         SpawnDropBall(brickPos);
                         eachBrick.Drop = false;
                     }
-
-
-
                     brickNum++;
-
-
-
-
                 }
 
             }
@@ -403,8 +398,13 @@ namespace Breakout
 
             foreach (DropBall eachDrop in dropBallList) //draws and animates brick drop for extra ball
             {
-                eachDrop.Move();
                 eachDrop.Draw();
+                eachDrop.Move();
+            }
+
+            if (keydown == true)
+            {
+                PaddleMove(key);
             }
 
             //ball.Bounce();
@@ -634,5 +634,7 @@ namespace Breakout
         public int BrickNum { get => brickNum; set => brickNum = value; }
         public bool Dead { get => dead; set => dead = value; }
         public bool LevelComplete { get => levelComplete; set => levelComplete = value; }
+        public bool Keydown { get => keydown; set => keydown = value; }
+        public string Key { get => key; set => key = value; }
     }
 }

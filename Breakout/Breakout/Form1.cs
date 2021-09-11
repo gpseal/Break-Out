@@ -63,7 +63,11 @@ namespace Breakout
             //timer1.Enabled = true;
             score = 0;
             level = 1;
-            
+
+            //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
+            //this.panelOptions.Controls.Add(Optionsform);
+            //Optionsform.Show();
+
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -86,11 +90,12 @@ namespace Breakout
             switch (level)
             {
                 case 1:
-                    world.Run();
                     if (keydown == true)
                     {
                         world.PaddleMove(key);
                     }
+                    world.Run();
+
                     break;
 
                 case 2:
@@ -125,20 +130,29 @@ namespace Breakout
             switch (key)
             {
                 case "Left":
-                    
-                    //rocket.Play();
-                    world.PaddleMove(key);
-                    keydown = true;
+
+                    world.Key = key;
+                    world.Keydown = true;
+                    world2.Key = key;
+                    world2.Keydown = true;
+                    world3.Key = key;
+                    world3.Keydown = true;
                     break;
 
                 case "Right":
-                    //rocket.Play();
-                    world.PaddleMove(key);
-                    keydown = true;
+                    world.Key = key;
+                    world.Keydown = true;
+                    world2.Key = key;
+                    world2.Keydown = true;
+                    world3.Key = key;
+                    world3.Keydown = true;
                     break;
 
-                case "Space":
-                    world.Pause();
+                case "P":
+                    timer1.Enabled = !timer1.Enabled;
+                    //world.Pause();
+                    //world2.Pause();
+                    //world3.Pause();
                     break;
 
                 case "S":
@@ -151,7 +165,7 @@ namespace Breakout
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            keydown = false;
+            world.Keydown = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -174,13 +188,15 @@ namespace Breakout
             label5.Visible = true;
             label6.Visible = true;
 
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
+
             if (world.Dead == true || world2.Dead == true || world3.Dead == true)
             {
                 level = 1;
                 world.Dead = false;
             }
 
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
+            
 
 
             world.Run();
@@ -188,7 +204,7 @@ namespace Breakout
 
         private void button3_Click(object sender, EventArgs e)
         {
-            label7.Visible = true;
+            //label7.Visible = true;
             Title.Visible = false;
             button2.Visible = false;
             button3.Visible = false;
@@ -198,36 +214,19 @@ namespace Breakout
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            trackBar1.Visible = !trackBar1.Visible;
-            trackBar2.Visible = !trackBar2.Visible;
-            trackBar3.Visible = !trackBar3.Visible;
-            trackBar4.Visible = !trackBar4.Visible;
-
-            label7.Visible = !label7.Visible;
-            button4.Visible = !button4.Visible;
-            Title.Visible = !Title.Visible;
-            button2.Visible = !button2.Visible;
-            button3.Visible = !button3.Visible;
-            timer2.Enabled = !timer2.Enabled;
+            panel1.Visible = !panel1.Visible;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            trackBar1.Visible = !trackBar1.Visible;
-            trackBar2.Visible = !trackBar2.Visible;
-            trackBar3.Visible = !trackBar3.Visible;
-            trackBar4.Visible = !trackBar4.Visible;
-
-            label7.Visible = !label7.Visible;
-            button4.Visible = !button4.Visible;
-            Title.Visible = !Title.Visible;
-            button2.Visible = !button2.Visible;
-            button3.Visible = !button3.Visible;
+            panel1.Visible = !panel1.Visible;
         }
 
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
             rows = trackBar2.Value;
         }
+
+
     }
 }
