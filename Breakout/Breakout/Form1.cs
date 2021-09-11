@@ -53,8 +53,8 @@ namespace Breakout
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
             //world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level); //clientSize automatically generated, tells the boundaries of the program
-            world2 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 2, 6, 2);
-            world3 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 6, 4, 3); //clientSize automatically generated, tells the boundaries of the program
+            //world2 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 2, 6, 2);
+            //world3 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 6, 4, 3); //clientSize automatically generated, tells the boundaries of the program
 
             //clientSize automatically generated, tells the boundaries of the program
 
@@ -81,7 +81,7 @@ namespace Breakout
             if (world.LevelComplete == true)
             {
                 level++;
-                world.LevelComplete = false;
+                //world.LevelComplete = false;
             }
 
 
@@ -90,29 +90,34 @@ namespace Breakout
             switch (level)
             {
                 case 1:
-                    if (keydown == true)
-                    {
-                        world.PaddleMove(key);
-                    }
+                    //if (keydown == true)
+                    //{
+                    //    world.PaddleMove(key);
+                    //}
                     world.Run();
 
                     break;
 
                 case 2:
-                    
-                    world2.Run();
-                    if (keydown == true)
+                    if (world.LevelComplete == true)
                     {
-                        world2.PaddleMove(key);
+                        Level2();
                     }
+                    world.Run();
+                    //world2.Run();
+                    //if (keydown == true)
+                    //{
+                    //    world2.PaddleMove(key);
+                    //}
                     break;
 
                 case 3:
-                    world3.Run();
-                    if (keydown == true)
+                    if (world.LevelComplete == true)
                     {
-                        world3.PaddleMove(key);
+                        Level3();
                     }
+                    world.Run();
+
                     break;
             }
 
@@ -133,19 +138,19 @@ namespace Breakout
 
                     world.Key = key;
                     world.Keydown = true;
-                    world2.Key = key;
-                    world2.Keydown = true;
-                    world3.Key = key;
-                    world3.Keydown = true;
+                    //world2.Key = key;
+                    //world2.Keydown = true;
+                    //world3.Key = key;
+                    //world3.Keydown = true;
                     break;
 
                 case "Right":
                     world.Key = key;
                     world.Keydown = true;
-                    world2.Key = key;
-                    world2.Keydown = true;
-                    world3.Key = key;
-                    world3.Keydown = true;
+                    //world2.Key = key;
+                    //world2.Keydown = true;
+                    //world3.Key = key;
+                    //world3.Keydown = true;
                     break;
 
                 case "P":
@@ -190,13 +195,11 @@ namespace Breakout
 
             world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
 
-            if (world.Dead == true || world2.Dead == true || world3.Dead == true)
+            if (world.Dead == true)
             {
                 level = 1;
                 world.Dead = false;
             }
-
-            
 
 
             world.Run();
@@ -225,6 +228,18 @@ namespace Breakout
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
             rows = trackBar2.Value;
+        }
+
+        private void Level2()
+        {
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 2, 6, 2);
+            world.LevelComplete = false;
+        }
+
+        private void Level3()
+        {
+            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 6, 4, 3);
+            world.LevelComplete = false;
         }
 
 
