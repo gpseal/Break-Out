@@ -101,21 +101,20 @@ namespace Breakout.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static byte[] brickHit {
+        internal static System.IO.UnmanagedMemoryStream bgMusic {
             get {
-                object obj = ResourceManager.GetObject("brickHit", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("bgMusic", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream brickHit1 {
+        internal static System.IO.UnmanagedMemoryStream brickHit {
             get {
-                return ResourceManager.GetStream("brickHit1", resourceCulture);
+                return ResourceManager.GetStream("brickHit", resourceCulture);
             }
         }
         
@@ -136,6 +135,15 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("controlPanel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream drop {
+            get {
+                return ResourceManager.GetStream("drop", resourceCulture);
             }
         }
         
@@ -165,6 +173,15 @@ namespace Breakout.Properties {
         internal static System.IO.UnmanagedMemoryStream move {
             get {
                 return ResourceManager.GetStream("move", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream newBall {
+            get {
+                return ResourceManager.GetStream("newBall", resourceCulture);
             }
         }
         
@@ -412,6 +429,15 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("scoreBoard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream woosh {
+            get {
+                return ResourceManager.GetStream("woosh", resourceCulture);
             }
         }
     }

@@ -130,10 +130,10 @@
   <data name="b3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\b3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="brickHit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\brickHit.flac;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="bgMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bgMusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="brickHit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="brickHit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brickHit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="city" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -141,6 +141,9 @@
   </data>
   <data name="controlPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\controlPanel.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="drop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drop.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="engine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\engine.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -150,6 +153,9 @@
   </data>
   <data name="move" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\move.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="newBall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newBall.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="p0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\p0.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -225,5 +231,8 @@
   </data>
   <data name="scoreBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\scoreBoard.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="woosh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\woosh.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

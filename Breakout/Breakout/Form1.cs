@@ -14,6 +14,7 @@ namespace Breakout
     public partial class Form1 : Form
     {
         //private SoundPlayer sound;
+
         private Bitmap bufferImage;
         private Graphics bufferGraphics;
         private Graphics graphics; //will have a graphics object
@@ -31,10 +32,10 @@ namespace Breakout
         private int columns;
         private int level;
         private int lives;
+        private SoundPlayer paddleMove;
 
         public Form1()
         {
-
             //labels = new List<Label>();
             //labels.Add(label1);
             //labels.Add(label2);
@@ -132,7 +133,7 @@ namespace Breakout
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            SoundPlayer rocket = new SoundPlayer(Properties.Resources.rocket2);
+
             key = e.KeyCode.ToString();
 
             switch (key)
@@ -183,6 +184,8 @@ namespace Breakout
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            
+
             Title.Visible = false;
             button2.Visible = false;
             button3.Visible = false;
@@ -233,7 +236,7 @@ namespace Breakout
 
         private void Level2()
         {
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, 2, 6, 2, lives, score);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, 3, 10, 2, lives, score);
             world.LevelComplete = false;
         }
 
@@ -253,5 +256,6 @@ namespace Breakout
         {
             columns = trackBar3.Value;
         }
+
     }
 }

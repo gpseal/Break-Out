@@ -12,6 +12,7 @@ namespace Breakout
     
     class World
     {
+
         private int counter;
 
         private Graphics bufferGraphics;
@@ -416,6 +417,8 @@ namespace Breakout
 
         public void SpawnBall()
         {
+            SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
+            newBall.Play();
             ballList.Add(new Ball(new Point(200, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
             activeBalls ++;
         }

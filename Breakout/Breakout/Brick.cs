@@ -45,7 +45,7 @@ namespace Breakout
         {
 
             this.playArea = playArea;
-            brickHit = new SoundPlayer(Properties.Resources.paddleHit);
+            brickHit = new SoundPlayer(Properties.Resources.brickHit);
             transparent = 255;
             this.ballList = ballList;
             this.texBox1 = texBox1;
@@ -144,6 +144,8 @@ namespace Breakout
 
                     if (dropNum == 1)
                     {
+                        SoundPlayer dropItem = new SoundPlayer(Properties.Resources.drop);
+                        dropItem.Play();
                         drop = true; //triggers item drop for brick
                     }
 
@@ -153,6 +155,7 @@ namespace Breakout
 
                 if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))  //checks to see if points on ball sides have entered brick
                 {
+                    brickHit.Play();
                     eachBall.BrickBounceSide();
 
                     if (dropNum == 1)
