@@ -30,6 +30,7 @@ namespace Breakout
         private int rows;
         private int columns;
         private int level;
+        private int lives;
 
         public Form1()
         {
@@ -63,6 +64,7 @@ namespace Breakout
             //timer1.Enabled = true;
             score = 0;
             level = 1;
+            lives = 3;
 
             //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //this.panelOptions.Controls.Add(Optionsform);
@@ -70,11 +72,11 @@ namespace Breakout
 
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
-            //world.Intro();
-        }
+        ////private void timer2_Tick(object sender, EventArgs e)
+        ////{
+        ////    bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
+        ////    //world.Intro();
+        ////}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -121,8 +123,9 @@ namespace Breakout
                     break;
             }
 
-            
 
+            score = world.Score;
+            lives = world.Lives;
             graphics.DrawImage(bufferImage, 0, 0);
             //Application.DoEvents();//make sure all images are drawn before the program proceeds
         }
@@ -192,15 +195,16 @@ namespace Breakout
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
-
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level);
+            level = 1;
+            score = 0;
+            lives = 3;
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, rows, columns, level, lives, score);
 
             if (world.Dead == true)
             {
-                level = 1;
+                
                 world.Dead = false;
             }
-
 
             world.Run();
         }
@@ -225,23 +229,29 @@ namespace Breakout
             panel1.Visible = !panel1.Visible;
         }
 
-        private void trackBar2_ValueChanged(object sender, EventArgs e)
-        {
-            rows = trackBar2.Value;
-        }
+
 
         private void Level2()
         {
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 2, 6, 2);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, 2, 6, 2, lives, score);
             world.LevelComplete = false;
         }
 
         private void Level3()
         {
-            world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 6, 4, 3);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, 6, 4, 3, lives, score);
             world.LevelComplete = false;
         }
 
+        private void trackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            rows = trackBar2.Value;
+        }
 
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            columns = trackBar3.Value;
+        }
     }
 }

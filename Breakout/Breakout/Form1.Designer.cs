@@ -226,10 +226,12 @@ namespace Breakout
             // trackBar3
             // 
             this.trackBar3.Location = new System.Drawing.Point(406, 239);
+            this.trackBar3.Minimum = 1;
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(243, 56);
             this.trackBar3.TabIndex = 18;
-            this.trackBar3.TickFrequency = 5;
+            this.trackBar3.Value = 1;
+            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             // 
             // trackBar1
             // 

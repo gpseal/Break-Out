@@ -37,7 +37,6 @@ namespace Breakout
         private TextureBrush tbrush;
         private Size playArea;
         private Timer timer1;
-        private Timer timer2;
         private TextBox texBox1;
         
         private Random random;
@@ -45,6 +44,7 @@ namespace Breakout
         private int backGroundAnimation;
 
         private int score;
+
         private int activeBalls;
 
         //Menus and intro
@@ -73,23 +73,23 @@ namespace Breakout
         //Levels
         private int level;
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Timer timer2, Label label1, Label label2, Label label3, Label title,  Random random, Button button2, Button button3, int rows, int columns, int level)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Label title, Random random, Button button2, Button button3, int rows, int columns, int level, int lives, int score)
         {
+            dead = false;
             //level = 1;
             //this.labels = labels;
             this.level = level;
             this.label1 = label1;
             this.label2 = label2;
             this.label3 = label3;
-            lives = 3;
+            this.lives = lives;
             this.random = random;
             this.timer1 = timer1;
-            this.timer2 = timer2;
             this.playArea = playArea;
             this.bufferGraphics = bufferGraphics;
             this.rows = rows;
             this.columns = columns;
-
+            this.score = score;
 
             Color[] brickColour = new Color[6];
             brickColour[0] = Color.Yellow;
@@ -118,7 +118,7 @@ namespace Breakout
             dropBallList = new List<DropBall>();
             //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
 
-            paddle = new Paddle(new Point(300, 500), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
+            paddle = new Paddle(new Point(300, 600), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
             brickList = new List<Brick>();
 
 
@@ -138,7 +138,7 @@ namespace Breakout
 
             brickCount = brickList.Count;
 
-            paddleIntro = introCount - 4;
+            paddleIntro = 0;
             introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
 
 
@@ -150,9 +150,7 @@ namespace Breakout
 
             backGroundAnimation = 0;
 
-            score = 0;
-
-            timer2.Enabled = true;
+            //timer2.Enabled = true;
             titleColor = 0;
 
             //INTRO SCREEN
@@ -242,6 +240,12 @@ namespace Breakout
         public void Run()
         {
 
+
+            if (paddleIntro < 15)
+            {
+                paddle.Intro();
+            }
+            paddleIntro++;
 
             timer1.Enabled = true;
 
@@ -356,6 +360,7 @@ namespace Breakout
                     brickPos = eachBrick.Position;
                     eachBrick.Draw();
                     eachBrick.Hit();
+
                     if (eachBrick.Drop == true) //checks if brick has an item drop
                     {
                         SpawnDropBall(brickPos);
@@ -369,10 +374,7 @@ namespace Breakout
 
             paddle.Hit();
 
-            if (introCount > paddleIntro)
-            {
-                //paddle.Intro();
-            }
+
 
             if (paddle.Drop == true)
             {
@@ -430,7 +432,7 @@ namespace Breakout
             //    backGroundAnimation = 0;
             //}
 
-            background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (backGroundAnimation).ToString()); //applies new image to background
+            background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (level).ToString()); //applies new image to background
             tbrush = new TextureBrush(background); //applies new texture brush
 
             bufferGraphics.FillRectangle(tbrush, 0, 0, playArea.Width, playArea.Height);
@@ -636,5 +638,7 @@ namespace Breakout
         public bool LevelComplete { get => levelComplete; set => levelComplete = value; }
         public bool Keydown { get => keydown; set => keydown = value; }
         public string Key { get => key; set => key = value; }
+        public int Score { get => score; set => score = value; }
+        public int Lives { get => lives; set => lives = value; }
     }
 }
