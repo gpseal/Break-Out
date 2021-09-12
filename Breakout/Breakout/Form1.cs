@@ -44,8 +44,8 @@ namespace Breakout
             //labels.Add(label5);
             //labels.Add(label6);
             //labels.Add(label8);
-            rows = 1;
-            columns = 2;
+            rows = 2;
+            columns = 10;
 
             //sound = new SoundPlayer(Properties.Resources.move);
             random = new Random();
@@ -198,7 +198,7 @@ namespace Breakout
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
-            level = 1;
+            level = 2;
             score = 0;
             lives = 3;
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, rows, columns, level, lives, score);

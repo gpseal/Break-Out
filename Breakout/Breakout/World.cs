@@ -119,7 +119,7 @@ namespace Breakout
             dropBallList = new List<DropBall>();
             //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
 
-            paddle = new Paddle(new Point(300, 600), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList);
+            paddle = new Paddle(new Point(300, 600), Color.PaleVioletRed, bufferGraphics, paddleWidth, 20, playArea/*, ball*/, ballList, dropBallList, level);
             brickList = new List<Brick>();
 
 
@@ -380,6 +380,7 @@ namespace Breakout
             if (paddle.Drop == true)
             {
                 SpawnBall();
+                paddle.Drop = false;
             }
 
 

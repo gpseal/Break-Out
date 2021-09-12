@@ -34,15 +34,17 @@ namespace Breakout
         private Brush tail2;
         private Brush tail3;
         private Brush tail4;
+        private Brush underWater;
         private TextureBrush engineBrush;
         private Image engine;
+        private int level;
 
         //for item drops
         private bool drop;
 
-        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList, List<DropBall> dropBallList)
+        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList, List<DropBall> dropBallList, int level)
         {
-            
+            this.level = level;
             this.dropBallList = dropBallList;
             this.ballList = ballList;
             //this.ball = ball;
@@ -64,6 +66,7 @@ namespace Breakout
             tail2 = new SolidBrush(Color.FromArgb(150, 204, 245, 255));
             tail3 = new SolidBrush(Color.FromArgb(100, 204, 245, 255));
             tail4 = new SolidBrush(Color.FromArgb(50, 204, 245, 255));
+            underWater = new SolidBrush(Color.FromArgb(50, 51, 51, 204));
             engine = (Bitmap)Properties.Resources.ResourceManager.GetObject("engine");
             engineBrush = new TextureBrush(engine);
             
@@ -137,7 +140,7 @@ namespace Breakout
 
             foreach (Ball eachBall in ballList)
             {
-                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     paddleHit.Play();
                     eachBall.PaddleBounce();
@@ -152,7 +155,7 @@ namespace Breakout
                 //}
 
 
-                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))
+                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     paddleHit.Play();
                     eachBall.BrickBounceSide();
@@ -162,9 +165,9 @@ namespace Breakout
 
             foreach (DropBall eachDrop in dropBallList)
             {
-                drop = false;
+                //drop = false;
 
-                if (rectangle.Contains(eachDrop.X1, eachDrop.Y1 + 10) || rectangle.Contains(eachDrop.X1 + 70, eachDrop.Y1))
+                if (rectangle.Contains(eachDrop.X1, eachDrop.Y1 + 10) || rectangle.Contains(eachDrop.X1 + 70, eachDrop.Y1)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     drop = true;
                     eachDrop.Y1 += 100;
@@ -182,15 +185,19 @@ namespace Breakout
             rectangle.X = position.X;
             rectangle.Y = position.Y;
 
-            bufferGraphics.FillRectangle(brush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
-            aniFrame++;
+            //bufferGraphics.FillRectangle(brush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
+            //aniFrame++;
 
             paddleImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("p" + (aniFrame).ToString()); //changes image to next frame in set
             tbrush = new TextureBrush(paddleImage); //applies new texture brush
-            tbrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X, position.Y); //adjusts position of texture
+            tbrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X, position.Y); //adjusts position of texture  https://docs.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-fill-a-shape-with-an-image-texture?view=netframeworkdesktop-4.8
             bufferGraphics.FillRectangle(tbrush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
             aniFrame++;
 
+            if (level == 2)
+            {
+                bufferGraphics.FillRectangle(underWater, position.X, position.Y, PaddleWidth, height);
+            }
             
         }
         

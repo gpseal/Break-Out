@@ -137,7 +137,7 @@ namespace Breakout
             {
                 
 
-                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))  //checks to see if points on ball top/bottom have entered brick
+                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop))  //checks to see if points on ball top/bottom have entered brick/*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     brickHit.Play();
                     eachBall.BrickBounceVert();
@@ -153,7 +153,7 @@ namespace Breakout
                     score = true;
                 }
 
-                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))  //checks to see if points on ball sides have entered brick
+                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle))  //checks to see if points on ball sides have entered brick/*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     brickHit.Play();
                     eachBall.BrickBounceSide();
