@@ -81,9 +81,10 @@ namespace Breakout
         public void BrickBounce(Rectangle brick)
         {
             brickDead = false;
+
             if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
             {
-                brickDead = true;
+                brickDead = true; //brick will no longer be detected
                 BounceUpDown();
             }
 

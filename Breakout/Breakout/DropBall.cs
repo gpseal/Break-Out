@@ -23,13 +23,13 @@ namespace Breakout
             blue = new SolidBrush(Color.BlueViolet);
             white = new SolidBrush(Color.White);
             Y = position.Y;
-            X = position.X + 35;
+            X = position.X;
         }
 
         public void Draw()
         {
-            bufferGraphics.FillEllipse(blue, X, Y, 20, 20);
-            bufferGraphics.FillEllipse(white, X + 5, Y+5, 10, 10);
+            bufferGraphics.FillEllipse(blue, X+30, Y, 20, 20);
+            bufferGraphics.FillEllipse(white, X + 35, Y+5, 10, 10);
         }
 
         public void Move()

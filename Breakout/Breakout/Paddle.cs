@@ -102,14 +102,11 @@ namespace Breakout
 
                 engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
                 bufferGraphics.FillRectangle(engineBrush, position.X + PaddleWidth - 10, position.Y, height, height);
-
             }
         }
 
         public void MoveRight()
         {
-
-
             int tailHeight = 4;
             if (position.X + PaddleWidth < playArea.Width)
             {
@@ -127,47 +124,17 @@ namespace Breakout
                 bufferGraphics.FillRectangle(tail4, position.X - paddleSpeed * 7, position.Y + 14, paddleSpeed * 4, tailHeight);
                 //position.X += paddleSpeed;
 
-                engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X + 8, position.Y); //adjusts position of texture
+                engineBrush.Transform = new Matrix(100.0f / 100.0f, 0.0f, 0.0f, 20.0f / 20.0f, position.X-10, position.Y); //adjusts position of texture
                 bufferGraphics.FillRectangle(engineBrush, position.X - paddleSpeed, position.Y, height, height);
-
             }
-
-
         }
 
         public void Hit()
         {
             //    SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
 
-            //    foreach (Ball eachBall in ballList)
-            //    {
-            //        if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
-            //        {
-            //            paddleHit.Play();
-            //            eachBall.PaddleBounce();
-            //            //hit = true;
-            //        }
-
-            //        //if (rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
-            //        //{
-            //        //    paddleHit.Play();
-            //        //    eachBall.PaddleBounce();
-            //        //    //hit = true;
-            //        //}
-
-
-            //        if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
-            //        {
-            //            paddleHit.Play();
-            //            eachBall.BrickBounceSide();
-            //        }
-
-            //    }
-
             foreach (DropBall eachDrop in dropBallList)
             {
-                //drop = false;
-
                 if (rectangle.Contains(eachDrop.X1, eachDrop.Y1 + 10) || rectangle.Contains(eachDrop.X1 + 70, eachDrop.Y1)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
                 {
                     drop = true;
