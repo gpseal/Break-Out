@@ -81,36 +81,35 @@ namespace Breakout
         public void BrickBounce(Rectangle brick)
         {
             brickDead = false;
-            if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //PUT THIS INTO THE BALL
+            if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
             {
                 brickDead = true;
-                BrickBounceVert();
+                BounceUpDown();
+            }
+
+            if (brick.Contains(BallLeft, BallSideMiddle) || brick.Contains(BallRight, BallSideMiddle)) //Checks to see if the mid side points, have entered a brick or the paddle
+            {
+                brickDead = true;
+                BounceLeftRight();
             }
         }
 
         public void Bounce()
 
         {
-
-
             if (position.X >= playArea.Width - size) //checks to see if ball is outside the boundary
             {
-                velocity.X *= NEG;  //changes velocity to negative so ball changes direction and bounces off walls
+                BounceLeftRight();  //changes velocity to negative so ball changes direction and bounces off walls
             }
-
-            //if (position.Y >= playArea.Height - size)
-            //{
-            //    velocity.Y *= -1;
-            //}
 
             if (position.X <= 0)
             {
-                velocity.X *= -1;
+                BounceLeftRight();
             }
 
             if (position.Y <= 0)
             {
-                velocity.Y *= -1;
+                BounceUpDown();
             }
 
         }
@@ -121,54 +120,49 @@ namespace Breakout
             {
                 ballOut = true;
             }
-
         }
 
-        public void BrickBounceVert()
+        public void BounceUpDown()
         {
-
-            bufferGraphics.FillEllipse(highlight, position.X - 5, position.Y, size + 10, size - 15);
-            velocity.Y *= -1;
-            score += 10;  //adds to total score, sent back world
+            velocity.Y *= NEG;
         }
 
-        public void BrickBounceSide()
+        public void BounceLeftRight()
         {
-            velocity.X *= -1;
-            score += 10;  //adds to total score, sent back world
+            velocity.X *= NEG;
         }
 
-        public void PaddleBounce()
-        {
-            bufferGraphics.FillEllipse(highlight, position.X, position.Y + size -5, size, size-15);
+        //public void PaddleBounce()
+        //{
+        //    bufferGraphics.FillEllipse(highlight, position.X, position.Y + size -5, size, size-15);
 
-            velocity.Y *= -1;
+        //    velocity.Y *= -1;
 
-            if (ballTopMiddle >= PaddleX && ballTopMiddle <= PaddleX + size) //if ball hits paddle near edge, velocity x will be changed
-            {
-                velocity.X +=2;
-            }
+        //    if (ballTopMiddle >= PaddleX && ballTopMiddle <= PaddleX + size) //if ball hits paddle near edge, velocity x will be changed
+        //    {
+        //        velocity.X +=2;
+        //    }
 
-            else if (ballTopMiddle <= PaddleX + paddleWidth && ballTopMiddle >= PaddleX + paddleWidth - size) //if ball hits paddle near edge velocity x will be changed
-            {
-                velocity.X -= 2;
-            }
+        //    else if (ballTopMiddle <= PaddleX + paddleWidth && ballTopMiddle >= PaddleX + paddleWidth - size) //if ball hits paddle near edge velocity x will be changed
+        //    {
+        //        velocity.X -= 2;
+        //    }
 
-            else //if ball does not hit near edge of paddle, velocity X reurns to normal
-            {
-                if (velocity.X < 0)
-                {
-                    velocity.X = -5;
-                }
+        //    else //if ball does not hit near edge of paddle, velocity X reurns to normal
+        //    {
+        //        if (velocity.X < 0)
+        //        {
+        //            velocity.X = -5;
+        //        }
 
-                else
-                {
-                    velocity.X = 5;
-                }
+        //        else
+        //        {
+        //            velocity.X = 5;
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
 
         public void Reset()
         {

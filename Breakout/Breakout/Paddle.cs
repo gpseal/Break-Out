@@ -137,32 +137,32 @@ namespace Breakout
 
         public void Hit()
         {
-            SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
+            //    SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
 
-            foreach (Ball eachBall in ballList)
-            {
-                if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
-                {
-                    paddleHit.Play();
-                    eachBall.PaddleBounce();
-                    //hit = true;
-                }
+            //    foreach (Ball eachBall in ballList)
+            //    {
+            //        if (rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop) || rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
+            //        {
+            //            paddleHit.Play();
+            //            eachBall.PaddleBounce();
+            //            //hit = true;
+            //        }
 
-                //if (rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
-                //{
-                //    paddleHit.Play();
-                //    eachBall.PaddleBounce();
-                //    //hit = true;
-                //}
+            //        //if (rectangle.Contains(eachBall.BallRight, eachBall.BallBottom) || rectangle.Contains(eachBall.BallLeft, eachBall.BallBottom))
+            //        //{
+            //        //    paddleHit.Play();
+            //        //    eachBall.PaddleBounce();
+            //        //    //hit = true;
+            //        //}
 
 
-                if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
-                {
-                    paddleHit.Play();
-                    eachBall.BrickBounceSide();
-                }
+            //        if (rectangle.Contains(eachBall.BallLeft, eachBall.BallSideMiddle) || rectangle.Contains(eachBall.BallRight, eachBall.BallSideMiddle)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
+            //        {
+            //            paddleHit.Play();
+            //            eachBall.BrickBounceSide();
+            //        }
 
-            }
+            //    }
 
             foreach (DropBall eachDrop in dropBallList)
             {
@@ -204,5 +204,6 @@ namespace Breakout
         
         public Point Position { get => position; set => position = value; }
         public bool Drop { get => drop; set => drop = value; }
+        public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
     }
 }

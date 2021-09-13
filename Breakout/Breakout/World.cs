@@ -250,6 +250,11 @@ namespace Breakout
 
         public void Run()
         {
+            Background();
+
+
+
+
 
 
             if (paddleIntro < 15)
@@ -289,7 +294,7 @@ namespace Breakout
                     break;
             }
 
-            Background();
+            
 
             if (introCount > -1)
             {
@@ -299,9 +304,6 @@ namespace Breakout
             brickNum = 0;
             foreach (Brick eachBrick in brickList)
             {
-
-                
-
                 if (eachBrick.Score == true)
                 {
                     score += 10;
@@ -353,6 +355,9 @@ namespace Breakout
 
             paddle.Draw();
 
+
+            //*************************COLLISION DETECTION*****************************
+
             foreach (Ball eachBall in ballList)
             {
                 if (eachBall.BallOut1 == true && eachBall.Dead == false) //check to see if the ball has gone below the bottom of the screen
@@ -362,8 +367,7 @@ namespace Breakout
                 }
 
                 eachBall.Bounce();
-
-
+                eachBall.BrickBounce(paddle.Rectangle);
 
                 foreach (Brick eachbrick in brickList)
                 {  //IF STATEMENT SHOULD GO INTO BALL CLASS, PASS THROUGH BRICKLIST.RECTANGLE
@@ -372,20 +376,12 @@ namespace Breakout
                         eachBall.BrickBounce(eachbrick.Rectangle);
                         if (eachBall.BrickDead == true)
                         {
+                            brickCount--;
+                            score += 10;
                             eachbrick.Dead = true;
                         }
                     }
-
-
-                //if (eachBall.BrickDead == true)
-                //{
-                //    eachbrick.Dead = true;
-                //}
-                //if (eachbrick.Rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || eachbrick.Rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop)) //PUT THIS INTO THE BALL
-                //{
-                //    eachBall.BrickBounceVert();
-                //}
-            }
+                }
 
                 eachBall.PaddleX = paddle.Position.X;
                 eachBall.Move();
@@ -405,9 +401,6 @@ namespace Breakout
                 PaddleMove(key);
             }
 
-            //ball.Bounce();
-            //ball.Move();
-            //ball.Draw();
         }
 
         public void SpawnBall()
