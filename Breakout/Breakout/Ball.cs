@@ -33,7 +33,7 @@ namespace Breakout
         private int ballBottomLeft;
         private bool ballOut;
         private bool dead;
-
+        private bool brickDead;
 
         private int test;
         //private Color highlight;
@@ -54,6 +54,7 @@ namespace Breakout
             this.paddleWidth = paddleWidth;
             score = 0; //score for game kept, will tick up when a brick bounce method is called
             ballOut = false;
+            brickDead = false;
         }
 
         public void Draw()
@@ -77,8 +78,20 @@ namespace Breakout
             BallOut();
         }
 
-        public void Bounce()
+        public void BrickBounce(Rectangle brick)
         {
+            brickDead = false;
+            if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //PUT THIS INTO THE BALL
+            {
+                brickDead = true;
+                BrickBounceVert();
+            }
+        }
+
+        public void Bounce()
+
+        {
+
 
             if (position.X >= playArea.Width - size) //checks to see if ball is outside the boundary
             {
@@ -178,5 +191,6 @@ namespace Breakout
         public bool BallOut1 { get => ballOut; set => ballOut = value; }
         public Point Position { get => position; set => position = value; }
         public bool Dead { get => dead; set => dead = value; }
+        public bool BrickDead { get => brickDead; set => brickDead = value; }
     }
 }

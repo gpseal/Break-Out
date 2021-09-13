@@ -100,6 +100,16 @@ namespace Breakout
             brickColour[4] = Color.Purple;
             brickColour[5] = Color.Black;
 
+            if (level == 2)
+            {
+                brickColour[0] = Color.Blue;
+                brickColour[1] = Color.BlueViolet;
+                brickColour[2] = Color.DarkTurquoise;
+                brickColour[3] = Color.DodgerBlue;
+                brickColour[4] = Color.SkyBlue;
+                brickColour[5] = Color.DeepSkyBlue;
+            }
+
 
             brickNum = 0;
             brickX = 0;
@@ -257,48 +267,6 @@ namespace Breakout
                 levelComplete = true;
             }
 
-            //    if (level == 3)
-            //    {
-            //    dead = true;  //dead set to true so that start button will now reset game
-            //    Brush black = new SolidBrush(Color.Black);
-            //    bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
-            //    label2.Text = "LIVES: ";
-            //    title.Text = "YOU WON!";
-            //    button2.Visible = true;
-            //    button3.Visible = true;
-            //    title.Visible = true;
-            //    timer1.Enabled = false;
-            //    }
-
-            //else
-            //{
-            //    level++;
-
-            //    switch (level)
-            //    {
-            //        case 2:
-            //            Level2();
-            //            break;
-
-            //        case 3:
-            //            Level3();
-            //            break;
-            //    }
-            //}
-
-            //if (lives <= 0)
-            //{
-            //    timer1.Enabled = false;
-            //}
-
-            //else
-            //{
-            //    timer1.Enabled = true;
-            //}
-
-            
-
-
             label1.Text = "SCORE: " + (score).ToString();
             label3.Text = "LEVEL: " + (level).ToString();
 
@@ -332,7 +300,7 @@ namespace Breakout
             foreach (Brick eachBrick in brickList)
             {
 
-
+                
 
                 if (eachBrick.Score == true)
                 {
@@ -341,10 +309,18 @@ namespace Breakout
                     eachBrick.Score = false;
                 }
 
+                if (eachBrick.Drop == true) //checks if brick has an item drop
+                {
+                    SpawnDropBall(brickPos);
+                    eachBrick.Drop = false;
+                }
+
                 if (eachBrick.Dead == true)
                 {
                     eachBrick.Kill();
                 }
+
+
 
                 else
                 {
@@ -360,22 +336,14 @@ namespace Breakout
                     }
                     brickPos = eachBrick.Position;
                     eachBrick.Draw();
-                    eachBrick.Hit();
+                    //eachBrick.Hit();
 
-                    if (eachBrick.Drop == true) //checks if brick has an item drop
-                    {
-                        SpawnDropBall(brickPos);
-                        eachBrick.Drop = false;
-                    }
+
                     brickNum++;
                 }
 
             }
-
-
             paddle.Hit();
-
-
 
             if (paddle.Drop == true)
             {
@@ -383,22 +351,48 @@ namespace Breakout
                 paddle.Drop = false;
             }
 
-
             paddle.Draw();
+
             foreach (Ball eachBall in ballList)
             {
-
                 if (eachBall.BallOut1 == true && eachBall.Dead == false) //check to see if the ball has gone below the bottom of the screen
                 {
                     eachBall.Dead = true;
                     BallOut();
                 }
 
+                eachBall.Bounce();
+
+
+
+                foreach (Brick eachbrick in brickList)
+                {  //IF STATEMENT SHOULD GO INTO BALL CLASS, PASS THROUGH BRICKLIST.RECTANGLE
+                    if (eachbrick.Dead == false)
+                    {
+                        eachBall.BrickBounce(eachbrick.Rectangle);
+                        if (eachBall.BrickDead == true)
+                        {
+                            eachbrick.Dead = true;
+                        }
+                    }
+
+
+                //if (eachBall.BrickDead == true)
+                //{
+                //    eachbrick.Dead = true;
+                //}
+                //if (eachbrick.Rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallBottom) || eachbrick.Rectangle.Contains(eachBall.BallTopMiddle, eachBall.BallTop)) //PUT THIS INTO THE BALL
+                //{
+                //    eachBall.BrickBounceVert();
+                //}
+            }
+
                 eachBall.PaddleX = paddle.Position.X;
                 eachBall.Move();
-                eachBall.Bounce();
+                
                 eachBall.Draw();
             }
+
 
             foreach (DropBall eachDrop in dropBallList) //draws and animates brick drop for extra ball
             {

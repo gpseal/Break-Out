@@ -34,6 +34,12 @@ namespace Breakout
         private int lives;
         private SoundPlayer paddleMove;
 
+
+        private FormOptions options;
+
+        public int Rows { get => rows; set => rows = value; }
+        public int Columns { get => columns; set => columns = value; }
+
         public Form1()
         {
             //labels = new List<Label>();
@@ -54,6 +60,9 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
+
+            options = new FormOptions();
+
             //world = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, rows, columns, level); //clientSize automatically generated, tells the boundaries of the program
             //world2 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 2, 6, 2);
             //world3 = new World(bufferGraphics, playArea, timer1, timer2, label1, label2, label3, Title, random, button2, button3, 6, 4, 3); //clientSize automatically generated, tells the boundaries of the program
@@ -198,9 +207,12 @@ namespace Breakout
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
-            level = 2;
+            level = 1;
             score = 0;
             lives = 3;
+
+            rows = options.Rows;
+            columns = options.Columns;
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, Title, random, button2, button3, rows, columns, level, lives, score);
 
             if (world.Dead == true)
@@ -215,21 +227,33 @@ namespace Breakout
         private void button3_Click(object sender, EventArgs e)
         {
             //label7.Visible = true;
-            Title.Visible = false;
-            button2.Visible = false;
-            button3.Visible = false;
-            timer2.Enabled = false;
+
+            //this.Hide();
+
+            //FormOptions options = new FormOptions();
+            //options.ShowDialog();
+
+            //options.ShowDialog();
+            //Title.Visible = false;
+            //button2.Visible = false;
+            //button3.Visible = false;
+            //timer2.Enabled = false;
 
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            panel1.Visible = !panel1.Visible;
+            //panel1.Visible = !panel1.Visible;
+            //this.Hide();
+
+            FormOptions options = new FormOptions(); /*https://stackoverflow.com/questions/3965043/how-to-open-a-new-form-from-another-form*/
+            options.ShowDialog();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            panel1.Visible = !panel1.Visible;
+            //panel1.Visible = !panel1.Visible;
         }
 
 
@@ -248,13 +272,13 @@ namespace Breakout
 
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
-            rows = trackBar2.Value;
+            //rows = trackBar2.Value;
         }
 
 
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
-            columns = trackBar3.Value;
+            //columns = trackBar3.Value;
         }
 
     }

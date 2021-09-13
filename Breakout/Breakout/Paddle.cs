@@ -38,6 +38,7 @@ namespace Breakout
         private TextureBrush engineBrush;
         private Image engine;
         private int level;
+        private int ballTop;
 
         //for item drops
         private bool drop;
