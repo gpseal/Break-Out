@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace Breakout
         private bool ballOut;
         private bool dead;
         private bool brickDead;
-
+        
         private int test;
         //private Color highlight;
 
@@ -54,6 +55,7 @@ namespace Breakout
             score = 0; //score for game kept, will tick up when a brick bounce method is called
             ballOut = false;
             brickDead = false;
+            
         }
 
         public void Draw()
@@ -79,18 +81,43 @@ namespace Breakout
 
         public void BrickBounce(Rectangle brick)
         {
+            SoundPlayer brickHit = new SoundPlayer(Properties.Resources.paddleBounce2);
             brickDead = false;
 
             if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
             {
+                brickHit.Play();
                 brickDead = true; //brick will no longer be detected
                 BounceUpDown();
             }
 
             if (brick.Contains(BallLeft, BallSideMiddle) || brick.Contains(BallRight, BallSideMiddle)) //Checks to see if the mid side points, have entered a brick or the paddle
             {
+                brickHit.Play();
                 brickDead = true;
                 BounceLeftRight();
+            }
+        }
+
+        public void PaddleBounce(Rectangle brick)
+        {
+            SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleBounce);
+            brickDead = false;
+
+            if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
+            {
+                paddleHit.Play();
+                brickDead = true; //brick will no longer be detected
+                BounceUpDown();
+                
+            }
+
+            if (brick.Contains(BallLeft, BallSideMiddle) || brick.Contains(BallRight, BallSideMiddle)) //Checks to see if the mid side points, have entered a brick or the paddle
+            {
+                paddleHit.Play();
+                brickDead = true;
+                BounceLeftRight();
+                
             }
         }
 
@@ -116,7 +143,7 @@ namespace Breakout
 
         public void BallOut()
         {
-            if (position.Y >= playArea.Height + 100 && dead == false)
+            if (position.Y >= playArea.Height && dead == false)
             {
                 ballOut = true;
             }

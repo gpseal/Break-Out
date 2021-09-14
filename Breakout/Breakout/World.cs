@@ -94,7 +94,6 @@ namespace Breakout
 
             ballList = new List<Ball>();
             ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
-
             activeBalls = ballList.Count;
 
             dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
@@ -129,24 +128,26 @@ namespace Breakout
             Background();
 
             //*************************COLLISION DETECTION*****************************
+            //checks if ball has entered each brick or paddle, then bounces accordingly
 
             foreach (Ball eachBall in ballList)
             {
-                if (eachBall.BallOut1 == true && eachBall.Dead == false) //check to see if the ball has gone below the bottom of the screen
+                //if ball has moved below bottom of screen, will run this and decide whether to remove a life or not
+                if (eachBall.BallOut1 == true && eachBall.Dead == false) 
                 {
                     eachBall.Dead = true;
-                    BallOut();
+                    BallOut(); //local method that removes 1 from active ballcount
                 }
 
-                eachBall.Bounce();
-                eachBall.BrickBounce(paddle.Rectangle);
+                eachBall.Bounce();  //detects if ball has hit side or top of playing area
+                eachBall.PaddleBounce(paddle.Rectangle);  //paddle collision detection
 
                 foreach (Brick eachbrick in brickList)
                 {  
                     if (eachbrick.Dead == false)  //only executes collision detection if the brick is not dead
                     {
-                        eachBall.BrickBounce(eachbrick.Rectangle);
-                        if (eachBall.BrickDead == true)  
+                        eachBall.BrickBounce(eachbrick.Rectangle);  //brick collision detection
+                        if (eachBall.BrickDead == true)  // will run if brick has been hit
                         {
                             brickCount--;
                             score += 10;
@@ -160,17 +161,10 @@ namespace Breakout
                 eachBall.Draw();
             }
 
+            paddle.Hit();
             paddle.Draw();
-
-            if (brickCount == 0)
-            {
-                levelComplete = true;
-            }
-
-            label1.Text = "SCORE: " + (score).ToString();
-            label3.Text = "LEVEL: " + (level).ToString();
-
-            switch (lives)
+            
+            switch (lives) //to display lives on scoreboard
             {
                 case 3:
                     label2.Text = "LIVES: == == ==";
@@ -189,21 +183,17 @@ namespace Breakout
                     break;
             }
 
-            
-
             if (introCount > -1)
             {
                 BrickIntro();
             }
 
-            
             foreach (Brick eachBrick in brickList)
             {
-
                 if (eachBrick.Drop == true) //checks if brick has an item drop
                 {
-                    SpawnDropBall(eachBrick.Position);
-                    eachBrick.Drop = false;
+                    SpawnDropBall(eachBrick.Position); //spawn drop item from brick that has been hit
+                    //eachBrick.Drop = false;  //remove ability for brick to drop item
                 }
 
                 if (eachBrick.Dead == true)
@@ -215,43 +205,50 @@ namespace Breakout
                 {
                     if (level == 2)
                     {
-                        eachBrick.Move();
+                        eachBrick.Move(); //bricks will move on level 2
                     }
 
                     if (level == 3)
                     {
-                        eachBrick.MoveHorizontal();
+                        eachBrick.MoveHorizontal(); //bricks will move on level 3
                     }
                     eachBrick.Draw();
                 }
-                
             }
 
-            
-
-            if (paddle.Drop == true)
+            //if paddle has touched an item drop, a new ball will be spawned
+            if (paddle.Drop == true) 
             {
                 SpawnBall();
                 paddle.Drop = false;
             }
-            
-            paddle.Hit();
 
-            foreach (DropBall eachDrop in dropBallList) //draws and animates brick drop for extra ball
+            //draws and animates items that are dropped from bricks
+            foreach (DropBall eachDrop in dropBallList) 
             {
                 eachDrop.Draw();
                 eachDrop.Move();
             }
 
+            //moves paddle using key code from form1
             if (keydown == true)
             {
-                PaddleMove(key);  //moves paddle using key code from form1
+                PaddleMove(key);  
             }
 
+            //paddle intro runs for first 15 frames of game
             if (paddleIntro < 15)
             {
                 paddle.Intro();
                 paddleIntro++;
+            }
+
+            label1.Text = "SCORE: " + (score).ToString();
+            label3.Text = "LEVEL: " + (level).ToString();
+
+            if (brickCount == 0)
+            {
+                levelComplete = true;
             }
 
         }
@@ -274,7 +271,6 @@ namespace Breakout
                 bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
                 panelTitle.Visible = !panelTitle.Visible;
             }
-
         }
 
         public void PaddleMove(string direction)
@@ -291,6 +287,7 @@ namespace Breakout
             }
         }
 
+        // Spawns ball if item drop comes into contact with paddle
         public void SpawnBall()
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
@@ -299,6 +296,7 @@ namespace Breakout
             activeBalls ++;
         }
 
+        //Spawns item drop if dead brick meets criteria
         public void SpawnDropBall(Point position)
         {
             dropBallList.Add(new DropBall(bufferGraphics, position));

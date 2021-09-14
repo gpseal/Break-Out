@@ -67,7 +67,7 @@ namespace Breakout
             items = new List<DropBall>();
             drop = false;
             this.random = random;
-            dropNum = 1;  /*random.Next(5);*/  //
+            dropNum = random.Next(2);  //chance that that brick drops item
             dead = false;
 
             //Brick movement

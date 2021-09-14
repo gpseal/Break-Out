@@ -29,8 +29,6 @@ namespace Breakout
 
         public Form1()
         {
-            rows = 2;
-            columns = 10;
             random = new Random();
             InitializeComponent();
             playArea = new Size(700, 540);

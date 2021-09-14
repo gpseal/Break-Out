@@ -219,9 +219,6 @@
     <None Include="Resources\88909__lsprice__gt10.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\brickHit.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\woosh.wav" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +228,15 @@
     <None Include="Resources\drop.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\432245__techgkn__clink.wav" />
+    <None Include="Resources\548511__ludwigmueller__perc-glass-lo.wav" />
     <Content Include="Resources\bgMusic.wav" />
+    <None Include="Resources\brickHit.wav" />
+    <None Include="Resources\brickHit2.wav" />
+    <None Include="Resources\paddleBounce2.wav" />
+    <None Include="Resources\paddleBounce.wav" />
+    <None Include="Resources\retroBounce.wav" />
+    <None Include="Resources\paddleBounce3.wav" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxWMPLib">

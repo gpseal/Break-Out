@@ -61,6 +61,15 @@ namespace Breakout.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _548511__ludwigmueller__perc_glass_lo {
+            get {
+                return ResourceManager.GetStream("_548511__ludwigmueller__perc_glass_lo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap b0 {
@@ -115,6 +124,15 @@ namespace Breakout.Properties {
         internal static System.IO.UnmanagedMemoryStream brickHit {
             get {
                 return ResourceManager.GetStream("brickHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream brickHit2 {
+            get {
+                return ResourceManager.GetStream("brickHit2", resourceCulture);
             }
         }
         
@@ -392,6 +410,24 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("p9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream paddleBounce {
+            get {
+                return ResourceManager.GetStream("paddleBounce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream paddleBounce2 {
+            get {
+                return ResourceManager.GetStream("paddleBounce2", resourceCulture);
             }
         }
         
