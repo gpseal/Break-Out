@@ -12,8 +12,8 @@ namespace Breakout
 {
     public partial class FormOptions : Form
     {
-        private int rows;
-        private int columns;
+        public int rows;
+        public int columns;
         public FormOptions()
         {
             InitializeComponent();

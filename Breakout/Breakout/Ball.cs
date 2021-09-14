@@ -11,7 +11,6 @@ namespace Breakout
     {
         private const int NEG = -1;
         
-        private int paddleX;
         private int paddleWidth;
         private Point position;
         private Point velocity;
@@ -133,37 +132,7 @@ namespace Breakout
             velocity.X *= NEG;
         }
 
-        //public void PaddleBounce()
-        //{
-        //    bufferGraphics.FillEllipse(highlight, position.X, position.Y + size -5, size, size-15);
-
-        //    velocity.Y *= -1;
-
-        //    if (ballTopMiddle >= PaddleX && ballTopMiddle <= PaddleX + size) //if ball hits paddle near edge, velocity x will be changed
-        //    {
-        //        velocity.X +=2;
-        //    }
-
-        //    else if (ballTopMiddle <= PaddleX + paddleWidth && ballTopMiddle >= PaddleX + paddleWidth - size) //if ball hits paddle near edge velocity x will be changed
-        //    {
-        //        velocity.X -= 2;
-        //    }
-
-        //    else //if ball does not hit near edge of paddle, velocity X reurns to normal
-        //    {
-        //        if (velocity.X < 0)
-        //        {
-        //            velocity.X = -5;
-        //        }
-
-        //        else
-        //        {
-        //            velocity.X = 5;
-        //        }
-
-        //    }
-
-        //}
+        
 
         public void Reset()
         {
@@ -180,7 +149,6 @@ namespace Breakout
         public int BallBottom { get => ballBottom; set => ballBottom = value; }
         public int BallTopMiddle { get => ballTopMiddle; set => ballTopMiddle = value; }
         public int BallSideMiddle { get => ballSideMiddle; set => ballSideMiddle = value; }
-        public int PaddleX { get => paddleX; set => paddleX = value; }
         public int Score { get => score; set => score = value; }
         public int Size { get => size; set => size = value; }
         public bool BallOut1 { get => ballOut; set => ballOut = value; }

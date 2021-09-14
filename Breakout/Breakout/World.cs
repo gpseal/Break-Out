@@ -13,21 +13,18 @@ namespace Breakout
     class World
     {
         private const int PADDLEWIDTH = 100;
-
-        private int counter;
+        private const int BRICKWIDTH = 69;
+        private const int BRICKHEIGHT = 19;
+        private const int BRICKGAP = 1;
 
         private Graphics bufferGraphics;
-        //private Ball ball;
         private List<Brick> brickList;
         private List<Ball> ballList;
-
-        private int lives;
         private List<DropBall> dropBallList;
-        
+        private int lives;
         private int brickX;
         private int brickY;
-        private int brickWidth;
-        private int brickHeight;
+
         private int brickGap;
         private Color[]brickColour;
         private int brickNum;
@@ -70,12 +67,14 @@ namespace Breakout
 
         private bool keydown;  //to signify that the paddle should move
         private string key;
+        private Panel panelTitle;
 
         //Levels
         private int level;
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Label title, Random random, Button button2, Button button3, int rows, int columns, int level, int lives, int score)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle)
         {
+            this.panelTitle = panelTitle;
             dead = false;
             //level = 1;
             //this.labels = labels;
@@ -112,9 +111,6 @@ namespace Breakout
 
             brickX = 0;
             brickY = -120;
-            brickWidth = 69;
-            brickHeight = 19;
-            brickGap = 1;
             introCount = 0;
 
             ballList = new List<Ball>();
@@ -135,13 +131,13 @@ namespace Breakout
             { 
                 for (int i = 0; i < columns; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, brickWidth, brickHeight/*, ball*/, ballList, brickNum, random, playArea));
-                    brickX += (brickWidth + brickGap);
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, ballList, brickNum, random, playArea));
+                    brickX += (BRICKWIDTH + BRICKGAP);
                     brickNum++;
                     introCount++;
                 }
                 brickX = 0;
-                brickY += (brickHeight + brickGap);
+                brickY += (BRICKHEIGHT + BRICKGAP);
             }
 
             brickCount = brickList.Count;
@@ -158,7 +154,6 @@ namespace Breakout
 
             backGroundAnimation = 0;
 
-            //timer2.Enabled = true;
             titleColor = 0;
 
             //INTRO SCREEN
@@ -184,15 +179,10 @@ namespace Breakout
                 timer1.Enabled = false;
                 Brush black = new SolidBrush(Color.Black);
                 bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
-                label2.Text = "LIVES: ";
-                title.Text = "YOU LOSE!";
-                button2.Visible = true;
-                button3.Visible = true;
-                title.Visible = true;
+                panelTitle.Visible = !panelTitle.Visible;
             }
 
         }
-
 
         public void PaddleMove(string direction)
         {
@@ -207,12 +197,6 @@ namespace Breakout
                     break;
             }
         }
-
-        public void Pause()
-        {
-            timer1.Enabled = !timer1.Enabled;
-        }
-
 
         public void Run()
         {
@@ -246,7 +230,7 @@ namespace Breakout
                     }
                 }
 
-                eachBall.PaddleX = paddle.Position.X;
+                //eachBall.PaddleX = paddle.Position.X;
                 eachBall.Move();
                 eachBall.Draw();
             }
@@ -337,7 +321,7 @@ namespace Breakout
 
             if (keydown == true)
             {
-                PaddleMove(key);
+                PaddleMove(key);  //moves paddle using key code from form1
             }
 
             if (paddleIntro < 15)
