@@ -22,42 +22,22 @@ namespace Breakout
         private List<Ball> ballList;
         private List<DropBall> dropBallList;
         private int lives;
-        private int brickX;
-        private int brickY;
-
-        private int brickGap;
-        private Color[]brickColour;
-        private int brickNum;
         private Paddle paddle;
-        private int introCount;
-        private int introNum;
-        private Image background;
         private TextureBrush tbrush;
         private Size playArea;
         private Timer timer1;
-        private TextBox texBox1;
-        
+
         private Random random;
-        private Point brickPos;
-        private int backGroundAnimation;
-
         private int score;
-
         private int activeBalls;
 
         //Menus and intro
-        private int titleColor;
-        private Label title;
+        private Panel panelTitle;
         private Label label1;
         private Label label2;
         private Label label3;
-        private List<Label> labels;
-        private Button button2;
-        private Button button3;
-        private int paddleIntro;  //used for timing of paddle intro
 
         private bool dead;
-        private bool intro; //allows intro to run
         private bool levelComplete;
 
         //brick variables
@@ -65,19 +45,22 @@ namespace Breakout
         private int columns;
         private int brickCount;
 
+        //paddle key movements
         private bool keydown;  //to signify that the paddle should move
         private string key;
-        private Panel panelTitle;
-
+        
         //Levels
         private int level;
+
+        //Brick / Paddle intro counters
+        private int introCount;
+        private int introNum;
+        private int paddleIntro;  //used for timing of paddle intro
 
         public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle)
         {
             this.panelTitle = panelTitle;
             dead = false;
-            //level = 1;
-            //this.labels = labels;
             this.level = level;
             this.label1 = label1;
             this.label2 = label2;
@@ -109,31 +92,26 @@ namespace Breakout
                 brickColour[5] = Color.DeepSkyBlue;
             }
 
-            brickX = 0;
-            brickY = -120;
-            introCount = 0;
-
             ballList = new List<Ball>();
             ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
-            //ballList.Add(new Ball(new Point(150, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth));
 
             activeBalls = ballList.Count;
 
-            dropBallList = new List<DropBall>();
-            //ball2 = new Ball(new Point(450, 300), new Point(-5, 5), Color.DimGray, bufferGraphics, playArea, 20, paddleWidth);
+            dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
 
             paddle = new Paddle(new Point(300, 600), Color.PaleVioletRed, bufferGraphics, PADDLEWIDTH, 20, playArea, ballList, dropBallList, level);
+
             brickList = new List<Brick>();
-
-
+            int brickX = 0;
+            int brickY = -120;  //starts offscreen to allow room for intro
+            introCount = 0;
 
             for (int j = 0; j < rows; j++)
             { 
                 for (int i = 0; i < columns; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, ballList, brickNum, random, playArea));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, ballList, random, playArea));
                     brickX += (BRICKWIDTH + BRICKGAP);
-                    brickNum++;
                     introCount++;
                 }
                 brickX = 0;
@@ -141,61 +119,8 @@ namespace Breakout
             }
 
             brickCount = brickList.Count;
-
-            //paddleIntro = 0;
             introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
-
-
-            //counter = 0;
-
             introNum = 0;
-
-            brickPos = new Point(500, 400);
-
-            backGroundAnimation = 0;
-
-            titleColor = 0;
-
-            //INTRO SCREEN
-            this.title = title;
-            this.button2 = button2;
-            this.button3 = button3;
-            intro = true;
-        }
-
-        public void BallOut()
-        {
-            activeBalls -= 1;  //keeps count of balls active, when extra balls are spawned this counter will have gone up
-            if (activeBalls == 0)  //once active balls have reached zero, a life will be taken off
-            {
-                lives--;
-                ballList[0].Reset();
-                activeBalls++;
-            }
-
-             if (lives == 0)
-            {
-                dead = true;  //dead set to true so that start button will now reset game
-                timer1.Enabled = false;
-                Brush black = new SolidBrush(Color.Black);
-                bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
-                panelTitle.Visible = !panelTitle.Visible;
-            }
-
-        }
-
-        public void PaddleMove(string direction)
-        {
-            switch (direction)
-            {
-                case "Left":
-                    paddle.MoveLeft();
-                    break;
-
-                case "Right":
-                    paddle.MoveRight();
-                    break;
-            }
         }
 
         public void Run()
@@ -297,7 +222,6 @@ namespace Breakout
                     {
                         eachBrick.MoveHorizontal();
                     }
-                    brickPos = eachBrick.Position;
                     eachBrick.Draw();
                 }
                 
@@ -332,6 +256,41 @@ namespace Breakout
 
         }
 
+        public void BallOut()
+        {
+            activeBalls -= 1;  //keeps count of balls active, when extra balls are spawned this counter will have gone up
+            if (activeBalls == 0)  //once active balls have reached zero, a life will be taken off
+            {
+                lives--;
+                ballList[0].Reset();
+                activeBalls++;
+            }
+
+            if (lives == 0)
+            {
+                dead = true;  //dead set to true so that start button will now reset game
+                timer1.Enabled = false;
+                Brush black = new SolidBrush(Color.Black);
+                bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
+                panelTitle.Visible = !panelTitle.Visible;
+            }
+
+        }
+
+        public void PaddleMove(string direction)
+        {
+            switch (direction)
+            {
+                case "Left":
+                    paddle.MoveLeft();
+                    break;
+
+                case "Right":
+                    paddle.MoveRight();
+                    break;
+            }
+        }
+
         public void SpawnBall()
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
@@ -347,7 +306,7 @@ namespace Breakout
 
         public void Background()
         {
-            background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (level).ToString()); //applies new image to background
+            Image background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (level).ToString()); //applies new image to background
             tbrush = new TextureBrush(background); //applies new texture brush
 
             bufferGraphics.FillRectangle(tbrush, 0, 0, playArea.Width, playArea.Height);
@@ -365,7 +324,6 @@ namespace Breakout
             }
         }
 
-        public int BrickNum { get => brickNum; set => brickNum = value; }
         public bool Dead { get => dead; set => dead = value; }
         public bool LevelComplete { get => levelComplete; set => levelComplete = value; }
         public bool Keydown { get => keydown; set => keydown = value; }

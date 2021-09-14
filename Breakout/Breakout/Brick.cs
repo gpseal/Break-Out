@@ -42,7 +42,7 @@ namespace Breakout
         private int brickMoveHorizontal;
         private bool dropable;
 
-        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, int brickNum, Random random, Size playArea)
+        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, /*Ball ball,*/ List<Ball> ballList, Random random, Size playArea)
         {
 
             this.playArea = playArea;
