@@ -143,37 +143,27 @@ namespace Breakout
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
 
-            key = e.KeyCode.ToString();
+            //key = e.KeyCode.ToString();
 
-            switch (key)
+            switch (e.KeyCode)
             {
-                case "Left":
+                case Keys.Left:
 
                     world.Key = key;
                     world.Keydown = true;
-                    //world2.Key = key;
-                    //world2.Keydown = true;
-                    //world3.Key = key;
-                    //world3.Keydown = true;
                     break;
 
-                case "Right":
+                case Keys.Right:
                     world.Key = key;
                     world.Keydown = true;
-                    //world2.Key = key;
-                    //world2.Keydown = true;
-                    //world3.Key = key;
-                    //world3.Keydown = true;
                     break;
 
-                case "P":
+                case Keys.P:
                     timer1.Enabled = !timer1.Enabled;
-                    //world.Pause();
-                    //world2.Pause();
-                    //world3.Pause();
+
                     break;
 
-                case "S":
+                case Keys.S:
                     //world.SpawnDropBall(brickPos);
                     break;
 
