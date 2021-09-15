@@ -99,7 +99,7 @@ namespace Breakout
             }
 
             ballList = new List<Ball>();
-            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
+            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls = ballList.Count;
 
             dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
@@ -321,7 +321,7 @@ namespace Breakout
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
             newBall.Play();
-            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
+            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls ++;
         }
 
