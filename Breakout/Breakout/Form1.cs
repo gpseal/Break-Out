@@ -13,6 +13,7 @@ namespace Breakout
 {
     public partial class Form1 : Form
     {
+        private string playerName;
         private Bitmap bufferImage;
         private Graphics bufferGraphics;
         private Graphics graphics;
@@ -26,11 +27,13 @@ namespace Breakout
         private int lives;
         private int ballSpeed;
         private int dropFrequency;
+        private string leaderBoardScore;
 
-        private FormOptions options;
+        private FormLeaderBoard leaders;
 
         public Form1()
         {
+            leaders = new FormLeaderBoard();
             random = new Random();
             InitializeComponent();
             playArea = new Size(700, 540);
@@ -47,6 +50,12 @@ namespace Breakout
             trackBar1.Value = ballSpeed;
             trackBar2.Value = rows;
             trackBar3.Value = columns;
+            playerName = "Player 1";
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
+            levelName.Visible = false;
+
+            
+            //FormLeaderBoard leaderBoard = new FormLeaderBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //this.panelOptions.Controls.Add(Optionsform);
             //Optionsform.Show();
@@ -123,7 +132,7 @@ namespace Breakout
             level = 1;
             score = 0;
             lives = 3;
-
+            playerName = textBox1.Text;
             //rows = options.Rows;
             //columns = options.Columns;
 
@@ -131,6 +140,8 @@ namespace Breakout
 
             if (world.Dead == true)
             {
+                leaderBoardScore = (playerName.ToString() + "   " + score.ToString());
+                leaders.addToList(leaderBoardScore);
                 world.Dead = false;
             }
 
@@ -169,11 +180,6 @@ namespace Breakout
             ballSpeed = trackBar1.Value;
         }
 
-        private void trackBar2_ValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void trackBar3_ValueChanged(object sender, EventArgs e)
         {
             columns = trackBar3.Value;
@@ -189,5 +195,18 @@ namespace Breakout
             rows = trackBar2.Value;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            leaders.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //leaders = new FormLeaderBoard();
+            //if (string.IsNullOrEmpty(playerName))
+            //    return;
+            //leaders.listBox2.Items.Add(/*playerName.ToString() + "   " + score.ToString()*/"Test");
+            leaders.addToList("test");
+        }
     }
 }
