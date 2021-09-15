@@ -133,6 +133,9 @@
   <data name="bgMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgMusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="brickDeath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\brickDeath.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="brickHit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brickHit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -231,6 +234,9 @@
   </data>
   <data name="paddleHit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\paddleHit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="playerDeath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\playerDeath.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="rocket" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rocket.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

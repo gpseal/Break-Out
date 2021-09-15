@@ -81,7 +81,7 @@ namespace Breakout
 
         public void BrickBounce(Rectangle brick)
         {
-            SoundPlayer brickHit = new SoundPlayer(Properties.Resources.paddleBounce2);
+            SoundPlayer brickHit = new SoundPlayer(Properties.Resources.brickDeath);
             brickDead = false;
 
             if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
@@ -101,7 +101,7 @@ namespace Breakout
 
         public void PaddleBounce(Rectangle brick)
         {
-            SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleBounce);
+            SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
             brickDead = false;
 
             if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle

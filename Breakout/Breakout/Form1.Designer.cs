@@ -38,13 +38,14 @@ namespace Breakout
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.Title = new System.Windows.Forms.Label();
+            this.gameTitle = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonOpt = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelTitle = new System.Windows.Forms.Panel();
             this.panelScore = new System.Windows.Forms.Panel();
+            this.levelName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelTitle.SuspendLayout();
             this.panelScore.SuspendLayout();
@@ -136,18 +137,18 @@ namespace Breakout
             this.label6.TabIndex = 8;
             this.label6.Visible = false;
             // 
-            // Title
+            // gameTitle
             // 
-            this.Title.AutoSize = true;
-            this.Title.BackColor = System.Drawing.Color.Transparent;
-            this.Title.Font = new System.Drawing.Font("Impact", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Title.ForeColor = System.Drawing.Color.White;
-            this.Title.Location = new System.Drawing.Point(3, 17);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(553, 145);
-            this.Title.TabIndex = 10;
-            this.Title.Text = "BREAKOUT";
-            this.Title.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.gameTitle.AutoSize = true;
+            this.gameTitle.BackColor = System.Drawing.Color.Transparent;
+            this.gameTitle.Font = new System.Drawing.Font("Impact", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gameTitle.ForeColor = System.Drawing.Color.White;
+            this.gameTitle.Location = new System.Drawing.Point(3, 17);
+            this.gameTitle.Name = "gameTitle";
+            this.gameTitle.Size = new System.Drawing.Size(553, 145);
+            this.gameTitle.TabIndex = 10;
+            this.gameTitle.Text = "BREAKOUT";
+            this.gameTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label8
             // 
@@ -204,7 +205,7 @@ namespace Breakout
             // 
             // panelTitle
             // 
-            this.panelTitle.Controls.Add(this.Title);
+            this.panelTitle.Controls.Add(this.gameTitle);
             this.panelTitle.Controls.Add(this.buttonOpt);
             this.panelTitle.Controls.Add(this.button2);
             this.panelTitle.Location = new System.Drawing.Point(187, 175);
@@ -224,12 +225,26 @@ namespace Breakout
             this.panelScore.TabIndex = 15;
             this.panelScore.Visible = false;
             // 
+            // levelName
+            // 
+            this.levelName.AutoSize = true;
+            this.levelName.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.levelName.ForeColor = System.Drawing.Color.White;
+            this.levelName.Location = new System.Drawing.Point(408, 420);
+            this.levelName.Name = "levelName";
+            this.levelName.Size = new System.Drawing.Size(120, 46);
+            this.levelName.TabIndex = 14;
+            this.levelName.Text = "LEVEL 1";
+            this.levelName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.levelName.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(937, 729);
+            this.Controls.Add(this.levelName);
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
@@ -263,12 +278,13 @@ namespace Breakout
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.Label gameTitle;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonOpt;
         private System.Windows.Forms.Panel panelTitle;
         private System.Windows.Forms.Panel panelScore;
+        private System.Windows.Forms.Label levelName;
     }
 }
 

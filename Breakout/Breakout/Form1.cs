@@ -118,7 +118,7 @@ namespace Breakout
             rows = options.Rows;
             columns = options.Columns;
 
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName);
 
             if (world.Dead == true)
             {
@@ -139,14 +139,14 @@ namespace Breakout
         private void Level2()
         {
             level = 2;
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 10, level, lives, score, panelTitle);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 10, level, lives, score, panelTitle, gameTitle, levelName);
             world.LevelComplete = false;
         }
 
         private void Level3()
         {
             level = 3;
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 6, 4, level, lives, score, panelTitle);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 6, 4, level, lives, score, panelTitle, gameTitle, levelName);
             world.LevelComplete = false;
         }
 

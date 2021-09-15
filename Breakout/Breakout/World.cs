@@ -36,6 +36,8 @@ namespace Breakout
         private Label label1;
         private Label label2;
         private Label label3;
+        private Label gameTitle;
+        private Label levelName;
 
         private bool dead;
         private bool levelComplete;
@@ -51,13 +53,15 @@ namespace Breakout
         
         //Levels
         private int level;
+        private int levelCounter;
 
-        //Brick / Paddle intro counters
-        private int introCount;
+        //Brick & Paddle intro counters
+        private int brickIntroCount;
         private int introNum;
         private int paddleIntro;  //used for timing of paddle intro
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle)
+
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle, Label gameTitle, Label levelName)
         {
             this.panelTitle = panelTitle;
             dead = false;
@@ -65,6 +69,8 @@ namespace Breakout
             this.label1 = label1;
             this.label2 = label2;
             this.label3 = label3;
+            this.levelName = levelName;
+            this.gameTitle = gameTitle;
             this.lives = lives;
             this.random = random;
             this.timer1 = timer1;
@@ -103,7 +109,7 @@ namespace Breakout
             brickList = new List<Brick>();
             int brickX = 0;
             int brickY = -120;  //starts offscreen to allow room for intro
-            introCount = 0;
+            brickIntroCount = 0;
 
             for (int j = 0; j < rows; j++)
             { 
@@ -111,21 +117,24 @@ namespace Breakout
                 {
                     brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, ballList, random, playArea));
                     brickX += (BRICKWIDTH + BRICKGAP);
-                    introCount++;
+                    brickIntroCount++;
                 }
                 brickX = 0;
                 brickY += (BRICKHEIGHT + BRICKGAP);
             }
 
             brickCount = brickList.Count;
-            introCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
+            brickIntroCount--; //takes a number off introcount as it is used again to cycle through list of bricks for intro
             introNum = 0;
+            levelCounter = 0;
+            levelName.Visible = true;
         }
 
         public void Run()
         {
             timer1.Enabled = true;
             Background();
+            
 
             //*************************COLLISION DETECTION*****************************
             //checks if ball has entered each brick or paddle, then bounces accordingly
@@ -156,7 +165,6 @@ namespace Breakout
                     }
                 }
 
-                //eachBall.PaddleX = paddle.Position.X;
                 eachBall.Move();
                 eachBall.Draw();
             }
@@ -183,24 +191,27 @@ namespace Breakout
                     break;
             }
 
-            if (introCount > -1)
+            if (brickIntroCount > -1)
             {
                 BrickIntro();
             }
 
             foreach (Brick eachBrick in brickList)
             {
-                if (eachBrick.Drop == true) //checks if brick has an item drop
+                //checks if brick has an item drop
+                if (eachBrick.Drop == true)
                 {
                     SpawnDropBall(eachBrick.Position); //spawn drop item from brick that has been hit
-                    //eachBrick.Drop = false;  //remove ability for brick to drop item
+                    eachBrick.Drop = false;  //stops brick from dropping items continuously
                 }
 
+                //begins brick fade animation
                 if (eachBrick.Dead == true)
                 {
                     eachBrick.Kill();
                 }
 
+                //different levels have different movements for bricks
                 else
                 {
                     if (level == 2)
@@ -251,28 +262,46 @@ namespace Breakout
                 levelComplete = true;
             }
 
+            //displays level name for 100 frames at beginning of each level
+            levelName.Text = "LEVEL " + level.ToString();
+            if (levelCounter >= 100)
+            {
+                levelName.Visible = false;
+            }
+            levelCounter++;
+
+            End();//checks to see if player has lost all lives
         }
 
+        //Runs when ball leaves bottom of screen. Keeps track of number of active balls, 
         public void BallOut()
         {
-            activeBalls -= 1;  //keeps count of balls active, when extra balls are spawned this counter will have gone up
+            SoundPlayer ballDeath = new SoundPlayer(Properties.Resources.playerDeath);
+            activeBalls --;  //keeps count of balls active, when extra balls are spawned this counter will have gone up
             if (activeBalls == 0)  //once active balls have reached zero, a life will be taken off
             {
+                ballDeath.Play();
                 lives--;
                 ballList[0].Reset();
                 activeBalls++;
             }
+        }
 
+        //ends game when lives = 0
+        public void End()
+        {
             if (lives == 0)
             {
                 dead = true;  //dead set to true so that start button will now reset game
                 timer1.Enabled = false;
                 Brush black = new SolidBrush(Color.Black);
+                gameTitle.Text = "GAMEOVER";
                 bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
                 panelTitle.Visible = !panelTitle.Visible;
             }
         }
 
+        //moves paddle while arrow keys are being held down
         public void PaddleMove(string direction)
         {
             switch (direction)
@@ -292,7 +321,7 @@ namespace Breakout
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
             newBall.Play();
-            ballList.Add(new Ball(new Point(200, 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
+            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20, PADDLEWIDTH));
             activeBalls ++;
         }
 
@@ -302,23 +331,24 @@ namespace Breakout
             dropBallList.Add(new DropBall(bufferGraphics, position));
         }
 
+        //draws background of level
         public void Background()
         {
             Image background = (Bitmap)Properties.Resources.ResourceManager.GetObject("b" + (level).ToString()); //applies new image to background
             tbrush = new TextureBrush(background); //applies new texture brush
-
             bufferGraphics.FillRectangle(tbrush, 0, 0, playArea.Width, playArea.Height);
         }
 
+        //plays brick intro animations
         public void BrickIntro()
         {
-            brickList[introCount].IntroAnim(); //runs intro anmimation for brick
+            brickList[brickIntroCount].IntroAnim(); //runs intro anmimation for brick
             introNum++;
 
             if (introNum >= 6) //intro takes 6 frames
             {
-                introCount--; //intro animation moves to next brick
-                introNum = 0;  //resets fram count
+                brickIntroCount--; //intro animation moves to next brick
+                introNum = 0;  //resets frame count
             }
         }
 

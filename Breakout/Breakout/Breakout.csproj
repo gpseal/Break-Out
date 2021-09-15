@@ -228,6 +228,8 @@
     <None Include="Resources\drop.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\playerDeath.wav" />
+    <None Include="Resources\brickDeath.wav" />
     <None Include="Resources\432245__techgkn__clink.wav" />
     <None Include="Resources\548511__ludwigmueller__perc-glass-lo.wav" />
     <Content Include="Resources\bgMusic.wav" />

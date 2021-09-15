@@ -121,6 +121,15 @@ namespace Breakout.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream brickDeath {
+            get {
+                return ResourceManager.GetStream("brickDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream brickHit {
             get {
                 return ResourceManager.GetStream("brickHit", resourceCulture);
@@ -437,6 +446,15 @@ namespace Breakout.Properties {
         internal static System.IO.UnmanagedMemoryStream paddleHit {
             get {
                 return ResourceManager.GetStream("paddleHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream playerDeath {
+            get {
+                return ResourceManager.GetStream("playerDeath", resourceCulture);
             }
         }
         
