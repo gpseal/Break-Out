@@ -15,6 +15,7 @@ namespace Breakout
         private Brush white;
         private int Y;
         private int X;
+        private bool drop;
 
         public DropBall(Graphics bufferGraphics, Point position)
         {
@@ -24,6 +25,7 @@ namespace Breakout
             white = new SolidBrush(Color.White);
             Y = position.Y;
             X = position.X;
+            drop = false;
         }
 
         public void Draw()
@@ -37,8 +39,18 @@ namespace Breakout
             Y += 4;
         }
 
-        public Point Position { get => position; set => position = value; }
-        public int Y1 { get => Y; set => Y = value; }
-        public int X1 { get => X; set => X = value; }
+        public void Hit(Rectangle paddle)
+        {
+            if (paddle.Contains(X, Y + 10) || paddle.Contains(X + 10, Y + 10) || paddle.Contains(X, Y) || paddle.Contains(X+10, Y)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
+            {
+                drop = true;
+                Y += 100;
+            }
+        }
+
+        //public Point Position { get => position; set => position = value; }
+        //public int Y1 { get => Y; set => Y = value; }
+        //public int X1 { get => X; set => X = value; }
+        public bool Drop { get => drop; set => drop = value; }
     }
 }

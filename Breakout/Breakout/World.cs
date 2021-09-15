@@ -169,27 +169,7 @@ namespace Breakout
                 eachBall.Draw();
             }
 
-            paddle.Hit();
             paddle.Draw();
-            
-            switch (lives) //to display lives on scoreboard
-            {
-                case 3:
-                    label2.Text = "LIVES: == == ==";
-                    break;
-
-                case 2:
-                    label2.Text = "LIVES: == ==";
-                    break;
-
-                case 1:
-                    label2.Text = "LIVES: ==";
-                    break;
-
-                case 0:
-                    label2.Text = "LIVES: ";
-                    break;
-            }
 
             if (brickIntroCount > -1)
             {
@@ -227,20 +207,6 @@ namespace Breakout
                 }
             }
 
-            //if paddle has touched an item drop, a new ball will be spawned
-            if (paddle.Drop == true) 
-            {
-                SpawnBall();
-                paddle.Drop = false;
-            }
-
-            //draws and animates items that are dropped from bricks
-            foreach (DropBall eachDrop in dropBallList) 
-            {
-                eachDrop.Draw();
-                eachDrop.Move();
-            }
-
             //moves paddle using key code from form1
             if (keydown == true)
             {
@@ -254,8 +220,20 @@ namespace Breakout
                 paddleIntro++;
             }
 
-            label1.Text = "SCORE: " + (score).ToString();
-            label3.Text = "LEVEL: " + (level).ToString();
+            //draws and animates items that are dropped from bricks
+            foreach (DropBall eachDrop in dropBallList)
+            {
+                eachDrop.Draw();
+                eachDrop.Move();
+                eachDrop.Hit(paddle.Rectangle);
+
+                if (eachDrop.Drop == true)
+                {
+                    SpawnBall();
+                    eachDrop.Drop = false;
+                }
+
+            }
 
             if (brickCount == 0)
             {
@@ -269,6 +247,30 @@ namespace Breakout
                 levelName.Visible = false;
             }
             levelCounter++;
+
+            //to display lives on scoreboard
+            switch (lives)
+            {
+                case 3:
+                    label2.Text = "LIVES: == == ==";
+                    break;
+
+                case 2:
+                    label2.Text = "LIVES: == ==";
+                    break;
+
+                case 1:
+                    label2.Text = "LIVES: ==";
+                    break;
+
+                case 0:
+                    label2.Text = "LIVES: ";
+                    break;
+            }
+
+            //displays score and level on scoreboard
+            label1.Text = "SCORE: " + (score).ToString();
+            label3.Text = "LEVEL: " + (level).ToString();
 
             End();//checks to see if player has lost all lives
         }

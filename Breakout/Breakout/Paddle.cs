@@ -11,17 +11,15 @@ namespace Breakout
 {
     class Paddle
     {
-
         
+
         private Graphics bufferGraphics;
         private Point position;
-        private Brush brush;
         private int PaddleWidth;
         private int height;
         private int introSpeed;
         private int aniFrame;
         private Size playArea;
-        //private Ball ball;
         private int paddleSpeed;
         private Rectangle rectangle;
         private List<Ball> ballList;
@@ -43,7 +41,7 @@ namespace Breakout
         //for item drops
         private bool drop;
 
-        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, /*Ball ball,*/ List<Ball> ballList, List<DropBall> dropBallList, int level)
+        public Paddle(Point position, Color colour, Graphics bufferGraphics, int width, int height, Size playArea, List<Ball> ballList, List<DropBall> dropBallList, int level)
         {
             this.level = level;
             this.dropBallList = dropBallList;
@@ -53,7 +51,6 @@ namespace Breakout
             this.height = height;
             PaddleWidth = width;
             this.bufferGraphics = bufferGraphics;
-            brush = new SolidBrush(colour);
             this.position = position;
             introSpeed = 15;
             aniFrame = 0;
@@ -129,32 +126,15 @@ namespace Breakout
             }
         }
 
-        public void Hit()
-        {
-            //    SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
-
-            foreach (DropBall eachDrop in dropBallList)
-            {
-                if (rectangle.Contains(eachDrop.X1, eachDrop.Y1 + 10) || rectangle.Contains(eachDrop.X1 + 70, eachDrop.Y1)) /*https://docs.microsoft.com/en-us/dotnet/api/system.windows.rect.contains?view=net-5.0*/
-                {
-                    drop = true;
-                    eachDrop.Y1 += 100;
-                }
-            }
-
-        }
-
+        //Draw paddle
         public void Draw()
         {
             if (aniFrame == 20)
             {
                 aniFrame = 0;
             }
-            rectangle.X = position.X;
+            rectangle.X = position.X-20;
             rectangle.Y = position.Y;
-
-            //bufferGraphics.FillRectangle(brush, position.X, position.Y, PaddleWidth, height); //draws image using textureBrush
-            //aniFrame++;
 
             paddleImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("p" + (aniFrame).ToString()); //changes image to next frame in set
             tbrush = new TextureBrush(paddleImage); //applies new texture brush
@@ -169,8 +149,7 @@ namespace Breakout
             
         }
         
-        public Point Position { get => position; set => position = value; }
-        public bool Drop { get => drop; set => drop = value; }
+        //public Point Position { get => position; set => position = value; }
         public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
     }
 }

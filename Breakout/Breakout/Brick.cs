@@ -46,7 +46,7 @@ namespace Breakout
             rectangle = new Rectangle(position.X, position.Y, width, height);
             drop = false;
             this.random = random;
-            dropNum = random.Next(5);  //chance that that brick drops item
+            dropNum = random.Next(3);  //chance that that brick drops item
             dead = false;
 
             //Brick movement
@@ -82,6 +82,7 @@ namespace Breakout
             
         }
 
+        //fades brick from play area, identifies whether a brick will drop an item
         public void Kill()
         {
             if (transparent>0)  //fades brick from sight after it has been hit
@@ -91,7 +92,7 @@ namespace Breakout
                 transparent -= 20;
             }
 
-            if (dropNum == 1 && dropable == true)
+            if (dropNum == 1 && dropable == true)  //decides whether item will be dropped
             {
                 SoundPlayer dropItem = new SoundPlayer(Properties.Resources.drop);
                 dropItem.Play();
