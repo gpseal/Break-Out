@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Breakout
 {
-    class Ball
+    public class Ball
     {
         private const int NEG = -1;
         

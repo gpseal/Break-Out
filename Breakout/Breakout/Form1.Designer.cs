@@ -46,9 +46,22 @@ namespace Breakout
             this.panelTitle = new System.Windows.Forms.Panel();
             this.panelScore = new System.Windows.Forms.Panel();
             this.levelName = new System.Windows.Forms.Label();
+            this.panelOptions = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.trackBar4 = new System.Windows.Forms.TrackBar();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelTitle.SuspendLayout();
             this.panelScore.SuspendLayout();
+            this.panelOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -238,12 +251,111 @@ namespace Breakout
             this.levelName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.levelName.Visible = false;
             // 
+            // panelOptions
+            // 
+            this.panelOptions.Controls.Add(this.label9);
+            this.panelOptions.Controls.Add(this.button4);
+            this.panelOptions.Controls.Add(this.trackBar3);
+            this.panelOptions.Controls.Add(this.trackBar4);
+            this.panelOptions.Controls.Add(this.trackBar2);
+            this.panelOptions.Controls.Add(this.trackBar1);
+            this.panelOptions.Controls.Add(this.label7);
+            this.panelOptions.Location = new System.Drawing.Point(187, 88);
+            this.panelOptions.Name = "panelOptions";
+            this.panelOptions.Size = new System.Drawing.Size(591, 466);
+            this.panelOptions.TabIndex = 16;
+            this.panelOptions.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(317, 341);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(242, 17);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "HIGH                                          LOW";
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(197, 397);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(179, 49);
+            this.button4.TabIndex = 21;
+            this.button4.Text = "EXIT";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.Location = new System.Drawing.Point(312, 195);
+            this.trackBar3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trackBar3.Minimum = 1;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(243, 56);
+            this.trackBar3.TabIndex = 24;
+            this.trackBar3.Value = 1;
+            this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar3_ValueChanged);
+            // 
+            // trackBar4
+            // 
+            this.trackBar4.Location = new System.Drawing.Point(312, 297);
+            this.trackBar4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trackBar4.Maximum = 6;
+            this.trackBar4.Minimum = 1;
+            this.trackBar4.Name = "trackBar4";
+            this.trackBar4.Size = new System.Drawing.Size(243, 56);
+            this.trackBar4.TabIndex = 25;
+            this.trackBar4.Value = 1;
+            this.trackBar4.ValueChanged += new System.EventHandler(this.trackBar4_ValueChanged);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(312, 104);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trackBar2.Maximum = 6;
+            this.trackBar2.Minimum = 1;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(237, 56);
+            this.trackBar2.TabIndex = 23;
+            this.trackBar2.Value = 1;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged_1);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(312, 15);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(237, 56);
+            this.trackBar1.TabIndex = 22;
+            this.trackBar1.Value = 1;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(8, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(277, 322);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "BALL SPEED\r\n\r\nBRICK ROWS\r\n\r\nBRICK COLUMNS\r\n\r\nDROP FREQUENCY";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(937, 729);
+            this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.levelName);
             this.Controls.Add(this.panelTitle);
             this.Controls.Add(this.label8);
@@ -262,6 +374,12 @@ namespace Breakout
             this.panelTitle.PerformLayout();
             this.panelScore.ResumeLayout(false);
             this.panelScore.PerformLayout();
+            this.panelOptions.ResumeLayout(false);
+            this.panelOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,6 +403,14 @@ namespace Breakout
         private System.Windows.Forms.Panel panelTitle;
         private System.Windows.Forms.Panel panelScore;
         private System.Windows.Forms.Label levelName;
+        private System.Windows.Forms.Panel panelOptions;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar trackBar4;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

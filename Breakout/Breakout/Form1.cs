@@ -24,6 +24,8 @@ namespace Breakout
         private int columns;
         private int level;
         private int lives;
+        private int ballSpeed;
+        private int dropFrequency;
 
         private FormOptions options;
 
@@ -35,9 +37,16 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
+            ballSpeed = 5;
 
-            options = new FormOptions();
-
+            //options = new FormOptions();
+            rows = 4;
+            columns = 10;
+            dropFrequency = 5;
+            trackBar4.Value = dropFrequency;
+            trackBar1.Value = ballSpeed;
+            trackBar2.Value = rows;
+            trackBar3.Value = columns;
             //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //this.panelOptions.Controls.Add(Optionsform);
             //Optionsform.Show();
@@ -115,10 +124,10 @@ namespace Breakout
             score = 0;
             lives = 3;
 
-            rows = options.Rows;
-            columns = options.Columns;
+            //rows = options.Rows;
+            //columns = options.Columns;
 
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
 
             if (world.Dead == true)
             {
@@ -130,38 +139,55 @@ namespace Breakout
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            //panel1.Visible = !panel1.Visible;
+            panelOptions.Visible = !panelOptions.Visible;
             //this.Hide();
-            FormOptions options = new FormOptions(); /*https://stackoverflow.com/questions/3965043/how-to-open-a-new-form-from-another-form*/
-            options.ShowDialog();
+            //FormOptions options = new FormOptions(); /*https://stackoverflow.com/questions/3965043/how-to-open-a-new-form-from-another-form*/
+            //options.ShowDialog();
         }
 
         private void Level2()
         {
             level = 2;
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 10, level, lives, score, panelTitle, gameTitle, levelName);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 10, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             world.LevelComplete = false;
         }
 
         private void Level3()
         {
             level = 3;
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 6, 4, level, lives, score, panelTitle, gameTitle, levelName);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 6, 4, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             world.LevelComplete = false;
         }
 
-        private void trackBar2_ValueChanged(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            //rows = trackBar2.Value;
+            panelOptions.Visible = !panelOptions.Visible;
         }
 
-        private void trackBar3_Scroll(object sender, EventArgs e)
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            //columns = trackBar3.Value;
+            ballSpeed = trackBar1.Value;
         }
 
-        public int Rows { get => rows; set => rows = value; }
-        public int Columns { get => columns; set => columns = value; }
+        private void trackBar2_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar3_ValueChanged(object sender, EventArgs e)
+        {
+            columns = trackBar3.Value;
+        }
+
+        private void trackBar4_ValueChanged(object sender, EventArgs e)
+        {
+            dropFrequency = trackBar4.Value;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            rows = trackBar2.Value;
+        }
 
     }
 }

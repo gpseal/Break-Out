@@ -11,7 +11,7 @@ namespace Breakout
 {
     class Brick
     {
-        
+        private int dropFrequency;
         private Color colour;
         private Graphics bufferGraphics;
         private Point position;
@@ -31,10 +31,10 @@ namespace Breakout
         private int brickMoveHorizontal;
         private int brickMove;
 
-        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Random random, Size playArea)
+        public Brick(Point position, Color colour, Graphics bufferGraphics, int width, int height, Random random, Size playArea, int dropFrequency)
         {
             this.colour = colour;
-
+            this.dropFrequency = dropFrequency;
             this.playArea = playArea;
             transparent = 255;
             this.height = height;
@@ -46,7 +46,7 @@ namespace Breakout
             rectangle = new Rectangle(position.X, position.Y, width, height);
             drop = false;
             this.random = random;
-            dropNum = random.Next(3);  //chance that that brick drops item
+            dropNum = random.Next(1, dropFrequency);  //chance that that brick drops item
             dead = false;
 
             //Brick movement

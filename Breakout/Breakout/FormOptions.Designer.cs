@@ -52,9 +52,9 @@ namespace Breakout
             this.panel1.Controls.Add(this.trackBar2);
             this.panel1.Controls.Add(this.trackBar3);
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(540, 450);
+            this.panel1.Size = new System.Drawing.Size(720, 554);
             this.panel1.TabIndex = 21;
             // 
             // label7
@@ -62,10 +62,9 @@ namespace Breakout
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Impact", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(38, 46);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(134, 50);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(211, 259);
+            this.label7.Size = new System.Drawing.Size(265, 322);
             this.label7.TabIndex = 14;
             this.label7.Text = "BALL SPEED\r\n\r\nBRICK ROWS\r\n\r\nBRICK COLUMNS\r\n\r\nPADDLE WIDTH";
             // 
@@ -75,10 +74,10 @@ namespace Breakout
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(215, 358);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Location = new System.Drawing.Point(287, 441);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(134, 40);
+            this.button4.Size = new System.Drawing.Size(179, 49);
             this.button4.TabIndex = 15;
             this.button4.Text = "EXIT";
             this.button4.UseVisualStyleBackColor = false;
@@ -86,52 +85,54 @@ namespace Breakout
             // 
             // trackBar4
             // 
-            this.trackBar4.Location = new System.Drawing.Point(304, 277);
-            this.trackBar4.Margin = new System.Windows.Forms.Padding(2);
+            this.trackBar4.Location = new System.Drawing.Point(405, 341);
+            this.trackBar4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Size = new System.Drawing.Size(182, 45);
+            this.trackBar4.Size = new System.Drawing.Size(243, 56);
             this.trackBar4.TabIndex = 19;
             this.trackBar4.TickFrequency = 5;
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(304, 48);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(2);
+            this.trackBar1.Location = new System.Drawing.Point(405, 59);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(178, 45);
+            this.trackBar1.Size = new System.Drawing.Size(237, 56);
             this.trackBar1.TabIndex = 16;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(304, 120);
-            this.trackBar2.Margin = new System.Windows.Forms.Padding(2);
+            this.trackBar2.Location = new System.Drawing.Point(405, 148);
+            this.trackBar2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar2.Maximum = 6;
             this.trackBar2.Minimum = 1;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(178, 45);
+            this.trackBar2.Size = new System.Drawing.Size(237, 56);
             this.trackBar2.TabIndex = 17;
             this.trackBar2.Value = 1;
             this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
             // 
             // trackBar3
             // 
-            this.trackBar3.Location = new System.Drawing.Point(304, 194);
-            this.trackBar3.Margin = new System.Windows.Forms.Padding(2);
+            this.trackBar3.Location = new System.Drawing.Point(405, 239);
+            this.trackBar3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar3.Minimum = 1;
             this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(182, 45);
+            this.trackBar3.Size = new System.Drawing.Size(243, 56);
             this.trackBar3.TabIndex = 18;
             this.trackBar3.Value = 1;
+            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar3_ValueChanged);
             // 
             // FormOptions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(540, 450);
+            this.ClientSize = new System.Drawing.Size(720, 554);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormOptions";
             this.Text = "Form2";
             this.panel1.ResumeLayout(false);

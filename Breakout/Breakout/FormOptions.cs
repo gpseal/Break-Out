@@ -47,8 +47,14 @@ namespace Breakout
             this.Hide();
         }
 
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
         public int Rows { get => rows; set => rows = value; }
         public int Columns { get => columns; set => columns = value; }
+
 
     }
 }

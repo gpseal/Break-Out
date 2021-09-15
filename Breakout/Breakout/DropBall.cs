@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Breakout
 {
-    class DropBall
+    public class DropBall
     {
         private Graphics bufferGraphics;
         private Point position;

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Breakout
 {
     
-    class World
+    public class World
     {
         private const int PADDLEWIDTH = 100;
         private const int BRICKWIDTH = 69;
@@ -26,7 +26,7 @@ namespace Breakout
         private TextureBrush tbrush;
         private Size playArea;
         private Timer timer1;
-
+        private int ballSpeed;
         private Random random;
         private int score;
         private int activeBalls;
@@ -60,8 +60,9 @@ namespace Breakout
         private int introNum;
         private int paddleIntro;  //used for timing of paddle intro
 
+        private int dropFrequency;
 
-        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle, Label gameTitle, Label levelName)
+        public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle, Label gameTitle, Label levelName, int ballSpeed, int dropFrequency)
         {
             this.panelTitle = panelTitle;
             dead = false;
@@ -79,7 +80,8 @@ namespace Breakout
             this.rows = rows;
             this.columns = columns;
             this.score = score;
-
+            this.ballSpeed = ballSpeed;
+            this.dropFrequency = dropFrequency;
             Color[] brickColour = new Color[6];
             brickColour[0] = Color.Yellow;
             brickColour[1] = Color.Orange;
@@ -99,7 +101,7 @@ namespace Breakout
             }
 
             ballList = new List<Ball>();
-            ballList.Add(new Ball(new Point(150, 300), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20));
+            ballList.Add(new Ball(new Point(150, 300), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls = ballList.Count;
 
             dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
@@ -115,7 +117,7 @@ namespace Breakout
             { 
                 for (int i = 0; i < columns; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, random, playArea));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, random, playArea, dropFrequency));
                     brickX += (BRICKWIDTH + BRICKGAP);
                     brickIntroCount++;
                 }
@@ -323,7 +325,7 @@ namespace Breakout
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
             newBall.Play();
-            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(5, 5), Color.DimGray, bufferGraphics, playArea, 20));
+            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls ++;
         }
 
