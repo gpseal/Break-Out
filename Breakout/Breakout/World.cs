@@ -115,7 +115,7 @@ namespace Breakout
             { 
                 for (int i = 0; i < columns; i++)
                 {
-                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, ballList, random, playArea));
+                    brickList.Add(new Brick(new Point(brickX, brickY), brickColour[j], bufferGraphics, BRICKWIDTH, BRICKHEIGHT, random, playArea));
                     brickX += (BRICKWIDTH + BRICKGAP);
                     brickIntroCount++;
                 }
