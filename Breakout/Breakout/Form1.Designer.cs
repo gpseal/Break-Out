@@ -235,7 +235,7 @@ namespace Breakout
             this.panelTitle.Location = new System.Drawing.Point(140, 142);
             this.panelTitle.Margin = new System.Windows.Forms.Padding(2);
             this.panelTitle.Name = "panelTitle";
-            this.panelTitle.Size = new System.Drawing.Size(458, 197);
+            this.panelTitle.Size = new System.Drawing.Size(438, 197);
             this.panelTitle.TabIndex = 14;
             // 
             // button3
@@ -290,7 +290,7 @@ namespace Breakout
             this.panelOptions.Controls.Add(this.trackBar2);
             this.panelOptions.Controls.Add(this.trackBar1);
             this.panelOptions.Controls.Add(this.label7);
-            this.panelOptions.Location = new System.Drawing.Point(57, 54);
+            this.panelOptions.Location = new System.Drawing.Point(120, 71);
             this.panelOptions.Margin = new System.Windows.Forms.Padding(2);
             this.panelOptions.Name = "panelOptions";
             this.panelOptions.Size = new System.Drawing.Size(458, 440);
@@ -394,7 +394,7 @@ namespace Breakout
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(703, 592);
+            this.ClientSize = new System.Drawing.Size(702, 592);
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.levelName);
             this.Controls.Add(this.panelTitle);

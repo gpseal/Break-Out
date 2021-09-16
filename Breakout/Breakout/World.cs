@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Race method repeats movements of each object until one reaches the finish line.
+ * Restart method sends all objects back to starting position.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

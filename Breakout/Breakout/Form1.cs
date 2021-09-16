@@ -1,4 +1,24 @@
-﻿using System;
+﻿/* Program name: 	    Breakout
+   Project file name:   Breakout.sln
+   Author:		        Greg Seal
+   Date:	            16/9/2021
+   Language:		    C#
+   Platform:		    Microsoft Visual Studio 2019
+   Purpose:		        A game of BreakOut
+   Description:		    Player moves a paddle horizontally along the bottom of the screen, bouncing a moving ball towards a lines of bricks at the
+                        top.  When the ball hits a brick it disappears.  The game is won when all of the bricks have been removed.
+                        The game is lost when the ball passes below the bottom of the screen three time.
+   Known Bugs:		    On occasion the ball can get stuck inside the paddle
+   Additional Features: 3 levels
+                        Bricks drop pickups that spawn extra balls
+                        Animated paddle
+                        User can choose number of bricks on screen
+                        User can choose speed of ball
+                        User can choose frequency of item drops
+                        High score leaderboard
+*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,7 +63,7 @@ namespace Breakout
             ballSpeed = 5;
 
             //options = new FormOptions();
-            rows = 4;
+            rows = 5;
             columns = 10;
             dropFrequency = 5;
             trackBar4.Value = dropFrequency;
@@ -53,8 +73,6 @@ namespace Breakout
             playerName = "Player 1";
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             levelName.Visible = false;
-
-            
             //FormLeaderBoard leaderBoard = new FormLeaderBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
             //this.panelOptions.Controls.Add(Optionsform);
@@ -63,7 +81,7 @@ namespace Breakout
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            bufferGraphics.FillRectangle(Brushes.MidnightBlue, 0, 0, Width, Height);
+            bufferGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
 
             if (world.LevelComplete == true)
             {
@@ -90,6 +108,12 @@ namespace Breakout
                         Level3();  //initializes new world class for level 2
                     }
                     world.Run();
+                    break;
+
+                case 4:
+                    gameTitle.Text = "YOU WON!";
+                    panelTitle.Visible = !panelTitle.Visible;
+                    leaders.addToList(score.ToString() + "\t\t" + playerName.ToString());
                     break;
             }
 

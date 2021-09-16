@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Moves ball, draws ball, bounces ball if it hits an object
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -94,6 +98,11 @@ namespace Breakout
             SoundPlayer paddleHit = new SoundPlayer(Properties.Resources.paddleHit);
             brickDead = false;
 
+            if (brick.Contains(ballLeft+8, ballTop+8) || brick.Contains(ballLeft + 2, ballTop + 8))
+            {
+
+            }
+
             if (brick.Contains(BallTopMiddle, BallBottom) || brick.Contains(BallTopMiddle, BallTop)) //Checks to see if the mid bottom point, or midtop point of the ball have entered a brick or the paddle
             {
                 paddleHit.Play();
@@ -145,6 +154,13 @@ namespace Breakout
         public void BounceLeftRight()
         {
             velocity.X *= NEG;
+        }
+
+        //changes X and Y velocity of ball
+        public void BounceCorner()
+        {
+            velocity.X *= NEG;
+            velocity.Y *= NEG;
         }
 
         //resets position of ball after player life is lost

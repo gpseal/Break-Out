@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Draws bricks, moves bricks, kills bricks, determines if brick holds a drop item.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

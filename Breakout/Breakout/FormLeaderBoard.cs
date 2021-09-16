@@ -26,6 +26,7 @@ namespace Breakout
 
         public void addToList(string score)
         {
+            int count = 1;
             listBoxLeaders.Items.Add(score);
 
             //sorting the listBox https://www.csharp-console-examples.com/winform/sort-listbox-items-on-descending-order-in-c/
@@ -41,7 +42,8 @@ namespace Breakout
 
             foreach (object scores in scoreList)
             {
-                listBoxLeaders.Items.Add(scores);
+                listBoxLeaders.Items.Add(count.ToString() + "\t" + scores.ToString());
+                count++;
             }
             //ArrayList list = new ArrayList();
 

@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * Draws drop item, moves drop item, determines if drop item has been collected.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -47,10 +51,6 @@ namespace Breakout
                 Y += 100;
             }
         }
-
-        //public Point Position { get => position; set => position = value; }
-        //public int Y1 { get => Y; set => Y = value; }
-        //public int X1 { get => X; set => X = value; }
         public bool Drop { get => drop; set => drop = value; }
     }
 }
