@@ -62,6 +62,8 @@ namespace Breakout
 
         private int dropFrequency;
 
+        private bool gameOver;
+
         public World(Graphics bufferGraphics, Size playArea, Timer timer1, Label label1, Label label2, Label label3, Random random, int rows, int columns, int level, int lives, int score, Panel panelTitle, Label gameTitle, Label levelName, int ballSpeed, int dropFrequency)
         {
             this.panelTitle = panelTitle;
@@ -130,6 +132,7 @@ namespace Breakout
             introNum = 0;
             levelCounter = 0;
             levelName.Visible = true;
+            gameOver = false;
         }
 
         public void Run()
@@ -302,6 +305,7 @@ namespace Breakout
                 gameTitle.Text = "GAMEOVER";
                 bufferGraphics.FillRectangle(black, 0, 0, playArea.Width, playArea.Height);
                 panelTitle.Visible = !panelTitle.Visible;
+                gameOver = true; //lets form1 send name & score to leaderboard
             }
         }
 
@@ -362,5 +366,6 @@ namespace Breakout
         public string Key { get => key; set => key = value; }
         public int Score { get => score; set => score = value; }
         public int Lives { get => lives; set => lives = value; }
+        public bool GameOver { get => gameOver; set => gameOver = value; }
     }
 }

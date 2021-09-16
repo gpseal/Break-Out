@@ -48,7 +48,6 @@ namespace Breakout
             this.panelScore = new System.Windows.Forms.Panel();
             this.levelName = new System.Windows.Forms.Label();
             this.panelOptions = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -283,7 +282,6 @@ namespace Breakout
             // 
             // panelOptions
             // 
-            this.panelOptions.Controls.Add(this.button5);
             this.panelOptions.Controls.Add(this.textBox1);
             this.panelOptions.Controls.Add(this.label9);
             this.panelOptions.Controls.Add(this.button4);
@@ -292,27 +290,12 @@ namespace Breakout
             this.panelOptions.Controls.Add(this.trackBar2);
             this.panelOptions.Controls.Add(this.trackBar1);
             this.panelOptions.Controls.Add(this.label7);
-            this.panelOptions.Location = new System.Drawing.Point(138, 51);
+            this.panelOptions.Location = new System.Drawing.Point(57, 54);
             this.panelOptions.Margin = new System.Windows.Forms.Padding(2);
             this.panelOptions.Name = "panelOptions";
             this.panelOptions.Size = new System.Drawing.Size(458, 440);
             this.panelOptions.TabIndex = 16;
             this.panelOptions.Visible = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(74)))), ((int)(((byte)(105)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(313, 375);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(134, 40);
-            this.button5.TabIndex = 28;
-            this.button5.Text = "est";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // textBox1
             // 
@@ -470,7 +453,6 @@ namespace Breakout
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
     }
 }
 

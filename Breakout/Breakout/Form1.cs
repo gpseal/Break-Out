@@ -93,6 +93,13 @@ namespace Breakout
                     break;
             }
 
+            //sends name nd score to leaderboard
+            if (world.GameOver == true)
+            {
+                leaders.addToList(score.ToString() + "\t\t" +playerName.ToString());
+                world.GameOver = false;
+            }
+
             score = world.Score;
             lives = world.Lives;
             graphics.DrawImage(bufferImage, 0, 0);
@@ -132,7 +139,11 @@ namespace Breakout
             level = 1;
             score = 0;
             lives = 3;
-            playerName = textBox1.Text;
+            if (!string.IsNullOrEmpty(textBox1.Text)) //https://stackoverflow.com/questions/52751474/is-there-anything-in-c-sharp-that-is-the-opposite-of-isnullorempty
+            {
+                playerName = textBox1.Text;
+            }
+            
             //rows = options.Rows;
             //columns = options.Columns;
 
@@ -140,8 +151,6 @@ namespace Breakout
 
             if (world.Dead == true)
             {
-                leaderBoardScore = (playerName.ToString() + "   " + score.ToString());
-                leaders.addToList(leaderBoardScore);
                 world.Dead = false;
             }
 
@@ -173,6 +182,7 @@ namespace Breakout
         private void button4_Click(object sender, EventArgs e)
         {
             panelOptions.Visible = !panelOptions.Visible;
+            playerName = textBox1.Text;
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
@@ -206,7 +216,7 @@ namespace Breakout
             //if (string.IsNullOrEmpty(playerName))
             //    return;
             //leaders.listBox2.Items.Add(/*playerName.ToString() + "   " + score.ToString()*/"Test");
-            leaders.addToList("test");
+            //leaders.addToList(playerName.ToString());
         }
     }
 }

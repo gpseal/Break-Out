@@ -47,10 +47,16 @@ namespace Breakout
             // 
             // listBoxLeaders
             // 
+            this.listBoxLeaders.BackColor = System.Drawing.Color.Black;
+            this.listBoxLeaders.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxLeaders.Font = new System.Drawing.Font("Impact", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxLeaders.ForeColor = System.Drawing.Color.White;
             this.listBoxLeaders.FormattingEnabled = true;
-            this.listBoxLeaders.Location = new System.Drawing.Point(30, 13);
+            this.listBoxLeaders.ItemHeight = 34;
+            this.listBoxLeaders.Location = new System.Drawing.Point(121, 13);
             this.listBoxLeaders.Name = "listBoxLeaders";
-            this.listBoxLeaders.Size = new System.Drawing.Size(482, 381);
+            this.listBoxLeaders.Size = new System.Drawing.Size(299, 374);
+            this.listBoxLeaders.Sorted = true;
             this.listBoxLeaders.TabIndex = 16;
             // 
             // button4

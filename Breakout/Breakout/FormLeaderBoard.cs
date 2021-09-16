@@ -12,7 +12,7 @@ namespace Breakout
 {
     public partial class FormLeaderBoard : Form
     {
-        private ListBox listbox1;
+        
         private int test;
 
         public FormLeaderBoard()
@@ -27,10 +27,38 @@ namespace Breakout
         public void addToList(string score)
         {
             listBoxLeaders.Items.Add(score);
+
+            //sorting the listBox https://www.csharp-console-examples.com/winform/sort-listbox-items-on-descending-order-in-c/
+            List<string> scoreList = new List<string>();
+
+            foreach (object eachScore in listBoxLeaders.Items) 
+            {
+                scoreList.Add(eachScore.ToString());
+            }
+            scoreList.Sort();
+            scoreList.Reverse();
+            listBoxLeaders.Items.Clear();
+
+            foreach (object scores in scoreList)
+            {
+                listBoxLeaders.Items.Add(scores);
+            }
+            //ArrayList list = new ArrayList();
+
+            //foreach (object o in listBox1.Items)
+            //{
+            //    list.Add(o);
+            //}
+            //list.Sort();
+            //list.Reverse();
+            //listBox1.Items.Clear();
+            //foreach (object o in list)
+            //{
+            //    listBox1.Items.Add(o);
+            //}
+
         }
 
-        public ListBox Listbox1 { get => listbox1; set => listbox1 = value; }
-        public ListBox Listbox11 { get => listbox1; set => listbox1 = value; }
         public int Test { get => test; set => test = value; }
 
         private void button4_Click(object sender, EventArgs e)
