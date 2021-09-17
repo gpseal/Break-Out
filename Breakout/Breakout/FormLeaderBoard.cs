@@ -42,7 +42,7 @@ namespace Breakout
 
             foreach (object scores in scoreList)
             {
-                listBoxLeaders.Items.Add(count.ToString() + "\t" + scores.ToString());
+                listBoxLeaders.Items.Add(count.ToString() + "   " + scores.ToString());
                 count++;
             }
             //ArrayList list = new ArrayList();

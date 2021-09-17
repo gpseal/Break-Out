@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Breakout.Ball">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAJAAJAEQIIAjgACArAAIAAQAEAASgBYAE4ACAACAIA=</HashCode>
+      <FileName>Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Brick">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAAAAgAAQMEYAgQgUgAAICAAAAAgQAAIAAQAaAIAAgA=</HashCode>
+      <FileName>Brick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.DropBall">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAQAgAAEgIEIAAAAAAAAAAAAAAAAAAAYgA=</HashCode>
+      <FileName>DropBall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Form1">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCEQAAUjaAAlAAAgHIAAECCEM5YDgBGDQMAgJAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.FormLeaderBoard">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAAAAAADAAAACAEAAAAAIAAAICQAAAAA=</HashCode>
+      <FileName>FormLeaderBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Paddle">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAIAQAgQAgQAEgAJICAAAIEgiAAIQCAoAcQAAAA=</HashCode>
+      <FileName>Paddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Program" Collapsed="true">
+    <Position X="12.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.World">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgQAEQCAQgBwABoDMAAYACAcIYACLCAUwC0JCAII=</HashCode>
+      <FileName>World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Properties.Resources" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAQAAAAgYIAACAEIBRmIAAS8HgAAAAgAAyAAQAYIQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Breakout.Properties.Settings" Collapsed="true">
+    <Position X="13" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

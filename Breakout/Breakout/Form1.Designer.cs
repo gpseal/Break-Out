@@ -158,7 +158,7 @@ namespace Breakout
             this.gameTitle.BackColor = System.Drawing.Color.Transparent;
             this.gameTitle.Font = new System.Drawing.Font("Impact", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gameTitle.ForeColor = System.Drawing.Color.White;
-            this.gameTitle.Location = new System.Drawing.Point(12, 17);
+            this.gameTitle.Location = new System.Drawing.Point(-5, 17);
             this.gameTitle.Name = "gameTitle";
             this.gameTitle.Size = new System.Drawing.Size(553, 145);
             this.gameTitle.TabIndex = 10;
@@ -269,7 +269,7 @@ namespace Breakout
             this.panelOptions.Controls.Add(this.trackBar2);
             this.panelOptions.Controls.Add(this.trackBar1);
             this.panelOptions.Controls.Add(this.label7);
-            this.panelOptions.Location = new System.Drawing.Point(261, 119);
+            this.panelOptions.Location = new System.Drawing.Point(278, 92);
             this.panelOptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelOptions.Name = "panelOptions";
             this.panelOptions.Size = new System.Drawing.Size(611, 542);
