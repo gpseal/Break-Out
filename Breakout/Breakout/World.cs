@@ -113,7 +113,7 @@ namespace Breakout
 
             dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
 
-            paddle = new Paddle(new Point(300, 600), Color.PaleVioletRed, bufferGraphics, PADDLEWIDTH, 20, playArea, ballList, dropBallList, level);
+            paddle = new Paddle(new Point(300, 650), Color.PaleVioletRed, bufferGraphics, PADDLEWIDTH, 20, playArea, ballList, dropBallList, level);
 
             brickList = new List<Brick>();
             int brickX = 0;
@@ -145,12 +145,14 @@ namespace Breakout
             timer1.Enabled = true;
             Background();
             
-
             //*************************COLLISION DETECTION*****************************
             //checks if ball has entered each brick or paddle, then bounces accordingly
 
             foreach (Ball eachBall in ballList)
             {
+                eachBall.Move();
+                eachBall.Draw();
+
                 //if ball has moved below bottom of screen, will run this and decide whether to remove a life or not
                 if (eachBall.BallOut1 == true && eachBall.Dead == false) 
                 {
@@ -174,12 +176,7 @@ namespace Breakout
                         }
                     }
                 }
-
-                eachBall.Move();
-                eachBall.Draw();
             }
-
-            paddle.Draw();
 
             if (brickIntroCount > -1)
             {
@@ -217,20 +214,6 @@ namespace Breakout
                 }
             }
 
-            //moves paddle using key code from form1
-            if (keydown == true)
-            {
-                PaddleMove(key);  
-            }
-
-            //paddle intro runs for first 15 frames of game
-            if (paddleIntro < 15)
-            {
-                paddle.Intro();
-                paddleIntro++;
-            }
-
-            //draws and animates items that are dropped from bricks
             foreach (DropBall eachDrop in dropBallList)
             {
                 eachDrop.Draw();
@@ -242,8 +225,25 @@ namespace Breakout
                     SpawnBall();
                     eachDrop.Drop = false;
                 }
-
             }
+
+            //moves paddle using key code from form1
+            paddle.Draw();
+
+            if (keydown == true)
+            {
+                PaddleMove(key);
+            }
+
+            //paddle intro runs for first 15 frames of game
+            if (paddleIntro < 15)
+            {
+                paddle.Intro();
+                paddleIntro++;
+            }
+
+            //draws and animates items that are dropped from bricks
+
 
             if (brickCount == 0)
             {

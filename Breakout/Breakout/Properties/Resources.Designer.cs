@@ -156,6 +156,15 @@ namespace Breakout.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream complete {
+            get {
+                return ResourceManager.GetStream("complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap controlPanel {
@@ -191,6 +200,15 @@ namespace Breakout.Properties {
             get {
                 object obj = ResourceManager.GetObject("flame", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream levelStart {
+            get {
+                return ResourceManager.GetStream("levelStart", resourceCulture);
             }
         }
         

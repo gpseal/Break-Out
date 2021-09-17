@@ -228,6 +228,8 @@
     <None Include="Resources\drop.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\complete.wav" />
+    <None Include="Resources\levelStart.wav" />
     <None Include="Resources\playerDeath.wav" />
     <None Include="Resources\brickDeath.wav" />
     <None Include="Resources\432245__techgkn__clink.wav" />

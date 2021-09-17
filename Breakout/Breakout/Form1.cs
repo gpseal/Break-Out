@@ -33,6 +33,9 @@ namespace Breakout
 {
     public partial class Form1 : Form
     {
+        private const int PLAYWIDTH = 840;
+        private const int PLAYHEIGHT = 640;
+
         private string playerName;
         private Bitmap bufferImage;
         private Graphics bufferGraphics;
@@ -48,15 +51,17 @@ namespace Breakout
         private int ballSpeed;
         private int dropFrequency;
         private string leaderBoardScore;
-
+        private SoundPlayer levelStart;
+        private SoundPlayer complete;
         private FormLeaderBoard leaders;
+
 
         public Form1()
         {
             leaders = new FormLeaderBoard();
             random = new Random();
             InitializeComponent();
-            playArea = new Size(700, 540);
+            playArea = new Size(PLAYWIDTH, PLAYHEIGHT);
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
@@ -64,7 +69,7 @@ namespace Breakout
 
             //options = new FormOptions();
             rows = 5;
-            columns = 10;
+            columns = 12;
             dropFrequency = 5;
             trackBar4.Value = dropFrequency;
             trackBar1.Value = ballSpeed;
@@ -73,10 +78,8 @@ namespace Breakout
             playerName = "Player 1";
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             levelName.Visible = false;
-            //FormLeaderBoard leaderBoard = new FormLeaderBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-            //Options Optionsform = new Options() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-            //this.panelOptions.Controls.Add(Optionsform);
-            //Optionsform.Show();
+            levelStart = new SoundPlayer(Properties.Resources.levelStart);
+            complete = new SoundPlayer(Properties.Resources.complete);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -111,6 +114,8 @@ namespace Breakout
                     break;
 
                 case 4:
+                    timer1.Enabled = false;
+                    complete.Play();
                     gameTitle.Text = "YOU WON!";
                     panelTitle.Visible = !panelTitle.Visible;
                     leaders.addToList(score.ToString() + "\t\t" + playerName.ToString());
@@ -177,8 +182,8 @@ namespace Breakout
             {
                 world.Dead = false;
             }
-
             world.Run();
+            levelStart.Play();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -192,8 +197,9 @@ namespace Breakout
         private void Level2()
         {
             level = 2;
-            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 10, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
+            world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 3, 12, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             world.LevelComplete = false;
+            levelStart.Play();
         }
 
         private void Level3()
@@ -201,6 +207,7 @@ namespace Breakout
             level = 3;
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, 6, 4, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
             world.LevelComplete = false;
+            levelStart.Play();
         }
 
         private void button4_Click(object sender, EventArgs e)
