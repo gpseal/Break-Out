@@ -9,6 +9,8 @@
                         top.  When the ball hits a brick it disappears.  The game is won when all of the bricks have been removed.
                         The game is lost when the ball passes below the bottom of the screen three time.
    Known Bugs:		    On occasion the ball can get stuck inside the paddle
+                        Leaderboard not sorted correctly (items are strings containing numbers)
+                        Item drops are not collected by paddle in correct position
    Additional Features: 3 levels
                         Bricks drop pickups that spawn extra balls
                         Animated paddle
@@ -50,7 +52,6 @@ namespace Breakout
         private int lives;
         private int ballSpeed;
         private int dropFrequency;
-        private string leaderBoardScore;
         private SoundPlayer levelStart;
         private SoundPlayer complete;
         private FormLeaderBoard leaders;
@@ -65,9 +66,7 @@ namespace Breakout
             bufferImage = new Bitmap(playArea.Width, playArea.Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             graphics = CreateGraphics();
-            ballSpeed = 5;
-
-            //options = new FormOptions();
+            ballSpeed = 7;
             rows = 5;
             columns = 12;
             dropFrequency = 5;
@@ -132,7 +131,6 @@ namespace Breakout
             score = world.Score;
             lives = world.Lives;
             graphics.DrawImage(bufferImage, 0, 0);
-            //Application.DoEvents();//make sure all images are drawn before the program proceeds
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -172,9 +170,6 @@ namespace Breakout
             {
                 playerName = textBox1.Text;
             }
-            
-            //rows = options.Rows;
-            //columns = options.Columns;
 
             world = new World(bufferGraphics, playArea, timer1, label1, label2, label3, random, rows, columns, level, lives, score, panelTitle, gameTitle, levelName, ballSpeed, dropFrequency);
 
@@ -189,9 +184,6 @@ namespace Breakout
         private void button3_Click_1(object sender, EventArgs e)
         {
             panelOptions.Visible = !panelOptions.Visible;
-            //this.Hide();
-            //FormOptions options = new FormOptions(); /*https://stackoverflow.com/questions/3965043/how-to-open-a-new-form-from-another-form*/
-            //options.ShowDialog();
         }
 
         private void Level2()
@@ -239,15 +231,6 @@ namespace Breakout
         private void button3_Click(object sender, EventArgs e)
         {
             leaders.Show();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //leaders = new FormLeaderBoard();
-            //if (string.IsNullOrEmpty(playerName))
-            //    return;
-            //leaders.listBox2.Items.Add(/*playerName.ToString() + "   " + score.ToString()*/"Test");
-            //leaders.addToList(playerName.ToString());
         }
     }
 }

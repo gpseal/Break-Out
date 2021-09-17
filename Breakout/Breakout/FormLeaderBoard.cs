@@ -12,62 +12,36 @@ namespace Breakout
 {
     public partial class FormLeaderBoard : Form
     {
-        
-        private int test;
+        private List<string> scoreList;
 
         public FormLeaderBoard()
         {
             InitializeComponent();
-
-            //rows = 1;
-            //columns = 1;
+            scoreList = new List<string>();
         }
 
-
+        //Adds sorted score stats to listBox list
         public void addToList(string score)
         {
-            int count = 1;
-            listBoxLeaders.Items.Add(score);
-
             //sorting the listBox https://www.csharp-console-examples.com/winform/sort-listbox-items-on-descending-order-in-c/
-            List<string> scoreList = new List<string>();
-
-            foreach (object eachScore in listBoxLeaders.Items) 
-            {
-                scoreList.Add(eachScore.ToString());
-            }
+            int count = 1;
+            scoreList.Add(score.ToString());
             scoreList.Sort();
             scoreList.Reverse();
+
             listBoxLeaders.Items.Clear();
 
             foreach (object scores in scoreList)
             {
-                listBoxLeaders.Items.Add(count.ToString() + "   " + scores.ToString());
+                listBoxLeaders.Items.Add(count.ToString() + "    " + scores.ToString());
                 count++;
             }
-            //ArrayList list = new ArrayList();
-
-            //foreach (object o in listBox1.Items)
-            //{
-            //    list.Add(o);
-            //}
-            //list.Sort();
-            //list.Reverse();
-            //listBox1.Items.Clear();
-            //foreach (object o in list)
-            //{
-            //    listBox1.Items.Add(o);
-            //}
 
         }
-
-        public int Test { get => test; set => test = value; }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
-
-
     }
 }

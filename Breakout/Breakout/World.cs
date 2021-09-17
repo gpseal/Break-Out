@@ -17,7 +17,11 @@ namespace Breakout
     
     public class World
     {
+        private const int BALLDROPHEIGHT = 300;
+        private const int BALLDROPWIDTH = 200;
         private const int PADDLEWIDTH = 100;
+        private const int PADDLESTARTWIDTH = 380;
+        private const int PADDLESTARTHEIGHT = 650;
         private const int BRICKWIDTH = 69;
         private const int BRICKHEIGHT = 19;
         private const int BRICKGAP = 1;
@@ -108,12 +112,12 @@ namespace Breakout
             }
 
             ballList = new List<Ball>();
-            ballList.Add(new Ball(new Point(150, 300), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
+            ballList.Add(new Ball(new Point(BALLDROPWIDTH, BALLDROPHEIGHT), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls = ballList.Count;
 
             dropBallList = new List<DropBall>(); //list created to store items dropped from bricks
 
-            paddle = new Paddle(new Point(300, 650), Color.PaleVioletRed, bufferGraphics, PADDLEWIDTH, 20, playArea, ballList, dropBallList, level);
+            paddle = new Paddle(new Point(PADDLESTARTWIDTH, PADDLESTARTHEIGHT), Color.PaleVioletRed, bufferGraphics, PADDLEWIDTH, 20, playArea, ballList, dropBallList, level);
 
             brickList = new List<Brick>();
             int brickX = 0;
@@ -214,18 +218,7 @@ namespace Breakout
                 }
             }
 
-            foreach (DropBall eachDrop in dropBallList)
-            {
-                eachDrop.Draw();
-                eachDrop.Move();
-                eachDrop.Hit(paddle.Rectangle);
 
-                if (eachDrop.Drop == true)
-                {
-                    SpawnBall();
-                    eachDrop.Drop = false;
-                }
-            }
 
             //moves paddle using key code from form1
             paddle.Draw();
@@ -243,6 +236,20 @@ namespace Breakout
             }
 
             //draws and animates items that are dropped from bricks
+            foreach (DropBall eachDrop in dropBallList)
+            {
+                eachDrop.Draw();
+                eachDrop.Move();
+                eachDrop.Hit(paddle.Rectangle);
+
+                if (eachDrop.Drop == true)
+                {
+                    SpawnBall();
+                    eachDrop.Drop = false;
+                }
+            }
+
+            
 
 
             if (brickCount == 0)
@@ -334,7 +341,7 @@ namespace Breakout
         {
             SoundPlayer newBall = new SoundPlayer(Properties.Resources.newBall);
             newBall.Play();
-            ballList.Add(new Ball(new Point(random.Next(300), 200), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
+            ballList.Add(new Ball(new Point(random.Next(400), BALLDROPHEIGHT), new Point(ballSpeed, ballSpeed), Color.DimGray, bufferGraphics, playArea, 20));
             activeBalls ++;
         }
 
