@@ -1,4 +1,5 @@
-
+# Breakout Assignment
+### Game can be played by downloading and installing contents within 'breakout.rar'
 
 
 https://github.com/gpseal/break-out/assets/83617997/7b067417-a314-4f1d-9893-ba5f153e4cbe
@@ -7,7 +8,6 @@ https://github.com/gpseal/break-out/assets/83617997/7b067417-a314-4f1d-9893-ba5f
 
 
 
-# Breakout Assignment
 
 Program name: 	    Breakout
 
